@@ -3,10 +3,13 @@ package com.aanyajindal.pool_in;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,8 +33,6 @@ import java.util.Date;
  */
 public class ItemByCategoryFragment extends Fragment {
     ArrayList<Item> list;
-    ItemAdapter itemAdapter;
-    ListView listView;
 
     private static final String TAG = "ItemByCategoryFragment";
 
@@ -58,7 +59,7 @@ public class ItemByCategoryFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        listView = (ListView) rootView.findViewById(R.id.lv_itemByCategory);
+        ListView listView = (ListView) rootView.findViewById(R.id.lv_itemByCategory);
 
         DatabaseReference itemsRef = FirebaseDatabase.getInstance().getReference().child("items");
         Query queryRef = itemsRef.orderByChild("cat").equalTo(category);
@@ -66,12 +67,9 @@ public class ItemByCategoryFragment extends Fragment {
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
+                System.out.println(dataSnapshot.getValue());
                 Item item = dataSnapshot.getValue(Item.class);
-                Log.d(TAG, "onChildAdded: " + item.getName());
                 list.add(new Item(item.getName(), item.getUser(), item.getDesc(), item.getMode(), item.getCat(), item.getTags(), item.getDate()));
-                Log.d(TAG, "onCreateView: " + list.size());
-                itemAdapter = new ItemAdapter(list);
-                listView.setAdapter(itemAdapter);
             }
 
             @Override
@@ -95,10 +93,22 @@ public class ItemByCategoryFragment extends Fragment {
             }
         });
 
+        ItemAdapter itemAdapter = new ItemAdapter(list);
+        listView.setAdapter(itemAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment frag = ItemFragment.newInstance(list.get(position));
+                fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.commit();
+            }
+        });
         return rootView;
     }
 
-    private class ItemAdapter extends BaseAdapter {
+    class ItemAdapter extends BaseAdapter {
         class Holder {
             TextView name;
             TextView user;
@@ -106,7 +116,7 @@ public class ItemByCategoryFragment extends Fragment {
             TextView tags;
         }
 
-        private ArrayList<Item> mList;
+        ArrayList<Item> mList;
 
         public ItemAdapter(ArrayList<Item> mList) {
             this.mList = mList;
