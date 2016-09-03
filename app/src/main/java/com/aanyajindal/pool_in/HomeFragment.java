@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.aanyajindal.pool_in.models.Post;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,10 +37,18 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         Button btnAddItem = (Button) rootView.findViewById(R.id.btn_addItem);
+        Button btnAddPost = (Button) rootView.findViewById(R.id.btn_addPost);
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent  = new Intent(getActivity().getApplicationContext(), AddItem.class);
+                startActivity(intent);
+            }
+        });
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), Post.class);
                 startActivity(intent);
             }
         });
