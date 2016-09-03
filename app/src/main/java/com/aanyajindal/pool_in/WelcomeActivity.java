@@ -63,30 +63,13 @@ public class WelcomeActivity extends AppCompatActivity
 
         final DatabaseReference mainDatabase,usersList;
         mainDatabase = FirebaseDatabase.getInstance().getReference();
-//        usersList  = mainDatabase.child("users");
-//        usersList.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if(dataSnapshot.exists()){
-//                    //user exists
-//                }
-//                else{
-//                    usersList.child(user.getUid()).setValue(new User(user.getDisplayName(), user.getEmail(),"",""));
-//                }
-//            }
 
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//
-//
-//            });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent  = new Intent(WelcomeActivity.this,AddItem.class);
+                startActivity(intent);
             }
         });
 
