@@ -29,5 +29,6 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.4.0'
     compile 'com.android.support:support-v4:24.2.0'
     compile 'info.hoang8f:fbutton:1.0.5'
+    compile 'com.github.florent37:materialtextfield:1.0.5'
 }
 apply plugin: 'com.google.gms.google-services'

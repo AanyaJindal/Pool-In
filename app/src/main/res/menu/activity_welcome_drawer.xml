@@ -26,7 +26,6 @@
             android:id="@+id/nav_settings"
             android:icon="@mipmap/ic_settings"
             android:title="Account Settings" />
-
     </group>
 
 </menu>
