@@ -134,11 +134,13 @@ public class AccountSettingsCategory extends AppCompatActivity {
 
                 usersList  = mainDatabase.child("users");
                 String string = etSkillSet.getText().toString();
-                usersList.child(user.getUid()).setValue(new User(user.getDisplayName(), user.getEmail(),etCollege.getText().toString(),etlocation.getText().toString()));
+                User myUser = new User(user.getDisplayName(), user.getEmail(),etCollege.getText().toString(),etlocation.getText().toString());
+                usersList.child(user.getUid()).setValue(myUser);
                 String[] parts = string.split(", ");
                 usersList.child(user.getUid()).child("skills").setValue("");
                 for(int i= 0;i<parts.length;i++){
-                    usersList.child(user.getUid()).child("skills").child(parts[i]).setValue("true");
+//                    usersList.child(user.getUid()).child("skills").child(parts[i]).setValue("true");
+                    mainDatabase.child("skills").child(parts[i]).child(user.getUid()).setValue("true");
                 }
 
             }

@@ -61,17 +61,17 @@ public class SkillByCategoryFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
-        Query queryRef = usersRef.child("skills").orderByChild(category).equalTo(true);
+        DatabaseReference skillsRef = FirebaseDatabase.getInstance().getReference().child("skills");
+        DatabaseReference queryRef = skillsRef.child(category);
 
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
                 System.out.println(dataSnapshot.getValue());
-                User user = dataSnapshot.getValue(User.class);
-                list.add(user);
-                UserAdapter itemAdapter = new UserAdapter(list);
-                listView.setAdapter(itemAdapter);
+//                User user = dataSnapshot.getValue(User.class);
+//                list.add(user);
+//                UserAdapter itemAdapter = new UserAdapter(list);
+//                listView.setAdapter(itemAdapter);
             }
 
             @Override
