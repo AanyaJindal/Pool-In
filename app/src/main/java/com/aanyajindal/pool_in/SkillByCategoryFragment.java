@@ -62,7 +62,7 @@ public class SkillByCategoryFragment extends Fragment {
         list = new ArrayList<>();
 
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
-        Query queryRef = usersRef.orderByChild("skills").equalTo(category);
+        Query queryRef = usersRef.child("skills").orderByChild(category).equalTo(true);
 
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override

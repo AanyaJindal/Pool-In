@@ -138,7 +138,7 @@ public class AccountSettingsCategory extends AppCompatActivity {
                 String[] parts = string.split(", ");
                 usersList.child(user.getUid()).child("skills").setValue("");
                 for(int i= 0;i<parts.length;i++){
-                    usersList.child(user.getUid()).child("skills").push().setValue(parts[i]);
+                    usersList.child(user.getUid()).child("skills").child(parts[i]).setValue("true");
                 }
 
             }
