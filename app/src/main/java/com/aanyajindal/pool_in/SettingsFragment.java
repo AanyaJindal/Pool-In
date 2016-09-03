@@ -58,7 +58,7 @@ public class SettingsFragment extends Fragment {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             public void onComplete(@NonNull Task<Void> task) {
                                 // user is now signed out
-                                startActivity(new Intent(getActivity().getApplicationContext(), SignInActivity.class));
+                                startActivity(new Intent(getActivity().getApplicationContext(), StartActivity.class));
                             }
                         });
             }

@@ -30,8 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 public class WelcomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button btnAdd;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +47,6 @@ public class WelcomeActivity extends AppCompatActivity
         });
 
 
-        btnAdd = (Button)findViewById(R.id.btn_add);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -67,15 +63,12 @@ public class WelcomeActivity extends AppCompatActivity
         final DatabaseReference mainDatabase,usersList;
         mainDatabase = FirebaseDatabase.getInstance().getReference();
 
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent(WelcomeActivity.this, AddItem.class);
-                startActivity(intent);
-            }
-        });
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = null;
+        fragment = HomeFragment.newInstance();
+        fragmentTransaction.replace(R.id.frag_container, fragment);
+        fragmentTransaction.commit();
 
 }
     @Override
@@ -100,6 +93,10 @@ public class WelcomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_settings) {
             frag = SettingsFragment.newInstance();
+            fragmentTransaction.replace(R.id.frag_container, frag);
+            fragmentTransaction.commit();
+        } else if(id == R.id.nav_home){
+            frag = HomeFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
         }
