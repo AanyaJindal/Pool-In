@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
         btnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), Post.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), PostActivity.class);
                 startActivity(intent);
             }
         });
