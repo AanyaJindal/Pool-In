@@ -44,19 +44,20 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LayoutInflater li = LayoutInflater.from(AddItem.this);
-                final View modeDialogView = li.inflate(R.layout.mode_dialog, null);
+                final View modeDialogView = li.inflate(R.layout.category_dialog, null);
                 final AlertDialog.Builder alert = new AlertDialog.Builder(AddItem.this);
                 final RadioButton rbBooks = (RadioButton) modeDialogView.findViewById(R.id.rb_books);
                 final RadioButton rbCar = (RadioButton) modeDialogView.findViewById(R.id.rb_car);
                 final RadioButton rbNotes = (RadioButton) modeDialogView.findViewById(R.id.rb_notes);
                 final RadioButton rbRes = (RadioButton) modeDialogView.findViewById(R.id.rb_res);
                 final RadioButton rbStationery = (RadioButton) modeDialogView.findViewById(R.id.rb_stationery);
+                final RadioButton rbOthers = (RadioButton) modeDialogView.findViewById(R.id.rb_others);
                 final EditText etRbothers = (EditText) modeDialogView.findViewById(R.id.et_rbothers);
 
 
                 alert.setView(modeDialogView);
                 alert.setTitle("Category");
-                alert.setPositiveButton("Set Mode of Payment", new DialogInterface.OnClickListener() {
+                alert.setPositiveButton("Set Item Category", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String tMode = "";
@@ -69,7 +70,9 @@ public class AddItem extends AppCompatActivity {
                         }else if(rbRes.isChecked()){
                             tMode = "Online Resources";
                         }else if(rbStationery.isChecked()){
-                            tMode = etRbothers.getText().toString();
+                            tMode = "Stationery";
+                        }else if(rbOthers.isChecked()){
+                            tMode = "Others:"+etRbothers.getText().toString();
                         }
                         etItemCategory.setText(tMode);
                     }
