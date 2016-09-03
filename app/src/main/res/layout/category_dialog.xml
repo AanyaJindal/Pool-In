@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
 
     <RadioGroup
         android:id="@+id/rg_category"
@@ -40,11 +43,19 @@
             android:id="@+id/rb_others"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <com.github.florent37.materialtextfield.MaterialTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:mtf_image="@mipmap/ic_skill"
+            app:mtf_labelColor="#757575">
         <EditText
             android:id="@+id/et_rbothers"
             android:hint="Other Item Category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        </com.github.florent37.materialtextfield.MaterialTextField>
 
     </RadioGroup>
 
