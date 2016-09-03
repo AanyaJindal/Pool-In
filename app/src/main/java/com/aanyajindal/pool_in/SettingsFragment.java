@@ -47,7 +47,7 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView  = inflater.inflate(R.layout.fragment_settings, container, false);
         Button btnEditProfile = (Button) rootView.findViewById(R.id.btn_editProfile);
-        Button btnChngPass = (Button) rootView.findViewById(R.id.btn_editProfile);
+        Button btnChngPass = (Button) rootView.findViewById(R.id.btn_chPass);
         Button btnLogout = (Button) rootView.findViewById(R.id.btn_logout);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
