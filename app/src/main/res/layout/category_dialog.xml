@@ -35,9 +35,14 @@
             android:id="@+id/rb_car"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Others"
+            android:id="@+id/rb_others"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/et_rbothers"
-            android:hint="Other Mode of Payment"
+            android:hint="Other Item Category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

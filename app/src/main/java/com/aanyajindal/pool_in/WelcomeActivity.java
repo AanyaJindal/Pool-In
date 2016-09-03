@@ -99,6 +99,10 @@ public class WelcomeActivity extends AppCompatActivity
             frag = HomeFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
+        } else if(id == R.id.nav_browse){
+            frag = ItemCategoryFragment.newInstance();
+            fragmentTransaction.replace(R.id.frag_container, frag);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
