@@ -35,6 +35,7 @@ public class ItemByCategoryFragment extends Fragment {
     ArrayList<Item> list;
 
     private static final String TAG = "ItemByCategoryFragment";
+    ListView listView;
 
     public ItemByCategoryFragment() {
         // Required empty public constructor
@@ -59,7 +60,7 @@ public class ItemByCategoryFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        ListView listView = (ListView) rootView.findViewById(R.id.lv_itemByCategory);
+        listView = (ListView) rootView.findViewById(R.id.lv_itemByCategory);
 
         DatabaseReference itemsRef = FirebaseDatabase.getInstance().getReference().child("items");
         Query queryRef = itemsRef.orderByChild("cat").equalTo(category);
@@ -70,6 +71,8 @@ public class ItemByCategoryFragment extends Fragment {
                 System.out.println(dataSnapshot.getValue());
                 Item item = dataSnapshot.getValue(Item.class);
                 list.add(new Item(item.getName(), item.getUser(), item.getDesc(), item.getMode(), item.getCat(), item.getTags(), item.getDate()));
+                ItemAdapter itemAdapter = new ItemAdapter(list);
+                listView.setAdapter(itemAdapter);
             }
 
             @Override
@@ -93,8 +96,7 @@ public class ItemByCategoryFragment extends Fragment {
             }
         });
 
-        ItemAdapter itemAdapter = new ItemAdapter(list);
-        listView.setAdapter(itemAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -163,8 +165,7 @@ public class ItemByCategoryFragment extends Fragment {
             try {
                 Date date = fmt.parse(item.getDate().toString());
                 frDate = fmt2.format(date);
-            }
-            catch(ParseException pe) {
+            } catch (ParseException pe) {
                 pe.printStackTrace();
             }
             holder.date.setText(frDate);

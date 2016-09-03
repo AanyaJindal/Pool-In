@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.aanyajindal.pool_in.models.Item;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class ItemFragment extends Fragment {
 
@@ -56,7 +60,18 @@ public class ItemFragment extends Fragment {
         itemMode.setText(obj.getMode());
         itemCategory.setText(obj.getCat());
         itemTags.setText(obj.getTags());
-        itemDate.setText(obj.getDate());
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
+        String frDate = "";
+        try {
+            Date date = fmt.parse(obj.getDate().toString());
+            frDate = fmt2.format(date);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+
+        itemDate.setText(frDate);
 
         return rootView;
     }
