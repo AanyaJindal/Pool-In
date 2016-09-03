@@ -19,7 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -143,7 +146,18 @@ public class ItemByCategoryFragment extends Fragment {
             Item item = (Item) getItem(position);
             holder.name.setText(item.getName());
             holder.tags.setText(item.getTags());
-            holder.date.setText(item.getDate());
+
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+            SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
+            String frDate = "";
+            try {
+                Date date = fmt.parse(item.getDate().toString());
+                frDate = fmt2.format(date);
+            }
+            catch(ParseException pe) {
+                pe.printStackTrace();
+            }
+            holder.date.setText(frDate);
             holder.user.setText(item.getUser());
             return convertView;
         }
