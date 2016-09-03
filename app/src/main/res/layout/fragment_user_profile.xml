@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.aanyajindal.pool_in.ItemFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <LinearLayout
@@ -104,7 +105,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_skills_listView">
+            android:id="@+id/user_skills_listView"
+            style="@style/ListViewStyle">
         </ListView>
 
         <TextView
@@ -119,7 +121,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_items_listView">
+            android:id="@+id/user_items_listView"
+            style="@style/ListViewStyle">
         </ListView>
 
     </LinearLayout>

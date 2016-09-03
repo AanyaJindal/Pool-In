@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lighterGray"
     tools:context=".ItemByCategoryFragment">
 
     <ListView
         android:id="@+id/lv_itemByCategory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/ListViewStyle">
 
     </ListView>
 

@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SkillCategoryFragment">
+    tools:context=".SkillCategoryFragment"
+    android:background="@color/lightGray">
 
     <ListView
         android:id="@+id/lv_skillCategory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/ListViewStyle">
 
     </ListView>
 
