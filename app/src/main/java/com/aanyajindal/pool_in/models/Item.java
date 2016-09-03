@@ -9,14 +9,14 @@ public class Item {
     String user;
     String desc;
     String mode;
-    String id;
+    String cat;
 
-    public Item(String name, String user, String desc, String mode, String id) {
+    public Item(String name, String user, String desc, String mode, String cat) {
         this.name = name;
         this.user = user;
         this.desc = desc;
         this.mode = mode;
-        this.id = id;
+        this.cat = cat;
     }
 
     public Item() {
@@ -54,11 +54,11 @@ public class Item {
         this.desc = desc;
     }
 
-    public String getId() {
-        return id;
+    public String getCat() {
+        return cat;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCat(String cat) {
+        this.cat = cat;
     }
 }
