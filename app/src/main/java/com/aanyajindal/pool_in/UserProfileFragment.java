@@ -62,7 +62,7 @@ public class UserProfileFragment extends Fragment {
         userSkills.setAdapter(usSkillAdapter);
 
         ArrayList<String> usItemlList = new ArrayList<>();
-        
+
         ArrayAdapter<String> usItemAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, usItemlList);
         userItems.setAdapter(usItemAdapter);
 
