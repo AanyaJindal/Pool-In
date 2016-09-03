@@ -10,13 +10,15 @@ public class Post {
     String body;
     String authorId;
     String tags;
+    String category;
 
-    public Post(String title, String date, String body, String authorId, String tags) {
+    public Post(String title, String date, String body, String authorId, String tags, String category) {
         this.title = title;
         this.date = date;
         this.body = body;
         this.authorId = authorId;
         this.tags = tags;
+        this.category = category;
     }
 
     public Post() {
@@ -60,5 +62,13 @@ public class Post {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
