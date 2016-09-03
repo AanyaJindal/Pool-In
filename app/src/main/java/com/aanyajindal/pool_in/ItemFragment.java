@@ -18,24 +18,46 @@ public class ItemFragment extends Fragment {
 
     }
 
+    public static ItemFragment newInstance(Item item) {
+        
+        Bundle args = new Bundle();
+        args.putString("name",item.getName());
+        args.putString("date",item.getDate());
+        args.putString("desc",item.getDesc());
+        args.putString("tags",item.getTags());
+        args.putString("user",item.getUser());
+        args.putString("mode",item.getMode());
+        args.putString("cat",item.getCat());
+        ItemFragment fragment = new ItemFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_item, container, false);
-        Item obj = new Item();
+        Bundle bundle = getArguments();
+        Item obj = new Item(bundle.getString("name"),bundle.getString("user"),bundle.getString("desc")
+        ,bundle.getString("mode"),bundle.getString("cat"),bundle.getString("tags"),bundle.getString("date"));
 
         TextView itemName = (TextView)rootView.findViewById(R.id.item_name_value);
         TextView itemUser = (TextView)rootView.findViewById(R.id.item_user_value);
         TextView itemDesc = (TextView)rootView.findViewById(R.id.item_desc_value);
         TextView itemMode = (TextView)rootView.findViewById(R.id.item_mode_value);
         TextView itemCategory = (TextView)rootView.findViewById(R.id.item_category_value);
+        TextView itemTags = (TextView) rootView.findViewById(R.id.item_tags_value);
+        TextView itemDate = (TextView) rootView.findViewById(R.id.item_date_value);
+
 
         itemName.setText(obj.getName());
         itemUser.setText(obj.getUser());
         itemDesc.setText(obj.getDesc());
         itemMode.setText(obj.getMode());
         itemCategory.setText(obj.getCat());
+        itemTags.setText(obj.getTags());
+        itemDate.setText(obj.getDate());
+
         return rootView;
     }
 

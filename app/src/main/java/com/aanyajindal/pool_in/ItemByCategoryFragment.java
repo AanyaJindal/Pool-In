@@ -3,10 +3,13 @@ package com.aanyajindal.pool_in;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -89,6 +92,16 @@ public class ItemByCategoryFragment extends Fragment {
 
         ItemAdapter itemAdapter = new ItemAdapter(list);
         listView.setAdapter(itemAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment frag = ItemFragment.newInstance(list.get(position));
+                fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.commit();
+            }
+        });
         return rootView;
     }
 

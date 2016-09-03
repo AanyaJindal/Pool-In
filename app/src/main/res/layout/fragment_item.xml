@@ -2,113 +2,149 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aanyajindal.pool_in.ItemFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.aanyajindal.pool_in.ItemFragment">
 
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:padding="16dp">
-
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:text="Item Description"
-           android:textSize="35dp"
-           android:textStyle="bold"
-           android:gravity="center"
-           android:id="@+id/item_header"/>
-
-   </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/item_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Item Name"
-            android:textSize="16dp"
-            android:id="@+id/item_name_header"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mathematics Book"
-            android:textSize="20dp"
-            android:id="@+id/item_name_value"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:text="Submitted By"
-            android:textSize="16dp"
-            android:id="@+id/item_user_header"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Barack Obama"
-            android:textSize="20dp"
-            android:id="@+id/item_user_value"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:text="Description"
-            android:textSize="16dp"
-            android:id="@+id/item_desc_header"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Engineering Mathermatics book, good condition,Published in year 2015 "
-            android:textSize="20dp"
-            android:id="@+id/item_desc_value"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:text="Mode of Availability"
-            android:textSize="16dp"
-            android:id="@+id/item_mode_header"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rent / Sell"
-            android:textSize="20dp"
-            android:id="@+id/item_mode_value"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:text="Category"
-            android:textSize="16dp"
-            android:id="@+id/item_category_header"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Book"
-            android:textSize="20dp"
-            android:id="@+id/item_category_value"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Item Description"
+            android:textSize="35dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/item_name_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Item Name"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_name_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mathematics Book"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/item_user_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Submitted By"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_user_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Barack Obama"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/item_desc_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Description"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_desc_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Engineering Mathermatics book, good condition,Published in year 2015 "
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/item_mode_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Mode of Availability"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_mode_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rent / Sell"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/item_category_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Category"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_category_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Book"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/item_tags_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tags"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_tags_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="tags"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/item_date_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Date"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_date_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Book"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
