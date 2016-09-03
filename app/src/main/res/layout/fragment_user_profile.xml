@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context="com.aanyajindal.pool_in.ItemFragment"
     android:orientation="vertical"
     >
@@ -17,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="User Profile"
+            android:textColor="#000000"
             android:textSize="35dp"
             android:textStyle="bold"
             android:gravity="center"
@@ -35,6 +37,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="Name"
+            android:textColor="#FF6F00"
             android:textSize="16dp"
             android:id="@+id/user_name_header"/>
 
@@ -42,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Barack Obama"
+            android:textColor="#000000"
             android:textSize="20dp"
             android:id="@+id/user_name_value"/>
 
@@ -49,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textColor="#FF6F00"
             android:layout_marginTop="16dp"
             android:text="Email ID"
             android:textSize="16dp"
@@ -58,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="barack@gmail.com"
+            android:textColor="#000000"
             android:textSize="20dp"
             android:id="@+id/user_email_value"/>
 
@@ -66,6 +72,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
+            android:textColor="#FF6F00"
             android:text="College"
             android:textSize="16dp"
             android:id="@+id/user_college_header"/>
@@ -73,6 +80,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:text="Massachusets Institute of Technology"
             android:textSize="20dp"
             android:id="@+id/user_college_value"/>
@@ -82,6 +90,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
+            android:textColor="#FF6F00"
             android:text="Location"
             android:textSize="16dp"
             android:id="@+id/user_location_header"/>
@@ -90,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Boston"
+            android:textColor="#000000"
             android:textSize="20dp"
             android:id="@+id/user_location_value"/>
 
@@ -97,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textColor="#FF6F00"
             android:layout_marginTop="16dp"
             android:text="User Skills"
             android:textSize="16dp"
@@ -106,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/user_skills_listView"
-            style="@style/ListViewStyle">
+            style="@style/ListViewStyle2">
         </ListView>
 
         <TextView
@@ -115,6 +126,7 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:text="User Items"
+            android:textColor="#FF6F00"
             android:textSize="16dp"
             android:id="@+id/user_items_header"/>
 
@@ -122,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/user_items_listView"
-            style="@style/ListViewStyle">
+            style="@style/ListViewStyle2">
         </ListView>
 
     </LinearLayout>

@@ -36,4 +36,13 @@
         <item name="android:cacheColorHint">#00000000</item>
     </style>
 
+    <style name="ListViewStyle2" parent="android:style/Widget.ListView">
+        <item name="background">@color/white</item>
+        <item name="android:divider">@color/black</item>
+        <item name="android:dividerHeight">@dimen/divider_height</item>
+        <item name="android:listSelector">@color/lightestGray</item>
+        <item name="android:drawSelectorOnTop">false</item>
+        <item name="android:cacheColorHint">#00000000</item>
+    </style>
+
 </resources>
