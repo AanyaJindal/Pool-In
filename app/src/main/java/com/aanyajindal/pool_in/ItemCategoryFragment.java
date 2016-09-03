@@ -1,8 +1,11 @@
 package com.aanyajindal.pool_in;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +41,7 @@ public class ItemCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_item_category, container, false);
         ListView lvItemCatg = (ListView) rootView.findViewById(R.id.lv_itemCategory);
-        ArrayList<String> itCatList = new ArrayList<>();
+        final ArrayList<String> itCatList = new ArrayList<>();
         itCatList.add("Books");
         itCatList.add("Notes");
         itCatList.add("Online Resources");
@@ -49,7 +52,11 @@ public class ItemCategoryFragment extends Fragment {
         lvItemCatg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment frag = PeopleByCategoryFragment.newInstance(itCatList.get(position));
+                fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.commit();
             }
         });
         return rootView;
