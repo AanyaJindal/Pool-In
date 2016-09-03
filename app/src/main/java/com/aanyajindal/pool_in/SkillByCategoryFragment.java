@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,13 +31,14 @@ import java.util.Date;
  */
 public class SkillByCategoryFragment extends Fragment {
 
+            User user;
 
     public SkillByCategoryFragment() {
         // Required empty public constructor
     }
 
     ListView listView;
-    ArrayList<User> list;
+    ArrayList<String> list;
 
 
     public static SkillByCategoryFragment newInstance(String skillCat) {
@@ -67,11 +69,12 @@ public class SkillByCategoryFragment extends Fragment {
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
-                System.out.println(dataSnapshot.getKey());
+                list.add(dataSnapshot.getKey());
 //                User user = dataSnapshot.getValue(User.class);
 //                list.add(user);
 //                UserAdapter itemAdapter = new UserAdapter(list);
 //                listView.setAdapter(itemAdapter);
+                UserAdapter userAdapter  = new UserAdapter(list);
             }
 
             @Override
@@ -104,9 +107,9 @@ public class SkillByCategoryFragment extends Fragment {
             TextView name;
             TextView college;
         }
-        ArrayList<User> mList;
+        ArrayList<String> mList;
 
-        public UserAdapter(ArrayList<User> mList) {
+        public UserAdapter(ArrayList<String> mList) {
             this.mList = mList;
         }
 
@@ -116,7 +119,7 @@ public class SkillByCategoryFragment extends Fragment {
         }
 
         @Override
-        public User getItem(int position) {
+        public String getItem(int position) {
             return mList.get(position);
         }
 
@@ -138,8 +141,19 @@ public class SkillByCategoryFragment extends Fragment {
             } else {
                 holder = (Holder) convertView.getTag();
             }
+            String userid =  getItem(position);
+            DatabaseReference userList= FirebaseDatabase.getInstance().getReference().child("users");
+            userList.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    user = dataSnapshot.getValue(User.class);
+                }
 
-            User user =  getItem(position);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             holder.name.setText(user.getName());
             holder.college.setText(user.getCollege());
 
