@@ -5,7 +5,7 @@
     tools:context=".ItemByCategoryFragment">
 
     <ListView
-        android:id="@+id/lv_peopleByCategory"
+        android:id="@+id/lv_itemByCategory"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -7,16 +7,36 @@ public class Item {
     String desc;
     String mode;
     String cat;
+    String tags;
+    String date;
 
-    public Item(String name, String user, String desc, String mode, String cat) {
+    public Item(String name, String user, String desc, String mode, String cat,String tags,String date) {
         this.name = name;
         this.user = user;
         this.desc = desc;
         this.mode = mode;
         this.cat = cat;
+        this.tags = tags;
+        this.date = date;
     }
 
     public Item() {
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public String getMode() {
