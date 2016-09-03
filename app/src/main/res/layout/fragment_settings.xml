@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context="com.aanyajindal.pool_in.SettingsFragment"
     android:padding="16dp"
-    android:background="#000000"
     android:gravity="center">
 
     <info.hoang8f.widget.FButton
@@ -15,14 +14,14 @@
         android:text="Edit Profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        fbutton:buttonColor="#FFAB91"
-        fbutton:shadowColor="#FF7043"
+        fbutton:buttonColor="#757575"
+        fbutton:shadowColor="#616161"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:textColor="#424242"
+        android:textColor="#ffffff"
         />
 
     <info.hoang8f.widget.FButton
@@ -30,27 +29,27 @@
         android:text="Change Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        fbutton:buttonColor="#FF7043"
-        fbutton:shadowColor="#F4511E"
+        fbutton:buttonColor="#616161"
+        fbutton:shadowColor="#424242"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:textColor="#424242"/>
+        android:textColor="#ffffff"/>
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btn_logout"
         android:text="Logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        fbutton:buttonColor="#F4511E"
-        fbutton:shadowColor="#D84315"
+        fbutton:buttonColor="#424242"
+        fbutton:shadowColor="#212121"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:textColor="#424242"/>
+        android:textColor="#ffffff"/>
 
 </LinearLayout>
