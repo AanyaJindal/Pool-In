@@ -27,6 +27,8 @@ import java.util.ArrayList;
  */
 public class ItemByCategoryFragment extends Fragment {
     ArrayList<Item> list;
+    ItemAdapter itemAdapter;
+    ListView listView;
 
     private static final String TAG = "ItemByCategoryFragment";
 
@@ -53,7 +55,7 @@ public class ItemByCategoryFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        ListView listView = (ListView) rootView.findViewById(R.id.lv_itemByCategory);
+        listView = (ListView) rootView.findViewById(R.id.lv_itemByCategory);
 
         DatabaseReference itemsRef = FirebaseDatabase.getInstance().getReference().child("items");
         Query queryRef = itemsRef.orderByChild("cat").equalTo(category);
@@ -61,9 +63,12 @@ public class ItemByCategoryFragment extends Fragment {
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
-                System.out.println(dataSnapshot.getValue());
                 Item item = dataSnapshot.getValue(Item.class);
+                Log.d(TAG, "onChildAdded: " + item.getName());
                 list.add(new Item(item.getName(), item.getUser(), item.getDesc(), item.getMode(), item.getCat(), item.getTags(), item.getDate()));
+                Log.d(TAG, "onCreateView: " + list.size());
+                itemAdapter = new ItemAdapter(list);
+                listView.setAdapter(itemAdapter);
             }
 
             @Override
@@ -87,12 +92,10 @@ public class ItemByCategoryFragment extends Fragment {
             }
         });
 
-        ItemAdapter itemAdapter = new ItemAdapter(list);
-        listView.setAdapter(itemAdapter);
         return rootView;
     }
 
-    class ItemAdapter extends BaseAdapter {
+    private class ItemAdapter extends BaseAdapter {
         class Holder {
             TextView name;
             TextView user;
@@ -100,7 +103,7 @@ public class ItemByCategoryFragment extends Fragment {
             TextView tags;
         }
 
-        ArrayList<Item> mList;
+        private ArrayList<Item> mList;
 
         public ItemAdapter(ArrayList<Item> mList) {
             this.mList = mList;
