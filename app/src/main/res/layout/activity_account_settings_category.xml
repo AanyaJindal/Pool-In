@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#455A64"
+        android:background="#000000"
         android:textColorHint="#78909C"
         android:hint="College name"/>
     </com.github.florent37.materialtextfield.MaterialTextField>
