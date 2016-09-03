@@ -76,8 +76,8 @@ public class SkillByCategoryFragment extends Fragment {
 //                User user = dataSnapshot.getValue(User.class);
 //                list.add(user);
 //                UserAdapter itemAdapter = new UserAdapter(list);
-//                listView.setAdapter(itemAdapter);
                 UserAdapter userAdapter = new UserAdapter(list);
+                listView.setAdapter(userAdapter);
             }
 
             @Override
@@ -111,6 +111,8 @@ public class SkillByCategoryFragment extends Fragment {
             TextView college;
         }
 
+        Holder holder;
+
         ArrayList<String> mList;
 
         public UserAdapter(ArrayList<String> mList) {
@@ -135,7 +137,7 @@ public class SkillByCategoryFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater li = LayoutInflater.from(getActivity());
-            Holder holder = new Holder();
+            holder = new Holder();
             if (convertView == null) {
                 convertView = li.inflate(R.layout.user_list, null);
 
@@ -146,11 +148,15 @@ public class SkillByCategoryFragment extends Fragment {
                 holder = (Holder) convertView.getTag();
             }
             String userid = getItem(position);
+            Log.d(TAG, "getView: userid "+ userid);
             DatabaseReference userList = FirebaseDatabase.getInstance().getReference().child("users");
             userList.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     user = dataSnapshot.getValue(User.class);
+                    Log.d(TAG, "onDataChange: "+user.getName());
+                    holder.name.setText(user.getName());
+                    holder.college.setText(user.getCollege());
                 }
 
                 @Override
@@ -158,8 +164,6 @@ public class SkillByCategoryFragment extends Fragment {
 
                 }
             });
-            holder.name.setText(user.getName());
-            holder.college.setText(user.getCollege());
 
             return convertView;
         }
