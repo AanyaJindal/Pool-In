@@ -11,6 +11,7 @@
     tools:context="com.aanyajindal.pool_in.AddItem">
     <EditText
         android:hint="Item Category"
+        android:focusable="false"
         android:id="@+id/et_itemCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

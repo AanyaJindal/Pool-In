@@ -40,6 +40,46 @@ public class AddItem extends AppCompatActivity {
         etItemMode = (EditText) findViewById(R.id.et_itemMode);
         btnAddItem = (Button) findViewById(R.id.btn_addItem);
 
+        etItemCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater li = LayoutInflater.from(AddItem.this);
+                final View modeDialogView = li.inflate(R.layout.mode_dialog, null);
+                final AlertDialog.Builder alert = new AlertDialog.Builder(AddItem.this);
+                final RadioButton rbBooks = (RadioButton) modeDialogView.findViewById(R.id.rb_books);
+                final RadioButton rbCar = (RadioButton) modeDialogView.findViewById(R.id.rb_car);
+                final RadioButton rbNotes = (RadioButton) modeDialogView.findViewById(R.id.rb_notes);
+                final RadioButton rbRes = (RadioButton) modeDialogView.findViewById(R.id.rb_res);
+                final RadioButton rbStationery = (RadioButton) modeDialogView.findViewById(R.id.rb_stationery);
+                final EditText etRbothers = (EditText) modeDialogView.findViewById(R.id.et_rbothers);
+
+
+                alert.setView(modeDialogView);
+                alert.setTitle("Category");
+                alert.setPositiveButton("Set Mode of Payment", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String tMode = "";
+                        if(rbBooks.isChecked()){
+                            tMode = "Books";
+                        }else if(rbCar.isChecked()){
+                            tMode = "Car Pooling";
+                        }else if(rbNotes.isChecked()){
+                            tMode = "Notes";
+                        }else if(rbRes.isChecked()){
+                            tMode = "Online Resources";
+                        }else if(rbStationery.isChecked()){
+                            tMode = etRbothers.getText().toString();
+                        }
+                        etItemCategory.setText(tMode);
+                    }
+                });
+                alert.setNegativeButton("CANCEL", null);
+                alert.create();
+                alert.show();
+            }
+        });
+
         etItemMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
