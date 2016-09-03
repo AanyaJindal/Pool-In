@@ -68,7 +68,7 @@ public class WelcomeActivity extends AppCompatActivity
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(WelcomeActivity.this,AddItem.class);
+                Intent intent  = new Intent(WelcomeActivity.this, AddItem.class);
                 startActivity(intent);
             }
         });

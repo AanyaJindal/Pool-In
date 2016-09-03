@@ -39,7 +39,8 @@ public class AddItem extends AppCompatActivity {
 
 
                 alert.setView(modeDialogView);
-                alert.setPositiveButton("Set Mode of Payment", new DialogInterface.OnClickListener() {
+                alert.setTitle("Mode of Availability");
+                alert.setPositiveButton("Set Mode of Availability", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String tMode = "";
