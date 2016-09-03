@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context="com.aanyajindal.pool_in.SettingsFragment"
     android:padding="16dp"
+    android:background="#000000"
     android:gravity="center">
 
     <info.hoang8f.widget.FButton
@@ -14,11 +15,14 @@
         android:text="Edit Profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        fbutton:buttonColor="#558B2F"
-        fbutton:shadowColor="#33691E"
+        fbutton:buttonColor="#FFAB91"
+        fbutton:shadowColor="#FF7043"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="#424242"
         />
 
     <info.hoang8f.widget.FButton
@@ -26,21 +30,27 @@
         android:text="Change Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        fbutton:buttonColor="#FFA000"
-        fbutton:shadowColor="#FF6F00"
+        fbutton:buttonColor="#FF7043"
+        fbutton:shadowColor="#F4511E"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"/>
+        fbutton:cornerRadius="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="#424242"/>
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btn_logout"
         android:text="Logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        fbutton:buttonColor="#E64A19"
-        fbutton:shadowColor="#BF360C"
+        fbutton:buttonColor="#F4511E"
+        fbutton:shadowColor="#D84315"
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp" />
+        fbutton:cornerRadius="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="#424242"/>
 
 </LinearLayout>
