@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/item_owner"
         android:text="hello"
+        android:textSize="20dp"
+        android:padding="2dp"
+        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/item_name"
         android:text="hello"
+        android:textSize="20dp"
+        android:padding="2dp"
+        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/item_tags"
+        android:padding="2dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:text="hello"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/item_date"
         android:text="hello"
+        android:textSize="20dp"
+        android:padding="2dp"
+        android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

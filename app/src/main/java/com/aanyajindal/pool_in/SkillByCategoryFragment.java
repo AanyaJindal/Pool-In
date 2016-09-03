@@ -67,7 +67,7 @@ public class SkillByCategoryFragment extends Fragment {
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
-                System.out.println(dataSnapshot.getValue());
+                System.out.println(dataSnapshot.getKey());
 //                User user = dataSnapshot.getValue(User.class);
 //                list.add(user);
 //                UserAdapter itemAdapter = new UserAdapter(list);
