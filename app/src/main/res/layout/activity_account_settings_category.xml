@@ -19,8 +19,8 @@
         android:id="@+id/et_college"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#333"
-        android:textColorHint="#666"
+        android:textColor="#455A64"
+        android:textColorHint="#78909C"
         android:hint="College name"/>
     </com.github.florent37.materialtextfield.MaterialTextField>
 
@@ -31,8 +31,8 @@
         android:id="@+id/et_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:textColor="#455A64"
+        android:textColorHint="#78909C"
         android:hint="Location"
         android:textSize="15sp"/>
   </com.github.florent37.materialtextfield.MaterialTextField>
@@ -45,8 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"
-        android:textColor="#333"
-        android:textColorHint="#666"
+        android:textColor="#455A64"
+        android:textColorHint="#78909C"
         android:hint="Add skills separated by comma"/>
     </com.github.florent37.materialtextfield.MaterialTextField>
 
