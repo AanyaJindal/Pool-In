@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:mtf_image="@mipmap/ic_college"
-        app:mtf_labelColor="#757575">
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:id="@+id/et_college"
         android:layout_width="match_parent"

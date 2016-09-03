@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:mtf_image="@mipmap/ic_skill"
-        app:mtf_labelColor="#757575">
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:hint="Item Category"
         android:focusable="false"
@@ -30,7 +31,8 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:mtf_image="@mipmap/ic_discuss"
-        app:mtf_labelColor="#757575">
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:hint="Item Name"
         android:id="@+id/et_itemName"
@@ -43,7 +45,8 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:mtf_image="@mipmap/ic_desc"
-        app:mtf_labelColor="#757575">
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:hint="Item Description"
         android:id="@+id/et_itemDesc"
@@ -56,7 +59,8 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:mtf_image="@mipmap/ic_tag"
-        app:mtf_labelColor="#757575">
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:hint="Item Tags"
         android:id="@+id/et_itemTags"
@@ -69,7 +73,8 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:mtf_image="@mipmap/ic_mode"
-        app:mtf_labelColor="#757575">
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:hint="Mode of Availability"
         android:id="@+id/et_itemMode"
