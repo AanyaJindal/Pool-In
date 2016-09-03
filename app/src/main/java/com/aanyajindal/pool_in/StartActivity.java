@@ -27,6 +27,7 @@ public class StartActivity extends AppCompatActivity {
                             .setLogo(R.mipmap.ic_launcher)
                             .setIsSmartLockEnabled(false)
                             .setProviders(AuthUI.EMAIL_PROVIDER,AuthUI.GOOGLE_PROVIDER)
+                            .setTheme(R.style.GreenTheme)
                             .build(this),
                     RC_SIGN_IN);
         }
