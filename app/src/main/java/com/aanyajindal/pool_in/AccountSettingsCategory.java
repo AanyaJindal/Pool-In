@@ -36,13 +36,22 @@ public class AccountSettingsCategory extends AppCompatActivity {
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
+
         mainDatabase = FirebaseDatabase.getInstance().getReference();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 usersList  = mainDatabase.child("users");
+                String string = etSkillSet.getText().toString();
                 usersList.child(user.getUid()).setValue(new User(user.getDisplayName(), user.getEmail(),etCollege.getText().toString(),etlocation.getText().toString()));
-                usersList.child(user.getUid()).child("skills").push().setValue(etSkillSet.getText().toString());
+                String[] parts = string.split(", ");
+                usersList.child(user.getUid()).child("skills").setValue("");
+                for(int i= 0;i<parts.length;i++){
+                    usersList.child(user.getUid()).child("skills").push().setValue(parts[i]);
+                }
+
             }
         });
 
