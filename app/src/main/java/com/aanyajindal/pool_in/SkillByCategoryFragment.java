@@ -3,6 +3,7 @@ package com.aanyajindal.pool_in;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,8 @@ import java.util.Date;
  */
 public class SkillByCategoryFragment extends Fragment {
 
-            User user;
+    User user;
+    private static final String TAG = "SkillByCategoryFragment";
 
     public SkillByCategoryFragment() {
         // Required empty public constructor
@@ -70,11 +72,12 @@ public class SkillByCategoryFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
                 list.add(dataSnapshot.getKey());
+                Log.d(TAG, "onChildAdded: " + dataSnapshot.getKey());
 //                User user = dataSnapshot.getValue(User.class);
 //                list.add(user);
 //                UserAdapter itemAdapter = new UserAdapter(list);
 //                listView.setAdapter(itemAdapter);
-                UserAdapter userAdapter  = new UserAdapter(list);
+                UserAdapter userAdapter = new UserAdapter(list);
             }
 
             @Override
@@ -102,11 +105,12 @@ public class SkillByCategoryFragment extends Fragment {
         return rootView;
     }
 
-    private class UserAdapter extends BaseAdapter{
-        class Holder{
+    private class UserAdapter extends BaseAdapter {
+        class Holder {
             TextView name;
             TextView college;
         }
+
         ArrayList<String> mList;
 
         public UserAdapter(ArrayList<String> mList) {
@@ -141,8 +145,8 @@ public class SkillByCategoryFragment extends Fragment {
             } else {
                 holder = (Holder) convertView.getTag();
             }
-            String userid =  getItem(position);
-            DatabaseReference userList= FirebaseDatabase.getInstance().getReference().child("users");
+            String userid = getItem(position);
+            DatabaseReference userList = FirebaseDatabase.getInstance().getReference().child("users");
             userList.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
