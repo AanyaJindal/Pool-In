@@ -1,7 +1,6 @@
 package com.aanyajindal.pool_in;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -54,7 +53,7 @@ public class ItemCategoryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment frag = PeopleByCategoryFragment.newInstance(itCatList.get(position));
+                Fragment frag = ItemByCategoryFragment.newInstance(itCatList.get(position));
                 fragmentTransaction.replace(R.id.frag_container, frag);
                 fragmentTransaction.commit();
             }
