@@ -16,23 +16,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mtf_image="@mipmap/ic_search"
-        app:mtf_labelColor="@color/cardview_dark_background">
+        app:mtf_image="@mipmap/ic_college"
+        app:mtf_labelColor="#757575">
     <EditText
         android:id="@+id/et_college"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#455A64"
         android:textColorHint="#78909C"
-        android:hint="College name"/>
+        android:hint="College name"
+        app:mtf_openKeyboardOnFocus="true"/>
     </com.github.florent37.materialtextfield.MaterialTextField>
 
   <com.github.florent37.materialtextfield.MaterialTextField
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       xmlns:app="http://schemas.android.com/apk/res-auto"
-      app:mtf_image="@mipmap/ic_search"
-      app:mtf_labelColor="@color/cardview_dark_background">
+      app:mtf_image="@mipmap/ic_location"
+      app:mtf_labelColor="#757575"
+      app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:id="@+id/et_location"
         android:layout_width="match_parent"
@@ -47,8 +49,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mtf_image="@mipmap/ic_search"
-        app:mtf_labelColor="@color/cardview_dark_background">
+        app:mtf_image="@mipmap/ic_skill"
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
     <EditText
         android:id="@+id/et_skills"
         android:layout_width="match_parent"
