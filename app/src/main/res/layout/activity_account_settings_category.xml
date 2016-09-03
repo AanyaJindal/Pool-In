@@ -33,7 +33,8 @@
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        android:hint="Location"/>
+        android:hint="Location"
+        android:textSize="15sp"/>
   </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
