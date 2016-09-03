@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_skill"
         app:mtf_labelColor="#757575">
     <EditText
         android:hint="Item Category"
@@ -28,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_discuss"
         app:mtf_labelColor="#757575">
     <EditText
         android:hint="Item Name"
@@ -40,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_desc"
         app:mtf_labelColor="#757575">
     <EditText
         android:hint="Item Description"
@@ -52,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_tag"
         app:mtf_labelColor="#757575">
     <EditText
         android:hint="Item Tags"
@@ -64,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_mode"
         app:mtf_labelColor="#757575">
     <EditText
         android:hint="Mode of Availability"
