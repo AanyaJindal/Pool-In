@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ui.email.SignInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -21,6 +25,8 @@ import com.google.android.gms.tasks.Task;
  */
 public class SettingsFragment extends Fragment {
 
+
+    FirebaseUser user;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -43,6 +49,10 @@ public class SettingsFragment extends Fragment {
         Button btnEditProfile = (Button) rootView.findViewById(R.id.btn_editProfile);
         Button btnChngPass = (Button) rootView.findViewById(R.id.btn_editProfile);
         Button btnLogout = (Button) rootView.findViewById(R.id.btn_logout);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +69,23 @@ public class SettingsFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
                                 // user is now signed out
                                 startActivity(new Intent(getActivity().getApplicationContext(), SignInActivity.class));
+                            }
+                        });
+            }
+        });
+        btnChngPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                String emailAddress = user.getEmail();
+
+                auth.sendPasswordResetEmail(emailAddress)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Recovery E-mail sent on registered E-mail ID", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
             }
