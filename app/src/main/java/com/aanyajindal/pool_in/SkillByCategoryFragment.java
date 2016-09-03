@@ -3,10 +3,13 @@ package com.aanyajindal.pool_in;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -78,6 +81,16 @@ public class SkillByCategoryFragment extends Fragment {
 //                UserAdapter itemAdapter = new UserAdapter(list);
                 UserAdapter userAdapter = new UserAdapter(list);
                 listView.setAdapter(userAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        Fragment frag = UserProfileFragment.newInstance(list.get(position));
+                        fragmentTransaction.replace(R.id.frag_container, frag);
+                        fragmentTransaction.commit();
+                    }
+                });
             }
 
             @Override

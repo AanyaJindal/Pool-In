@@ -30,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 public class WelcomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +59,7 @@ public class WelcomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        final DatabaseReference mainDatabase,usersList;
+        final DatabaseReference mainDatabase, usersList;
         mainDatabase = FirebaseDatabase.getInstance().getReference();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -70,7 +69,8 @@ public class WelcomeActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.frag_container, fragment);
         fragmentTransaction.commit();
 
-}
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,20 +95,20 @@ public class WelcomeActivity extends AppCompatActivity
             frag = SettingsFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
-        } else if(id == R.id.nav_home){
+        } else if (id == R.id.nav_home) {
             frag = HomeFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
-        } else if(id == R.id.nav_browse){
+        } else if (id == R.id.nav_browse) {
             frag = ItemCategoryFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
-        } else if(id == R.id.nav_search){
+        } else if (id == R.id.nav_search) {
             frag = SkillCategoryFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
-        } else if(id == R.id.nav_profile){
-            frag = UserProfileFragment.newInstance();
+        } else if (id == R.id.nav_profile) {
+            frag = UserProfileFragment.newInstance(user.getUid());
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
         }
