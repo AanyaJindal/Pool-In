@@ -1,8 +1,5 @@
 package com.aanyajindal.pool_in.models;
 
-/**
- * Created by aanyajindal on 04/09/16.
- */
 public class Post {
 
     String title;

@@ -1,12 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.aanyajindal.pool_in.PostActivity">
+    android:padding="16dp"
+    tools:context="com.aanyajindal.pool_in.PostActivity"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_skill"
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
+        <EditText
+            android:hint="Title"
+            android:focusable="false"
+            android:id="@+id/et_postTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_desc"
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
+        <EditText
+            android:hint="Body"
+            android:id="@+id/et_postBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_mode"
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
+        <EditText
+            android:hint="Category"
+            android:id="@+id/et_postCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mtf_image="@mipmap/ic_tag"
+        app:mtf_labelColor="#757575"
+        app:mtf_openKeyboardOnFocus="true">
+        <EditText
+            android:hint="Post Tags"
+            android:id="@+id/et_postTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_addPost"
+        android:text="ADD POST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        fbutton:buttonColor="#424242"
+        fbutton:shadowColor="#212121"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"/>
+</LinearLayout>
