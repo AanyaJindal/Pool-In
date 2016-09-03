@@ -21,9 +21,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AddItem extends AppCompatActivity {
 
-    EditText etItemName, etItemCategory, etItemDesc, etItemMode;
+    EditText etItemName, etItemCategory, etItemDesc, etItemMode,etItemTags;
     Button btnAddItem;
 
     DatabaseReference mainDatabase,itemsList;
@@ -39,7 +42,10 @@ public class AddItem extends AppCompatActivity {
         etItemName = (EditText) findViewById(R.id.et_itemName);
         etItemDesc = (EditText) findViewById(R.id.et_itemDesc);
         etItemMode = (EditText) findViewById(R.id.et_itemMode);
+        etItemTags= (EditText) findViewById(R.id.et_itemTags);
+
         btnAddItem = (Button) findViewById(R.id.btn_addItem);
+
 
         etItemCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +133,11 @@ public class AddItem extends AppCompatActivity {
                 String itCat = etItemCategory.getText().toString();
                 String itMode = etItemMode.getText().toString();
                 String itDesc = etItemDesc.getText().toString();
-                Item item = new Item(itName,user.getUid(),itDesc,itMode,itCat);
+                String itTags = etItemTags.getText().toString();
+                Date newDate = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                String date = sdf.format(newDate);
+                Item item = new Item(itName,user.getUid(),itDesc,itMode,itCat,itTags,date);
                 mainDatabase = FirebaseDatabase.getInstance().getReference();
                 itemsList = mainDatabase.child("items");
                 String itemid = itemsList.push().getKey();
