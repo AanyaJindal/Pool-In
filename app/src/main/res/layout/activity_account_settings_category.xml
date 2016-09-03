@@ -31,8 +31,8 @@
         android:id="@+id/et_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#333"
-        android:textColorHint="#666"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
         android:hint="Location"/>
   </com.github.florent37.materialtextfield.MaterialTextField>
 
