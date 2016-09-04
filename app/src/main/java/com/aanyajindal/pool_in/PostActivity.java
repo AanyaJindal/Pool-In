@@ -64,6 +64,7 @@ public class PostActivity extends AppCompatActivity {
                 final RadioButton rbFest = (RadioButton) postDialogView.findViewById(R.id.rb_fest);
                 final RadioButton rbCampus = (RadioButton) postDialogView.findViewById(R.id.rb_campus);
                 final RadioButton rbOthers1 = (RadioButton) postDialogView.findViewById(R.id.rb_others1);
+                final RadioButton rbProjects = (RadioButton) postDialogView.findViewById(R.id.rb_project);
                 final EditText etRbothers1 = (EditText) postDialogView.findViewById(R.id.et_rbothers1);
 
 
@@ -75,6 +76,8 @@ public class PostActivity extends AppCompatActivity {
                         String tMode = "";
                         if(rbPlacement.isChecked()){
                             tMode = "Placement";
+                        }else if(rbProjects.isChecked()){
+                            tMode = "Projects";
                         }else if(rbLost.isChecked()){
                             tMode = "Lost and Found";
                         }else if(rbMentor.isChecked()){
