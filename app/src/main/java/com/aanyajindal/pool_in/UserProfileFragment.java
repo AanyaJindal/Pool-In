@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class UserProfileFragment extends Fragment {
     TextView userEmail;
     TextView userCollege;
     TextView userName;
+    Button contactMe;
 
 
 
@@ -87,6 +89,14 @@ public class UserProfileFragment extends Fragment {
         userEmail = (TextView) rootView.findViewById(R.id.user_email_value);
         userCollege = (TextView) rootView.findViewById(R.id.user_college_value);
         userLocation = (TextView) rootView.findViewById(R.id.user_location_value);
+        contactMe = (Button) rootView.findViewById(R.id.btn_contact_me);
+
+        contactMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         ListView userSkills = (ListView) rootView.findViewById(R.id.user_skills_listView);
         //ListView userItems = (ListView) rootView.findViewById(R.id.user_items_listView);
