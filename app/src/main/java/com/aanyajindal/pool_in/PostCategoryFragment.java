@@ -40,7 +40,7 @@ public class PostCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_post_category, container, false);
-        ListView lvItemCatg = (ListView) rootView.findViewById(R.id.lv_itemCategory);
+        ListView lvPostCatg = (ListView) rootView.findViewById(R.id.lv_postCategory);
         final ArrayList<String> postCatList = new ArrayList<>(Arrays.asList("Projects",
                 "Placement",
                 "Lost and Found",
@@ -48,10 +48,11 @@ public class PostCategoryFragment extends Fragment {
                 "Blood Donation",
                 "Complaints",
                 "Fest Participation",
-                "Campus Life"));
+                "Campus Life",
+                "Others"));
         ArrayAdapter<String> postCatAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, postCatList);
-        lvItemCatg.setAdapter(postCatAdapter);
-        lvItemCatg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvPostCatg.setAdapter(postCatAdapter);
+        lvPostCatg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
