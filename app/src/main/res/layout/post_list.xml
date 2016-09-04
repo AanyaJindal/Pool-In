@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/post_title"
         android:text="Post Title here"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:padding="2dp"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
     <TextView
         android:id="@+id/post_author"
         android:text="Barack Obama"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:padding="2dp"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/post_date"
         android:padding="2dp"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:text="30-12-1994"
@@ -32,7 +32,7 @@
     <TextView
         android:id="@+id/post_tags"
         android:text="Tag1, Tag2"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:padding="2dp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
