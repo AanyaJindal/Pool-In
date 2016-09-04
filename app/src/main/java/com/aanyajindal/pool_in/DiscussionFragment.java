@@ -8,22 +8,26 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aanyajindal.pool_in.models.Comment;
+import com.aanyajindal.pool_in.models.Item;
 import com.aanyajindal.pool_in.models.Post;
 import com.aanyajindal.pool_in.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,6 +63,7 @@ public class DiscussionFragment extends Fragment {
 
     User user;
     TextView discussionAuthorView;
+    ListView commentsList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,10 +82,29 @@ public class DiscussionFragment extends Fragment {
 
         final DatabaseReference commentRef = postsRef.child(postid).child("comments");
 
-        commentRef.addValueEventListener(new ValueEventListener() {
+        commentRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Comment comment = new Comment();
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Comment comment = dataSnapshot.getValue(Comment.class);
+                list.add(comment);
+                CommentAdapter comAdapter = new CommentAdapter(list);
+                commentsList.setAdapter(comAdapter);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -111,7 +135,8 @@ public class DiscussionFragment extends Fragment {
 
         Button addCommentButton = (Button) rootView.findViewById(R.id.btn_addComment);
 
-        ListView commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
+
+        commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
 
         discussionTitleView.setText(post.getTitle());
         discussionAuthorView.setText(post.getAuthorId());
@@ -134,7 +159,7 @@ public class DiscussionFragment extends Fragment {
                         Date newDate = new Date();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                         String date = sdf.format(newDate);
-                        Comment comment = new Comment(fUser.getUid(),date,body);
+                        Comment comment = new Comment(fUser.getUid(), date, body);
                         commentRef.push().setValue(comment);
                     }
                 });
@@ -148,4 +173,81 @@ public class DiscussionFragment extends Fragment {
         return rootView;
     }
 
+    class CommentAdapter extends BaseAdapter {
+        class Holder {
+            TextView name;
+            TextView comment;
+            TextView date;
+        }
+
+        ArrayList<Comment> mList;
+
+        public CommentAdapter(ArrayList<Comment> mList) {
+            this.mList = mList;
+        }
+
+        @Override
+        public int getCount() {
+            return mList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater li = LayoutInflater.from(getActivity());
+            Holder holder = new Holder();
+            if (convertView == null) {
+                convertView = li.inflate(R.layout.comment_list, null);
+
+                holder.name = (TextView) convertView.findViewById(R.id.tv_list_author);
+                holder.comment = (TextView) convertView.findViewById(R.id.tv_list_body);
+                holder.date = (TextView) convertView.findViewById(R.id.tv_list_date);
+                convertView.setTag(holder);
+            } else {
+                holder = (Holder) convertView.getTag();
+            }
+
+            Comment comment = (Comment) getItem(position);
+            holder.name.setText(comment.getAuthorId());
+
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+            SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
+            String frDate = "";
+            try {
+                Date date = fmt.parse(comment.getDate().toString());
+                frDate = fmt2.format(date);
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+            }
+            holder.date.setText(frDate);
+
+            holder.comment.setText(comment.getBody());
+
+            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(comment.getAuthorId());
+            final Holder finalHolder = holder;
+            temp.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    user = dataSnapshot.getValue(User.class);
+                    finalHolder.name.setText(user.getName());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            return convertView;
+        }
+
+    }
 }
