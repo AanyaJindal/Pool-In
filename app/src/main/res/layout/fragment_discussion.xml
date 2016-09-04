@@ -1,11 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.aanyajindal.pool_in.DiscussionFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.aanyajindal.pool_in.DiscussionFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,14 +15,14 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/discussion_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Discussion"
             android:textColor="#000000"
             android:textSize="28dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:id="@+id/discussion_header"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -30,120 +31,126 @@
         android:layout_height="0.2dp"
         android:background="#000000" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Title"
-            android:textColor="#FF6F00"
-            android:textSize="16dp"
-            android:id="@+id/discussion_title_header"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Student coordinator needed"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:id="@+id/discussion_title_value"/>
+            <TextView
+                android:id="@+id/discussion_title_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textColor="#FF6F00"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="#000000" />
+            <TextView
+                android:id="@+id/discussion_title_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Student coordinator needed"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#FF6F00"
-            android:layout_marginTop="16dp"
-            android:text="Author"
-            android:textSize="16dp"
-            android:id="@+id/discussion_author_header"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#000000" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Barack Obama"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:id="@+id/discussion_author_value"/>
+            <TextView
+                android:id="@+id/discussion_author_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Author"
+                android:textColor="#FF6F00"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="#000000" />
+            <TextView
+                android:id="@+id/discussion_author_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Barack Obama"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:textColor="#FF6F00"
-            android:text="Discussion Date"
-            android:textSize="16dp"
-            android:id="@+id/discussion_date_header"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#000000" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:text="30-12-1994"
-            android:textSize="20dp"
-            android:id="@+id/discussion_date_value"/>
+            <TextView
+                android:id="@+id/discussion_date_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Discussion Date"
+                android:textColor="#FF6F00"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="#000000" />
+            <TextView
+                android:id="@+id/discussion_date_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="30-12-1994"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:textColor="#FF6F00"
-            android:text="Content"
-            android:textSize="16dp"
-            android:id="@+id/discussion_body_header"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#000000" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:text="The content goes here"
-            android:textSize="20dp"
-            android:id="@+id/discussion_body_value"/>
+            <TextView
+                android:id="@+id/discussion_body_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Content"
+                android:textColor="#FF6F00"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btn_addComment"
-            android:text="ADD COMMENT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            fbutton:buttonColor="#424242"
-            fbutton:shadowColor="#212121"
-            fbutton:shadowEnabled="true"
-            fbutton:shadowHeight="5dp"
-            fbutton:cornerRadius="5dp"
-            android:layout_marginTop="20dp"
-            android:textSize="20dp"
-            android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/discussion_body_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The content goes here"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/discussion_comment_listView"
-            android:layout_marginTop="10dp">
+            <info.hoang8f.widget.FButton
+                android:id="@+id/btn_addComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="ADD COMMENT"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                fbutton:buttonColor="#424242"
+                fbutton:cornerRadius="5dp"
+                fbutton:shadowColor="#212121"
+                fbutton:shadowEnabled="true"
+                fbutton:shadowHeight="5dp" />
 
-        </ListView>
+            <ListView
+                android:id="@+id/discussion_comment_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+            </ListView>
 
         </LinearLayout>
 
+    </ScrollView>
 </LinearLayout>

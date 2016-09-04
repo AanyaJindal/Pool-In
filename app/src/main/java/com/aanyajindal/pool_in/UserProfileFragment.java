@@ -89,19 +89,10 @@ public class UserProfileFragment extends Fragment {
         userLocation = (TextView) rootView.findViewById(R.id.user_location_value);
 
         ListView userSkills = (ListView) rootView.findViewById(R.id.user_skills_listView);
-        ListView userItems = (ListView) rootView.findViewById(R.id.user_items_listView);
-
-
-
         ArrayList<String> usSkillList = new ArrayList<>(Arrays.asList(" "));
 
         ArrayAdapter<String> usSkillAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, usSkillList);
         userSkills.setAdapter(usSkillAdapter);
-
-        ArrayList<String> usItemlList = new ArrayList<>(Arrays.asList(" "));
-
-        ArrayAdapter<String> usItemAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, usItemlList);
-        userItems.setAdapter(usItemAdapter);
 
         return rootView;
     }

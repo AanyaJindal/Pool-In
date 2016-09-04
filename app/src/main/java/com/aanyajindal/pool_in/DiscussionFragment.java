@@ -38,7 +38,7 @@ public class DiscussionFragment extends Fragment {
     DatabaseReference postsRef;
     FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    ArrayList<Comment> list;
+    ArrayList<Comment> list = new ArrayList<>();
 
     public DiscussionFragment() {
         // Required empty public constructor

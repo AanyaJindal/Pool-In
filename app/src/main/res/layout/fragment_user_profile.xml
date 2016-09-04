@@ -164,23 +164,6 @@
             android:layout_height="0.2dp"
             android:background="#000000" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:text="User Items"
-            android:textColor="#FF6F00"
-            android:textSize="16dp"
-            android:id="@+id/user_items_header"/>
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_items_listView"
-            style="@style/ListViewStyle2">
-        </ListView>
-
 
     </LinearLayout>
 
