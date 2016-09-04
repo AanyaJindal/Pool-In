@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/item_owner"
         android:text="hello"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:padding="2dp"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/item_name"
         android:text="hello"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:padding="2dp"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/item_tags"
         android:padding="2dp"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:text="hello"
@@ -31,7 +31,7 @@
     <TextView
         android:id="@+id/item_date"
         android:text="hello"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:padding="2dp"
         android:textColor="#ffffff"
         android:layout_width="wrap_content"
