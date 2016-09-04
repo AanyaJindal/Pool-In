@@ -78,12 +78,10 @@
             android:id="@+id/user_email_value"/>
 
         <info.hoang8f.widget.FButton
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="27dp"
+            android:layout_height="24dp"
             android:id="@+id/btn_contact_me"
-            android:layout_alignParentRight="true"
-            android:text=" Contact Me"
+            android:text="Contact Me"
             fbutton:buttonColor="#424242"
             fbutton:shadowColor="#212121"
             fbutton:shadowEnabled="true"

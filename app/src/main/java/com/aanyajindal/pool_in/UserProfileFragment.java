@@ -1,6 +1,7 @@
 package com.aanyajindal.pool_in;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -94,7 +95,16 @@ public class UserProfileFragment extends Fragment {
         contactMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                // set the type to 'email'
+                emailIntent.setType("vnd.android.cursor.dir/email");
+                String to[] = {userEmail.getText().toString()};
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+                // the mail subject
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, " I want to connect with you!");
+                // the mail body
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hey, "+userName.getText().toString()+ " I would like to connect with you and discuss more...");
+                startActivity(Intent.createChooser(emailIntent, "Send Report via Email..."));
             }
         });
 
