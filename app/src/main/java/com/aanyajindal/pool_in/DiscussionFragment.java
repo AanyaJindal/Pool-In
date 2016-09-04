@@ -12,11 +12,18 @@ import android.widget.TextView;
 
 import com.aanyajindal.pool_in.models.Comment;
 import com.aanyajindal.pool_in.models.Post;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class DiscussionFragment extends Fragment {
 
+
+    DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference().child("posts");
     ArrayList<Comment> list;
 
     public DiscussionFragment() {
@@ -33,6 +40,7 @@ public class DiscussionFragment extends Fragment {
         args.putString("body", post.getBody());
         args.putString("tags",post.getTags());
         args.putString("category",post.getCategory());
+        args.putString("pid",post.getpID());
 
         DiscussionFragment fragment = new DiscussionFragment();
         fragment.setArguments(args);
@@ -46,9 +54,21 @@ public class DiscussionFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_discussion, container, false);
 
         Bundle bundle = getArguments();
-        Post post = new Post(bundle.getString("title"),bundle.getString("date"),bundle.getString("body"),bundle.getString("author"),bundle.getString("tags"),bundle.getString("category"));
+        Post post = new Post(bundle.getString("title"),bundle.getString("date"),bundle.getString("body"),bundle.getString("author"),bundle.getString("tags"),bundle.getString("category"),bundle.getString("pid"));
 
+        DatabaseReference commentRef = postsRef.child(post.getpID()).child("comments");
 
+        commentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Comment comment = new Comment();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         TextView discussionTitleView = (TextView)rootView.findViewById(R.id.discussion_title_value);
         TextView discussionAuthorView = (TextView)rootView.findViewById(R.id.discussion_author_value);

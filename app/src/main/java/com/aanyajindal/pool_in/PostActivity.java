@@ -113,8 +113,8 @@ public class PostActivity extends AppCompatActivity {
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 postsDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
                 String key;
-                Post post = new Post(postTitle,date,postBody,user.getUid(),postTags,postCategory);
                 key = postsDatabase.push().getKey();
+                Post post = new Post(postTitle,date,postBody,user.getUid(),postTags,postCategory,key);
                 postsDatabase.child(key).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
