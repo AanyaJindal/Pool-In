@@ -10,6 +10,12 @@
         android:layout_height="match_parent">
 
         <RadioButton
+            android:text="Projects"
+            android:id="@+id/rb_project"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
             android:text="Placement"
             android:id="@+id/rb_placement"
             android:layout_width="match_parent"
