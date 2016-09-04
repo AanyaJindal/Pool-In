@@ -8,16 +8,24 @@ public class Post {
     String authorId;
     String tags;
     String category;
-    String pID;
+    String postid;
 
-    public Post(String title, String date, String body, String authorId, String tags, String category,String pID) {
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
+    }
+
+    public Post(String title, String date, String body, String authorId, String tags, String category, String postid) {
         this.title = title;
         this.date = date;
         this.body = body;
         this.authorId = authorId;
         this.tags = tags;
         this.category = category;
-        this.pID = pID;
+        this.postid = postid;
     }
 
     public Post() {
@@ -71,11 +79,4 @@ public class Post {
         this.category = category;
     }
 
-    public String getpID() {
-        return pID;
-    }
-
-    public void setpID(String pID) {
-        this.pID = pID;
-    }
 }
