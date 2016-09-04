@@ -3,9 +3,12 @@ package com.aanyajindal.pool_in;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -173,6 +176,16 @@ public class PostByCategoryFragment extends Fragment {
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Fragment frag = DiscussionFragment.newInstance(list.get(position));
+                    fragmentTransaction.replace(R.id.frag_container, frag);
+                    fragmentTransaction.commit();
                 }
             });
             return convertView;
