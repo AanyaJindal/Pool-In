@@ -27,7 +27,7 @@
         app:mtf_openKeyboardOnFocus="true">
         <EditText
             android:hint="Title"
-            android:focusable="false"
+            android:focusable="true"
             android:id="@+id/et_postTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -56,6 +56,7 @@
         app:mtf_openKeyboardOnFocus="true">
         <EditText
             android:hint="Category"
+            android:focusable="false"
             android:id="@+id/et_postCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -39,7 +39,8 @@ public class StartActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // user is signed in!
                 Intent intent = new Intent(this, WelcomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//this activity now not on backstack
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//this activity now not on backstack
+                finish();
                 startActivity(intent);
             } else {
                 // user is not signed in. Maybe just wait for the user to press

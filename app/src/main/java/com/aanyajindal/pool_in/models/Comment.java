@@ -3,18 +3,18 @@ package com.aanyajindal.pool_in.models;
 /**
  * Created by aanyajindal on 04/09/16.
  */
-public class Model {
+public class Comment {
     String authorId;
     String date;
     String body;
 
-    public Model(String authorId, String date, String body) {
+    public Comment(String authorId, String date, String body) {
         this.authorId = authorId;
         this.date = date;
         this.body = body;
     }
 
-    public Model() {
+    public Comment() {
     }
 
     public String getAuthorId() {

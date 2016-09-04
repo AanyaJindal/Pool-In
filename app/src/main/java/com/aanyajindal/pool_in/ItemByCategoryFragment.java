@@ -15,12 +15,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aanyajindal.pool_in.models.Item;
+import com.aanyajindal.pool_in.models.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +36,7 @@ import java.util.Date;
 public class ItemByCategoryFragment extends Fragment {
     ArrayList<Item> list;
 
+    User user;
     private static final String TAG = "ItemByCategoryFragment";
     ListView listView;
 
@@ -169,7 +172,21 @@ public class ItemByCategoryFragment extends Fragment {
                 pe.printStackTrace();
             }
             holder.date.setText(frDate);
-            holder.user.setText(item.getUser());
+
+            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(item.getUser());
+            final Holder finalHolder = holder;
+            temp.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    user = dataSnapshot.getValue(User.class);
+                    finalHolder.user.setText(user.getName());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             return convertView;
         }
 
