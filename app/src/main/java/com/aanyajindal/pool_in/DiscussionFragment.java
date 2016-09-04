@@ -34,13 +34,13 @@ public class DiscussionFragment extends Fragment {
 
         Bundle args = new Bundle();
 
-        args.putString("title",post.getTitle());
-        args.putString("date",post.getDate());
-        args.putString("author",post.getAuthorId());
+        args.putString("title", post.getTitle());
+        args.putString("date", post.getDate());
+        args.putString("author", post.getAuthorId());
         args.putString("body", post.getBody());
-        args.putString("tags",post.getTags());
-        args.putString("category",post.getCategory());
-        args.putString("pid",post.getpID());
+        args.putString("tags", post.getTags());
+        args.putString("category", post.getCategory());
+        args.putString("pid", post.getpID());
 
         DiscussionFragment fragment = new DiscussionFragment();
         fragment.setArguments(args);
@@ -51,17 +51,19 @@ public class DiscussionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_discussion, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_discussion, container, false);
 
         Bundle bundle = getArguments();
-        Post post = new Post(bundle.getString("title"),bundle.getString("date"),bundle.getString("body"),bundle.getString("author"),bundle.getString("tags"),bundle.getString("category"),bundle.getString("pid"));
+        Post post = new Post(bundle.getString("title"), bundle.getString("date"), bundle.getString("body"), bundle.getString("author"), bundle.getString("tags"), bundle.getString("category"), bundle.getString("pid"));
 
         DatabaseReference commentRef = postsRef.child(post.getpID()).child("comments");
 
-        commentRef.addValueEventListener(new ValueEventListener() {
+        final ValueEventListener valueEventListener = commentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Comment comment = new Comment();
+                for (DataSnapshot dataSnap : dataSnapshot) {
+                    Comment comment = new Comment();
+                }
             }
 
             @Override
@@ -70,14 +72,14 @@ public class DiscussionFragment extends Fragment {
             }
         });
 
-        TextView discussionTitleView = (TextView)rootView.findViewById(R.id.discussion_title_value);
-        TextView discussionAuthorView = (TextView)rootView.findViewById(R.id.discussion_author_value);
-        TextView discussionDateView = (TextView)rootView.findViewById(R.id.discussion_date_value);
-        TextView discussionBodyView = (TextView)rootView.findViewById(R.id.discussion_body_value);
+        TextView discussionTitleView = (TextView) rootView.findViewById(R.id.discussion_title_value);
+        TextView discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
+        TextView discussionDateView = (TextView) rootView.findViewById(R.id.discussion_date_value);
+        TextView discussionBodyView = (TextView) rootView.findViewById(R.id.discussion_body_value);
 
-        Button addCommentButton = (Button)rootView.findViewById(R.id.btn_addComment);
+        Button addCommentButton = (Button) rootView.findViewById(R.id.btn_addComment);
 
-        ListView commentsList = (ListView)rootView.findViewById(R.id.discussion_comment_listView);
+        ListView commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
 
         discussionTitleView.setText(post.getTitle());
         discussionAuthorView.setText(post.getAuthorId());
@@ -90,7 +92,6 @@ public class DiscussionFragment extends Fragment {
 
             }
         });
-
 
 
         return rootView;
