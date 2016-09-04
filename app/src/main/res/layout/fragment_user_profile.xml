@@ -77,9 +77,14 @@
             android:textSize="20dp"
             android:id="@+id/user_email_value"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#000000" />
+
         <info.hoang8f.widget.FButton
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:id="@+id/btn_contact_me"
             android:text="Contact Me"
             fbutton:buttonColor="#424242"
@@ -92,11 +97,6 @@
             android:textColor="#ffffff"
             android:drawableLeft="@mipmap/ic_mail2"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="#000000" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,8 +107,6 @@
             android:textSize="16dp"
             android:id="@+id/user_college_header"/>
 
-
-
         <TextView
                 android:layout_weight="1.4"
                 android:layout_width="match_parent"
@@ -117,7 +115,6 @@
                 android:text="Massachusets Institute"
                 android:textSize="20dp"
                 android:id="@+id/user_college_value"/>
-
 
         <View
             android:layout_width="match_parent"
