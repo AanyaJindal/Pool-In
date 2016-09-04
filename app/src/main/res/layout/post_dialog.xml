@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/rg_category"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:text="Placement"
+            android:id="@+id/rb_placement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:text="Lost and Found"
+            android:id="@+id/rb_lost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Mentorship"
+            android:id="@+id/rb_mentor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Blood Donation"
+            android:id="@+id/rb_blood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Complaints"
+            android:id="@+id/rb_complaints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Fest Participation"
+            android:id="@+id/rb_fest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Campus Life"
+            android:id="@+id/rb_campus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="Others"
+            android:id="@+id/rb_others1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.github.florent37.materialtextfield.MaterialTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:mtf_image="@mipmap/ic_skill"
+            app:mtf_labelColor="#757575"
+            app:mtf_openKeyboardOnFocus="true">
+            <EditText
+                android:id="@+id/et_rbothers1"
+                android:hint="Other Item Category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
+    </RadioGroup>
+
+</LinearLayout>
