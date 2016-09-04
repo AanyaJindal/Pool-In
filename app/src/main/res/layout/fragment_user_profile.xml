@@ -33,7 +33,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -83,6 +83,7 @@
             android:background="#000000" />
 
         <info.hoang8f.widget.FButton
+            android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_contact_me"
@@ -144,44 +145,8 @@
             android:layout_height="0.2dp"
             android:background="#000000" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#FF6F00"
-            android:layout_marginTop="16dp"
-            android:text="User Skills"
-            android:textSize="16dp"
-            android:id="@+id/user_skills_header"/>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_skills_listView"
-            style="@style/ListViewStyle2">
-        </ListView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="#000000" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:text="User Items"
-            android:textColor="#FF6F00"
-            android:textSize="16dp"
-            android:id="@+id/user_items_header"/>
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_items_listView"
-            style="@style/ListViewStyle2">
-        </ListView>
 
 
     </LinearLayout>

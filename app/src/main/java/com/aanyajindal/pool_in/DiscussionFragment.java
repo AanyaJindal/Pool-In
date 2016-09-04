@@ -38,7 +38,7 @@ public class DiscussionFragment extends Fragment {
     DatabaseReference postsRef;
     FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    ArrayList<Comment> list;
+    ArrayList<Comment> list = new ArrayList<>();
 
     public DiscussionFragment() {
         // Required empty public constructor
@@ -114,19 +114,19 @@ public class DiscussionFragment extends Fragment {
         });
 
 
-        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(post.getAuthorId());
-        temp.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.getValue(User.class);
-                discussionAuthorView.setText(user.getName());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+//        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(post.getAuthorId());
+//        temp.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                user = dataSnapshot.getValue(User.class);
+//                discussionAuthorView.setText(user.getName());
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
 
         TextView discussionTitleView = (TextView) rootView.findViewById(R.id.discussion_title_value);
         discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
@@ -140,7 +140,17 @@ public class DiscussionFragment extends Fragment {
 
         discussionTitleView.setText(post.getTitle());
         discussionAuthorView.setText(post.getAuthorId());
-        discussionDateView.setText(post.getDate());
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
+        String frDate = "";
+        try {
+            Date date = fmt.parse(post.getDate());
+            frDate = fmt2.format(date);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        discussionDateView.setText(frDate);
+
         discussionBodyView.setText(post.getBody());
 
         addCommentButton.setOnClickListener(new View.OnClickListener() {
