@@ -63,6 +63,7 @@ public class DiscussionFragment extends Fragment {
 
     User user;
     TextView discussionAuthorView;
+    ListView commentsList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +87,9 @@ public class DiscussionFragment extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Comment comment = dataSnapshot.getValue(Comment.class);
                 list.add(comment);
+                CommentAdapter comAdapter = new CommentAdapter(list);
+                commentsList.setAdapter(comAdapter);
+
             }
 
             @Override
@@ -131,7 +135,8 @@ public class DiscussionFragment extends Fragment {
 
         Button addCommentButton = (Button) rootView.findViewById(R.id.btn_addComment);
 
-        ListView commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
+
+        commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
 
         discussionTitleView.setText(post.getTitle());
         discussionAuthorView.setText(post.getAuthorId());
