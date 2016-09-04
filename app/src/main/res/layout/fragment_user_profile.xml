@@ -80,7 +80,8 @@
         <info.hoang8f.widget.FButton
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="26dp"
+            android:layout_height="27dp"
+            android:id="@+id/btn_contact_me"
             android:layout_alignParentRight="true"
             android:text=" Contact Me"
             fbutton:buttonColor="#424242"
