@@ -3,6 +3,8 @@ package com.aanyajindal.pool_in;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,12 +44,12 @@ public class ItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_item, container, false);
         Bundle bundle = getArguments();
-        Item obj = new Item(bundle.getString("name"),bundle.getString("user"),bundle.getString("desc")
+        final Item obj = new Item(bundle.getString("name"),bundle.getString("user"),bundle.getString("desc")
         ,bundle.getString("mode"),bundle.getString("cat"),bundle.getString("tags"),bundle.getString("date"));
 
         TextView itemName = (TextView)rootView.findViewById(R.id.item_name_value);
-        TextView itemUser = (TextView)rootView.findViewById(R.id.item_user_value);
-        TextView itemDesc = (TextView)rootView.findViewById(R.id.item_desc_value);
+        final TextView itemUser = (TextView)rootView.findViewById(R.id.item_user_value);
+        final TextView itemDesc = (TextView)rootView.findViewById(R.id.item_desc_value);
         TextView itemMode = (TextView)rootView.findViewById(R.id.item_mode_value);
         TextView itemCategory = (TextView)rootView.findViewById(R.id.item_category_value);
         TextView itemTags = (TextView) rootView.findViewById(R.id.item_tags_value);
@@ -72,6 +74,17 @@ public class ItemFragment extends Fragment {
         }
 
         itemDate.setText(frDate);
+
+        itemUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment frag = UserProfileFragment.newInstance(obj.getUser());
+                fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.commit();
+            }
+        });
 
         return rootView;
     }

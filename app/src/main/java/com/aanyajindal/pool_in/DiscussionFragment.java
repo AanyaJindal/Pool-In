@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -115,7 +116,17 @@ public class DiscussionFragment extends Fragment {
 
         discussionTitleView.setText(post.getTitle());
         discussionAuthorView.setText(post.getAuthorId());
-        discussionDateView.setText(post.getDate());
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
+        String frDate = "";
+        try {
+            Date date = fmt.parse(post.getDate());
+            frDate = fmt2.format(date);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        discussionDateView.setText(frDate);
+
         discussionBodyView.setText(post.getBody());
 
         addCommentButton.setOnClickListener(new View.OnClickListener() {
