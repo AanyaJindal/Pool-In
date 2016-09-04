@@ -108,15 +108,7 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-        ListView userSkills = (ListView) rootView.findViewById(R.id.user_skills_listView);
-        //ListView userItems = (ListView) rootView.findViewById(R.id.user_items_listView);
 
-
-
-        ArrayList<String> usSkillList = new ArrayList<>(Arrays.asList(" "));
-
-        ArrayAdapter<String> usSkillAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, usSkillList);
-        userSkills.setAdapter(usSkillAdapter);
 
         return rootView;
     }

@@ -114,19 +114,19 @@ public class DiscussionFragment extends Fragment {
         });
 
 
-        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(post.getAuthorId());
-        temp.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.getValue(User.class);
-                discussionAuthorView.setText(user.getName());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+//        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(post.getAuthorId());
+//        temp.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                user = dataSnapshot.getValue(User.class);
+//                discussionAuthorView.setText(user.getName());
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
 
         TextView discussionTitleView = (TextView) rootView.findViewById(R.id.discussion_title_value);
         discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
