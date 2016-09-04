@@ -39,6 +39,7 @@ public class PostActivity extends AppCompatActivity {
         et_postTitle = (EditText)findViewById(R.id.et_postTitle);
         et_postBody = (EditText)findViewById(R.id.et_postBody);
         et_postTags = (EditText)findViewById(R.id.et_postTags);
+        et_postCategory = (EditText) findViewById(R.id.et_postCategory);
         btn = (Button) findViewById(R.id.btn_addPost);
 
         Date newDate = new Date();
