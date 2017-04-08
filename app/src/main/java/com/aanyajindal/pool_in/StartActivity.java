@@ -7,10 +7,13 @@ import android.os.Bundle;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Arrays;
+
 public class StartActivity extends AppCompatActivity {
 
     public static final int RC_SIGN_IN  = 101;
 
+    @SuppressWarnings("VisibleForTests")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +25,16 @@ public class StartActivity extends AppCompatActivity {
         } else {
             startActivityForResult(
                     // Get an instance of AuthUI based on the default app
-                    AuthUI.getInstance()
+
+                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setLogo(R.mipmap.ic_launcher)
                             .setIsSmartLockEnabled(false)
-                            .setProviders(AuthUI.EMAIL_PROVIDER,AuthUI.GOOGLE_PROVIDER)
+                             .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                     new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                     new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build()))
                             .setTheme(R.style.GreenTheme)
-                            .build(this),
+                            .build(),
                     RC_SIGN_IN);
         }
 
