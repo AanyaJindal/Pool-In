@@ -52,8 +52,8 @@ public class SettingsFragment extends Fragment {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), AccountSettingsCategory.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity().getApplicationContext(), AccountSettingsCategory.class);
+//                startActivity(intent);
             }
         });
         btnLogout.setOnClickListener(new View.OnClickListener() {

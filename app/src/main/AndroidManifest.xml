@@ -19,14 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AccountSettingsCategory" />
         <activity android:name=".AddItem" />
         <activity android:name=".PostActivity" />
         <activity
             android:name=".ProfileActivity"
+            android:parentActivityName=".WelcomeActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditProfileActivity"></activity>
+        <activity
+            android:name=".EditProfileActivity" />
     </application>
 
 </manifest>

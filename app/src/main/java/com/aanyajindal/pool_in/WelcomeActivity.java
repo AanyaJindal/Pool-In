@@ -31,13 +31,28 @@ public class WelcomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists())
+                {
+                    startActivity(new Intent(WelcomeActivity.this,EditProfileActivity.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +123,10 @@ public class WelcomeActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_profile) {
-            startActivity(new Intent(this,ProfileActivity.class));
-//            frag = UserProfileFragment.newInstance(user.getUid());
-//            fragmentTransaction.replace(R.id.frag_container, frag);
-//            fragmentTransaction.commit();
+            Intent intent = new Intent(this,ProfileActivity.class);
+            intent.putExtra("userid",user.getUid());
+            startActivity(intent);
+
         } else if (id == R.id.nav_discussions) {
             frag = PostCategoryFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);

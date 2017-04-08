@@ -1,6 +1,7 @@
 package com.aanyajindal.pool_in;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -101,11 +102,9 @@ public class ItemFragment extends Fragment {
         itemUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment frag = UserProfileFragment.newInstance(obj.getUser());
-                fragmentTransaction.replace(R.id.frag_container, frag);
-                fragmentTransaction.commit();
+                Intent intent = new Intent(getContext(),ProfileActivity.class);
+                intent.putExtra("userid",obj.getUser());
+                startActivity(intent);
             }
         });
 

@@ -1,6 +1,7 @@
 package com.aanyajindal.pool_in;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -84,11 +85,9 @@ public class SkillByCategoryFragment extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        Fragment frag = UserProfileFragment.newInstance(list.get(position));
-                        fragmentTransaction.replace(R.id.frag_container, frag);
-                        fragmentTransaction.commit();
+                        Intent intent = new Intent(getContext(),ProfileActivity.class);
+                        intent.putExtra("userid",list.get(position));
+                        startActivity(intent);
                     }
                 });
             }
@@ -169,7 +168,7 @@ public class SkillByCategoryFragment extends Fragment {
                     user = dataSnapshot.getValue(User.class);
                     Log.d(TAG, "onDataChange: "+user.getName());
                     holder.name.setText(user.getName());
-                    holder.college.setText(user.getCollege());
+                   // holder.college.setText(user.getCollege());
                 }
 
                 @Override

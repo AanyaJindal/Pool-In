@@ -16,6 +16,8 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/rl_contact"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -225,7 +227,7 @@
                 android:layout_toRightOf="@id/iv_location"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Adarsh Nagar"
+                android:text="Location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#212121" />
 

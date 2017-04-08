@@ -11,7 +11,7 @@
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btn_editProfile"
-        android:text="Edit Profile"
+        android:text="Rate us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         fbutton:buttonColor="#757575"

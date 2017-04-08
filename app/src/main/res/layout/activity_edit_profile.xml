@@ -15,12 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_current_dp"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center_horizontal" />
-
         <com.github.florent37.materialtextfield.MaterialTextField xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +23,7 @@
             app:mtf_openKeyboardOnFocus="true">
 
             <EditText
-                android:id="@+id/et_name"
+                android:id="@+id/et_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -59,7 +53,7 @@
             app:mtf_openKeyboardOnFocus="true">
 
             <EditText
-                android:id="@+id/et_email"
+                android:id="@+id/et_branch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -92,14 +86,6 @@
         android:elevation="4dp"
         android:text="Save Changes" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_changePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/iv_current_dp"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_camera_alt_white_24dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>
