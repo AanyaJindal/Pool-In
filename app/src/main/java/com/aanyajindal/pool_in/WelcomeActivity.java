@@ -108,9 +108,10 @@ public class WelcomeActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_profile) {
-            frag = UserProfileFragment.newInstance(user.getUid());
-            fragmentTransaction.replace(R.id.frag_container, frag);
-            fragmentTransaction.commit();
+            startActivity(new Intent(this,ProfileActivity.class));
+//            frag = UserProfileFragment.newInstance(user.getUid());
+//            fragmentTransaction.replace(R.id.frag_container, frag);
+//            fragmentTransaction.commit();
         } else if (id == R.id.nav_discussions) {
             frag = PostCategoryFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
