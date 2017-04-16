@@ -2,30 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="12dp"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/discussion_title_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textColor="#FF6F00"
-        android:textSize="16dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/discussion_title_value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Student coordinator needed"
-        android:textColor="#000000"
-        android:textSize="20dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:background="#000000" />
 
     <TextView
         android:id="@+id/discussion_author_header"

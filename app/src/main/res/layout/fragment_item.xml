@@ -14,7 +14,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/item_header"
+            android:id="@+id/item_name_value"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#000000"
@@ -40,27 +40,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/item_name_header"
-                android:textColor="#FF6F00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Item Name"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/item_name_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:text="Mathematics Book"
-                android:textSize="20dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.2dp"
-                android:background="#000000" />
 
             <TextView
                 android:id="@+id/item_user_header"

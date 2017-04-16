@@ -57,8 +57,10 @@ public class ItemFragment extends Fragment {
                 , bundle.getString("mode"), bundle.getString("cat"), bundle.getString("tags"), bundle.getString("date"));
 
         TextView itemName = (TextView) rootView.findViewById(R.id.item_name_value);
-        final TextView itemUser = (TextView) rootView.findViewById(R.id.item_user_value);
-        final TextView itemDesc = (TextView) rootView.findViewById(R.id.item_desc_value);
+        TextView itemUser;
+        itemUser = (TextView) rootView.findViewById(R.id.item_user_value);
+        TextView itemDesc;
+        itemDesc = (TextView) rootView.findViewById(R.id.item_desc_value);
         TextView itemMode = (TextView) rootView.findViewById(R.id.item_mode_value);
         TextView itemCategory = (TextView) rootView.findViewById(R.id.item_category_value);
         TextView itemTags = (TextView) rootView.findViewById(R.id.item_tags_value);
