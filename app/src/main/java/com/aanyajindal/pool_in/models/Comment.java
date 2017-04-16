@@ -5,16 +5,20 @@ package com.aanyajindal.pool_in.models;
  */
 public class Comment {
     String authorId;
+    String author;
     String date;
     String body;
 
-    public Comment(String authorId, String date, String body) {
-        this.authorId = authorId;
-        this.date = date;
-        this.body = body;
-    }
+
 
     public Comment() {
+    }
+
+    public Comment(String authorId, String author, String date, String body) {
+        this.authorId = authorId;
+        this.author = author;
+        this.date = date;
+        this.body = body;
     }
 
     public String getAuthorId() {
@@ -23,6 +27,14 @@ public class Comment {
 
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getDate() {

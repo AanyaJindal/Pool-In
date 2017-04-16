@@ -163,21 +163,22 @@ public class PostByCategoryFragment extends Fragment {
                 pe.printStackTrace();
             }
             holder.date.setText(frDate);
+            holder.user.setText(post.getAuthor());
 
-            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(post.getAuthorId());
-            final Holder finalHolder = holder;
-            temp.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    user = dataSnapshot.getValue(User.class);
-                    finalHolder.user.setText(user.getName());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+//            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(post.getAuthorId());
+//            final Holder finalHolder = holder;
+//            temp.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    user = dataSnapshot.getValue(User.class);
+//                    finalHolder.user.setText(user.getName());
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

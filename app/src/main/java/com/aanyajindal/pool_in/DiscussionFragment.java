@@ -2,6 +2,7 @@ package com.aanyajindal.pool_in;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -51,6 +52,7 @@ public class DiscussionFragment extends Fragment {
         args.putString("title", post.getTitle());
         args.putString("date", post.getDate());
         args.putString("author", post.getAuthorId());
+        args.putString("authorname", post.getAuthor());
         args.putString("body", post.getBody());
         args.putString("tags", post.getTags());
         args.putString("category", post.getCategory());
@@ -62,7 +64,6 @@ public class DiscussionFragment extends Fragment {
     }
 
     User user;
-    TextView discussionAuthorView;
     ListView commentsList;
 
     @Override
@@ -76,7 +77,7 @@ public class DiscussionFragment extends Fragment {
 
         postsRef = FirebaseDatabase.getInstance().getReference().child("posts");
         Bundle bundle = getArguments();
-        Post post = new Post(bundle.getString("title"), bundle.getString("date"), bundle.getString("body"), bundle.getString("author"), bundle.getString("tags"), bundle.getString("category"), bundle.getString("postid"));
+        final Post post = new Post(bundle.getString("title"), bundle.getString("date"), bundle.getString("body"), bundle.getString("author"), bundle.getString("authorname"), bundle.getString("tags"), bundle.getString("category"), bundle.getString("postid"));
 
         String postid = post.getPostid();
 
@@ -129,7 +130,7 @@ public class DiscussionFragment extends Fragment {
 //        });
 
         TextView discussionTitleView = (TextView) rootView.findViewById(R.id.discussion_title_value);
-        discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
+        TextView discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
         TextView discussionDateView = (TextView) rootView.findViewById(R.id.discussion_date_value);
         TextView discussionBodyView = (TextView) rootView.findViewById(R.id.discussion_body_value);
 
@@ -139,7 +140,18 @@ public class DiscussionFragment extends Fragment {
         commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
 
         discussionTitleView.setText(post.getTitle());
-        discussionAuthorView.setText(post.getAuthorId());
+        discussionAuthorView.setText(post.getAuthor());
+
+        discussionAuthorView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),ProfileActivity.class);
+                intent.putExtra("userid",post.getAuthorId());
+                startActivity(intent);
+            }
+        });
+
+
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
         String frDate = "";
@@ -169,7 +181,7 @@ public class DiscussionFragment extends Fragment {
                         Date newDate = new Date();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                         String date = sdf.format(newDate);
-                        Comment comment = new Comment(fUser.getUid(), date, body);
+                        Comment comment = new Comment(fUser.getUid(), fUser.getDisplayName(), date, body);
                         commentRef.push().setValue(comment);
                     }
                 });
@@ -227,7 +239,6 @@ public class DiscussionFragment extends Fragment {
             }
 
             Comment comment = (Comment) getItem(position);
-            holder.name.setText(comment.getAuthorId());
 
             SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
             SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
@@ -241,23 +252,27 @@ public class DiscussionFragment extends Fragment {
             holder.date.setText(frDate);
 
             holder.comment.setText(comment.getBody());
+            holder.name.setText(comment.getAuthor());
 
-            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(comment.getAuthorId());
-            final Holder finalHolder = holder;
-            temp.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    user = dataSnapshot.getValue(User.class);
-                    finalHolder.name.setText(user.getName());
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+//            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(comment.getAuthorId());
+//            final Holder finalHolder = holder;
+//            temp.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    user = dataSnapshot.getValue(User.class);
+//                    finalHolder.name.setText(user.getName());
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
             return convertView;
         }
+
+
 
     }
 }

@@ -6,29 +6,25 @@ public class Post {
     String date;
     String body;
     String authorId;
+    String author;
     String tags;
     String category;
     String postid;
 
-    public String getPostid() {
-        return postid;
+
+
+    public Post() {
     }
 
-    public void setPostid(String postid) {
-        this.postid = postid;
-    }
-
-    public Post(String title, String date, String body, String authorId, String tags, String category, String postid) {
+    public Post(String title, String date, String body, String authorId, String author, String tags, String category, String postid) {
         this.title = title;
         this.date = date;
         this.body = body;
         this.authorId = authorId;
+        this.author = author;
         this.tags = tags;
         this.category = category;
         this.postid = postid;
-    }
-
-    public Post() {
     }
 
     public String getTitle() {
@@ -63,6 +59,14 @@ public class Post {
         this.authorId = authorId;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public String getTags() {
         return tags;
     }
@@ -79,4 +83,11 @@ public class Post {
         this.category = category;
     }
 
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
+    }
 }

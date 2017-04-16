@@ -65,23 +65,24 @@ public class ItemFragment extends Fragment {
         TextView itemDate = (TextView) rootView.findViewById(R.id.item_date_value);
 
 
-        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(obj.getUser());
-        temp.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.getValue(User.class);
-                itemUser.setText(user.getName());
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(obj.getUser());
+//        temp.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                user = dataSnapshot.getValue(User.class);
+//                itemUser.setText(user.getName());
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         itemName.setText(obj.getName());
+        itemUser.setText(obj.getUsername());
         itemDesc.setText(obj.getDesc());
         itemMode.setText(obj.getMode());
         itemCategory.setText(obj.getCat());
