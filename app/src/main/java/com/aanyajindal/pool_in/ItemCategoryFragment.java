@@ -44,6 +44,7 @@ public class ItemCategoryFragment extends Fragment {
         itCatList.add("Books");
         itCatList.add("Notes");
         itCatList.add("Online Resources");
+        itCatList.add("Stationery");
         itCatList.add("Car Pooling");
         itCatList.add("Others");
         ArrayAdapter<String> itCatAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, itCatList);

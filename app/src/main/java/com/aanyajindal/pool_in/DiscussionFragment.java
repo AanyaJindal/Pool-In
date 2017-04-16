@@ -80,6 +80,8 @@ public class DiscussionFragment extends Fragment {
         final Post post = new Post(bundle.getString("title"), bundle.getString("date"), bundle.getString("body"), bundle.getString("author"), bundle.getString("authorname"), bundle.getString("tags"), bundle.getString("category"), bundle.getString("postid"));
 
         String postid = post.getPostid();
+        TextView headerTitle = (TextView) rootView.findViewById(R.id.discussion_header);
+        headerTitle.setText(post.getTitle());
 
         final DatabaseReference commentRef = postsRef.child(postid).child("comments");
 
@@ -142,7 +144,6 @@ public class DiscussionFragment extends Fragment {
         commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
 
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.discussion_list, commentsList, false);
-        TextView discussionTitleView = (TextView) header.findViewById(R.id.discussion_title_value);
         TextView discussionAuthorView = (TextView) header.findViewById(R.id.discussion_author_value);
         TextView discussionDateView = (TextView) header.findViewById(R.id.discussion_date_value);
         TextView discussionBodyView = (TextView) header.findViewById(R.id.discussion_body_value);
@@ -150,7 +151,6 @@ public class DiscussionFragment extends Fragment {
 
         commentsList.addHeaderView(header, null, false);
 
-        discussionTitleView.setText(post.getTitle());
         discussionAuthorView.setText(post.getAuthor());
 
         discussionAuthorView.setOnClickListener(new View.OnClickListener() {
