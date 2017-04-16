@@ -47,11 +47,13 @@
             android:layout_height="wrap_content"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:hint="Other Item Category"
             fbutton:met_floatingLabel="highlight"
+            android:textSize="15sp"
             android:id="@+id/et_rbothers"
             fbutton:met_iconLeft="@mipmap/ic_skill"
             android:textColor="#000000"
