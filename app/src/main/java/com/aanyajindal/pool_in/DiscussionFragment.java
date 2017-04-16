@@ -129,15 +129,26 @@ public class DiscussionFragment extends Fragment {
 //            }
 //        });
 
-        TextView discussionTitleView = (TextView) rootView.findViewById(R.id.discussion_title_value);
-        TextView discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
-        TextView discussionDateView = (TextView) rootView.findViewById(R.id.discussion_date_value);
-        TextView discussionBodyView = (TextView) rootView.findViewById(R.id.discussion_body_value);
 
-        Button addCommentButton = (Button) rootView.findViewById(R.id.btn_addComment);
+
+//        TextView discussionTitleView = (TextView) rootView.findViewById(R.id.discussion_title_value);
+//        TextView discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
+//        TextView discussionDateView = (TextView) rootView.findViewById(R.id.discussion_date_value);
+//        TextView discussionBodyView = (TextView) rootView.findViewById(R.id.discussion_body_value);
+//
+//        Button addCommentButton = (Button) rootView.findViewById(R.id.btn_addComment);
 
 
         commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
+
+        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.discussion_list, commentsList, false);
+        TextView discussionTitleView = (TextView) header.findViewById(R.id.discussion_title_value);
+        TextView discussionAuthorView = (TextView) header.findViewById(R.id.discussion_author_value);
+        TextView discussionDateView = (TextView) header.findViewById(R.id.discussion_date_value);
+        TextView discussionBodyView = (TextView) header.findViewById(R.id.discussion_body_value);
+        Button addCommentButton = (Button) header.findViewById(R.id.btn_addComment);
+
+        commentsList.addHeaderView(header, null, false);
 
         discussionTitleView.setText(post.getTitle());
         discussionAuthorView.setText(post.getAuthor());
@@ -206,6 +217,19 @@ public class DiscussionFragment extends Fragment {
 
         public CommentAdapter(ArrayList<Comment> mList) {
             this.mList = mList;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if(position == 0)
+                return 0;
+            else
+                return  1;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 2;
         }
 
         @Override
