@@ -137,7 +137,7 @@ public class AddItem extends AppCompatActivity {
                 Date newDate = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                 String date = sdf.format(newDate);
-                Item item = new Item(itName,user.getUid(),itDesc,itMode,itCat,itTags,date);
+                Item item = new Item(itName,user.getUid(),user.getDisplayName(),itDesc,itMode,itCat,itTags,date);
                 mainDatabase = FirebaseDatabase.getInstance().getReference();
                 itemsList = mainDatabase.child("items");
                 String itemid = itemsList.push().getKey();

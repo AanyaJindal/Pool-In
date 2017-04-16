@@ -36,6 +36,7 @@ public class ItemFragment extends Fragment {
 
         Bundle args = new Bundle();
         args.putString("name", item.getName());
+        args.putString("username", item.getUsername());
         args.putString("date", item.getDate());
         args.putString("desc", item.getDesc());
         args.putString("tags", item.getTags());
@@ -52,7 +53,7 @@ public class ItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item, container, false);
         Bundle bundle = getArguments();
-        final Item obj = new Item(bundle.getString("name"), bundle.getString("user"), bundle.getString("desc")
+        final Item obj = new Item(bundle.getString("name"), bundle.getString("user"), bundle.getString("username"), bundle.getString("desc")
                 , bundle.getString("mode"), bundle.getString("cat"), bundle.getString("tags"), bundle.getString("date"));
 
         TextView itemName = (TextView) rootView.findViewById(R.id.item_name_value);

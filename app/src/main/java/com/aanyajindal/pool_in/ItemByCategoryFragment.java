@@ -73,7 +73,7 @@ public class ItemByCategoryFragment extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
                 System.out.println(dataSnapshot.getValue());
                 Item item = dataSnapshot.getValue(Item.class);
-                list.add(new Item(item.getName(), item.getUser(), item.getDesc(), item.getMode(), item.getCat(), item.getTags(), item.getDate()));
+                list.add(new Item(item.getName(), item.getUser(), item.getUsername(), item.getDesc(), item.getMode(), item.getCat(), item.getTags(), item.getDate()));
                 ItemAdapter itemAdapter = new ItemAdapter(list);
                 listView.setAdapter(itemAdapter);
             }
@@ -172,21 +172,23 @@ public class ItemByCategoryFragment extends Fragment {
                 pe.printStackTrace();
             }
             holder.date.setText(frDate);
+            holder.user.setText((item.getUsername()));
 
-            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(item.getUser());
-            final Holder finalHolder = holder;
-            temp.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    user = dataSnapshot.getValue(User.class);
-                    finalHolder.user.setText(user.getName());
-                }
+//            DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(item.getUser());
+//            final Holder finalHolder = holder;
+//            temp.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    user = dataSnapshot.getValue(User.class);
+//                    finalHolder.user.setText(user.getName());
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
             return convertView;
         }
 
