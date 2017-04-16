@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="material_green_50">#FF5722</color>
-    <color name="material_green_500">#E64A19</color>
-    <color name="material_green_700">#BF360C</color>
-    <color name="material_green_a200">#FF6E40</color>
-    <color name="material_lime_a700">#DD2C00</color>
-    <color name="material_purple_a700">#AA00FF</color>
+
+    <color name="colorPrimary">#b21c00</color>
+    <color name="colorPrimaryDark">#7b0000</color>
+    <color name="colorPrimaryLight">#ec542e</color>
+
+    <color name="colorSecondary">#526d00</color>
+    <color name="colorSecondaryDark">#274200</color>
+    <color name="colorSecondaryLight">#819b37</color>
+
+    <color name="colorAccent">#7ca800</color>
+
+
+
     <color name="lightGray">#333333</color>
     <color name="darkGray">#0d0d0d</color>
     <color name="black">#000000</color>
     <color name="lighterGray">#666666</color>
     <color name="white">#f2f2f2</color>
     <color name="lightestGray">#f2f2f2</color>
-    <color name="background">#b3b3b3</color>
+
+    <color name="background">#ffffff</color>
+
 </resources>

@@ -15,32 +15,31 @@
         <!--android:layout_gravity="top"-->
         <!--/>-->
 
-    <info.hoang8f.widget.FButton
+    <Button
         android:id="@+id/btn_addItem"
         android:text="ADD NEW ITEM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fbutton:buttonColor="#616161"
-        fbutton:shadowColor="#424242"
-        fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
-        android:layout_marginTop="20dp"
+        android:elevation="2dp"
+        android:padding="8dp"
+        android:textColor="#ffffff"
         android:textSize="20dp"
-        android:textColor="#ffffff"/>
+        android:layout_width="match_parent"
+        android:background="@color/colorSecondary"
+        android:layout_height="wrap_content" />
 
-    <info.hoang8f.widget.FButton
+    <Button
         android:id="@+id/btn_addPost"
         android:text="ADD NEW POST"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fbutton:buttonColor="#424242"
-        fbutton:shadowColor="#212121"
-        fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
-        android:layout_marginTop="20dp"
+        android:elevation="2dp"
+        android:padding="8dp"
+        android:textColor="#ffffff"
         android:textSize="20dp"
-        android:textColor="#ffffff"/>
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorSecondary"
+        android:layout_height="wrap_content" />
+
+
+
+
 
 </LinearLayout>
