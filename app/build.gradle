@@ -32,6 +32,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     compile 'info.hoang8f:fbutton:1.0.5'
     compile 'com.github.florent37:materialtextfield:1.0.7'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'

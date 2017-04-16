@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
     android:orientation="vertical"
     tools:context="com.aanyajindal.pool_in.AddItem">
 
@@ -16,95 +17,92 @@
         android:layout_height="wrap_content"
         android:text="Add Item"
         android:textColor="#000000"
-        android:textSize="28dp"
+        android:textSize="20dp"
+        android:padding="10dp"
         android:textStyle="bold"
         android:gravity="center"
         android:id="@+id/item_header"/>
 
-    <com.github.florent37.materialtextfield.MaterialTextField
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mtf_image="@mipmap/ic_skill"
-        app:mtf_labelColor="#757575"
-        app:mtf_openKeyboardOnFocus="true">
-    <EditText
-        android:hint="Item Category"
-        android:focusable="false"
-        android:id="@+id/et_itemCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </com.github.florent37.materialtextfield.MaterialTextField>
+        android:layout_height="1dp"
+        android:background="#000000" />
 
-    <com.github.florent37.materialtextfield.MaterialTextField
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mtf_image="@mipmap/ic_discuss"
-        app:mtf_labelColor="#757575"
-        app:mtf_openKeyboardOnFocus="true">
-    <EditText
+        android:paddingTop="10dp"
+        android:padding="5dp"
+        android:hint="Item Category"
+        fbutton:met_floatingLabel="highlight"
+        android:id="@+id/et_itemCategory"
+        fbutton:met_iconLeft="@mipmap/ic_skill"
+        android:textColor="#000000"
+        app:mtf_openKeyboardOnFocus="true"
+        android:focusable="false"
+        />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
         android:hint="Item Name"
         android:id="@+id/et_itemName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </com.github.florent37.materialtextfield.MaterialTextField>
+        fbutton:met_floatingLabel="highlight"
+        fbutton:met_iconLeft="@mipmap/ic_discuss"
+        android:textColor="#000000"
+        app:mtf_openKeyboardOnFocus="true"
+        />
 
-    <com.github.florent37.materialtextfield.MaterialTextField
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mtf_image="@mipmap/ic_desc"
-        app:mtf_labelColor="#757575"
-        app:mtf_openKeyboardOnFocus="true">
-    <EditText
+        android:padding="5dp"
         android:hint="Item Description"
         android:id="@+id/et_itemDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </com.github.florent37.materialtextfield.MaterialTextField>
+        fbutton:met_floatingLabel="highlight"
+        fbutton:met_iconLeft="@mipmap/ic_desc"
+        android:textColor="#000000"
+        app:mtf_openKeyboardOnFocus="true"
+        />
 
-    <com.github.florent37.materialtextfield.MaterialTextField
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mtf_image="@mipmap/ic_tag"
-        app:mtf_labelColor="#757575"
-        app:mtf_openKeyboardOnFocus="true">
-    <EditText
+        android:padding="5dp"
         android:hint="Item Tags"
+        fbutton:met_floatingLabel="highlight"
         android:id="@+id/et_itemTags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </com.github.florent37.materialtextfield.MaterialTextField>
+        fbutton:met_iconLeft="@mipmap/ic_tag"
+        android:textColor="#000000"
+        app:mtf_openKeyboardOnFocus="true"
+        />
 
-    <com.github.florent37.materialtextfield.MaterialTextField
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:mtf_image="@mipmap/ic_mode"
-        app:mtf_labelColor="#757575"
-        app:mtf_openKeyboardOnFocus="true">
-    <EditText
+        android:padding="5dp"
         android:hint="Mode of Availability"
+        fbutton:met_floatingLabel="highlight"
         android:id="@+id/et_itemMode"
+        fbutton:met_iconLeft="@mipmap/ic_mode"
+        android:textColor="#000000"
+        app:mtf_openKeyboardOnFocus="true"
         android:focusable="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </com.github.florent37.materialtextfield.MaterialTextField>
+        />
 
-    <info.hoang8f.widget.FButton
+    <Button
         android:id="@+id/btn_addItem"
+        android:layout_gravity="bottom"
         android:text="ADD ITEM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fbutton:buttonColor="#424242"
-        fbutton:shadowColor="#212121"
-        fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"/>
+        android:elevation="2dp"
+        android:padding="8dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:background="@color/colorSecondary"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
