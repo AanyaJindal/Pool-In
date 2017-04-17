@@ -50,7 +50,7 @@ public class PostCategoryFragment extends Fragment {
                 "Fest Participation",
                 "Campus Life",
                 "Others"));
-        ArrayAdapter<String> postCatAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, postCatList);
+        ArrayAdapter<String> postCatAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category,R.id.tv_it_cat, postCatList);
         lvPostCatg.setAdapter(postCatAdapter);
         lvPostCatg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

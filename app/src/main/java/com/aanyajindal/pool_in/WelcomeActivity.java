@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,8 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aanyajindal.pool_in.models.User;
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +34,13 @@ import com.google.firebase.database.ValueEventListener;
 public class WelcomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    ImageView ivUserProfilePic;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    User mUser;
+    TextView tvUserDisplayName;
+    private static final String TAG = "WelcomeActivity";
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +51,8 @@ public class WelcomeActivity extends AppCompatActivity
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.exists())
-                {
-                    startActivity(new Intent(WelcomeActivity.this,EditProfileActivity.class));
+                if (!dataSnapshot.exists()) {
+                    startActivity(new Intent(WelcomeActivity.this, EditProfileActivity.class));
                 }
             }
 
@@ -72,6 +80,16 @@ public class WelcomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+
+
+        ivUserProfilePic = (ImageView) header.findViewById(R.id.iv_user_profile_pic);
+        tvUserDisplayName = (TextView) header.findViewById(R.id.tv_user_display_name);
+        Log.d(TAG, "onCreate: " + user.getDisplayName());
+
+        Glide.with(this).load(user.getPhotoUrl().toString()).into(ivUserProfilePic);
+        tvUserDisplayName.setText("Hello, " + user.getDisplayName());
 
 
         final DatabaseReference mainDatabase, usersList;
@@ -123,8 +141,8 @@ public class WelcomeActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_profile) {
-            Intent intent = new Intent(this,ProfileActivity.class);
-            intent.putExtra("userid",user.getUid());
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("userid", user.getUid());
             startActivity(intent);
 
         } else if (id == R.id.nav_discussions) {
