@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/item_name_value"
@@ -20,7 +20,7 @@
             android:textColor="#000000"
             android:gravity="center"
             android:text="Item Description"
-            android:textSize="28dp"
+            android:textSize="25dp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -37,14 +37,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="vertical">
 
 
             <TextView
                 android:id="@+id/item_user_header"
                 android:layout_width="match_parent"
-                android:textColor="#FF6F00"
+                android:textColor="@color/colorPrimary"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Submitted By"
@@ -67,7 +68,7 @@
             <TextView
                 android:id="@+id/item_desc_header"
                 android:layout_width="match_parent"
-                android:textColor="#FF6F00"
+                android:textColor="@color/colorPrimary"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Description"
@@ -91,7 +92,7 @@
                 android:id="@+id/item_mode_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FF6F00"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="16dp"
                 android:text="Mode of Availability"
                 android:textSize="16dp"
@@ -113,7 +114,7 @@
             <TextView
                 android:id="@+id/item_category_header"
                 android:layout_width="match_parent"
-                android:textColor="#FF6F00"
+                android:textColor="@color/colorPrimary"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Category"
@@ -137,7 +138,7 @@
                 android:id="@+id/item_tags_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FF6F00"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="16dp"
                 android:text="Tags"
                 android:textSize="16dp"
@@ -160,7 +161,7 @@
                 android:id="@+id/item_date_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FF6F00"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="16dp"
                 android:text="Date"
                 android:textSize="16dp"
