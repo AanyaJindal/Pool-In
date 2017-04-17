@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,9 +51,11 @@ public class PostCategoryFragment extends Fragment {
                 "Complaints",
                 "Fest Participation",
                 "Campus Life",
+
                 "Others"));
-        ArrayAdapter<String> postCatAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category,R.id.tv_it_cat, postCatList);
-        lvPostCatg.setAdapter(postCatAdapter);
+        ItPostCatAdapter itPostCatAdapter = new ItPostCatAdapter(postCatList);
+        lvPostCatg.setAdapter(itPostCatAdapter);
+
         lvPostCatg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -63,6 +67,52 @@ public class PostCategoryFragment extends Fragment {
             }
         });
         return rootView;
+    }
+
+    class ItPostCatAdapter extends BaseAdapter {
+        class Holder {
+            TextView name;
+        }
+
+        ArrayList<String> mList;
+
+        public ItPostCatAdapter(ArrayList<String> mList) {
+            this.mList = mList;
+        }
+
+        @Override
+        public int getCount() {
+            return mList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater li = LayoutInflater.from(getActivity());
+            Holder holder = new Holder();
+            if (convertView == null) {
+                convertView = li.inflate(R.layout.list_post_category, null);
+
+                holder.name = (TextView) convertView.findViewById(R.id.tv_it_post_cat);
+                convertView.setTag(holder);
+            } else {
+                holder = (Holder) convertView.getTag();
+            }
+
+            holder.name.setText(mList.get(position).toString());
+
+            return convertView;
+        }
+
     }
 
 }
