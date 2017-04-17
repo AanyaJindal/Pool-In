@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
     <RadioGroup
-        android:id="@+id/rg_category"
+        android:id="@+id/rg_post_category"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -59,19 +61,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <com.github.florent37.materialtextfield.MaterialTextField
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:mtf_image="@mipmap/ic_skill"
-            app:mtf_labelColor="#757575"
-            app:mtf_openKeyboardOnFocus="true">
-            <EditText
-                android:id="@+id/et_rbothers1"
-                android:hint="Other Item Category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.github.florent37.materialtextfield.MaterialTextField>
+            android:padding="5dp"
+            android:id="@+id/et_rbothers1"
+            android:hint="Other Item Category"
+            fbutton:met_floatingLabel="highlight"
+            android:textSize="15sp"
+            fbutton:met_iconLeft="@mipmap/ic_skill"
+            android:textColor="#000000"
+            app:mtf_openKeyboardOnFocus="true"
+            />
 
     </RadioGroup>
 

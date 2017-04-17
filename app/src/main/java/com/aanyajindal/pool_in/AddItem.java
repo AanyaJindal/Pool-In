@@ -78,6 +78,7 @@ public class AddItem extends AppCompatActivity {
                 });
                 alert.setView(modeDialogView);
                 alert.setTitle("Category");
+                alert.setIcon(R.mipmap.ic_skill);
                 alert.setPositiveButton("Set Item Category", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -118,6 +119,7 @@ public class AddItem extends AppCompatActivity {
 
                 alert.setView(modeDialogView);
                 alert.setTitle("Mode of Availability");
+                alert.setIcon(R.mipmap.ic_mode);
                 alert.setPositiveButton("Set Mode of Availability", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

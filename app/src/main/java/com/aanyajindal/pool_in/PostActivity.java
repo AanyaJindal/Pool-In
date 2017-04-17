@@ -2,6 +2,7 @@ package com.aanyajindal.pool_in;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.aanyajindal.pool_in.models.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +32,7 @@ public class PostActivity extends AppCompatActivity {
     EditText etPostBody;
     EditText etPostCategory;
     EditText etPostTags;
-
+    RadioGroup rgPostCategory;
     DatabaseReference postsDatabase;
     FirebaseUser user;
 
@@ -56,6 +58,7 @@ public class PostActivity extends AppCompatActivity {
                 LayoutInflater li = LayoutInflater.from(PostActivity.this);
                 final View postDialogView = li.inflate(R.layout.post_dialog, null);
                 final AlertDialog.Builder alert = new AlertDialog.Builder(PostActivity.this);
+                rgPostCategory = (RadioGroup) postDialogView.findViewById(R.id.rg_post_category);
                 final RadioButton rbPlacement = (RadioButton) postDialogView.findViewById(R.id.rb_placement);
                 final RadioButton rbLost = (RadioButton) postDialogView.findViewById(R.id.rb_lost);
                 final RadioButton rbMentor = (RadioButton) postDialogView.findViewById(R.id.rb_mentor);
@@ -67,9 +70,21 @@ public class PostActivity extends AppCompatActivity {
                 final RadioButton rbProjects = (RadioButton) postDialogView.findViewById(R.id.rb_project);
                 final EditText etRbothers1 = (EditText) postDialogView.findViewById(R.id.et_rbothers1);
 
+                rgPostCategory.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                        if(checkedId==R.id.rb_others1){
+                            etRbothers1.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            etRbothers1.setVisibility(View.GONE);
+                        }
+                    }
+                });
 
                 alert.setView(postDialogView);
                 alert.setTitle("Post Category");
+                alert.setIcon(R.mipmap.ic_skill);
                 alert.setPositiveButton("Set Post Category", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
