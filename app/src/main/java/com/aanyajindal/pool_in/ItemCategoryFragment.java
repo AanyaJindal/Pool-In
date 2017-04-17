@@ -10,9 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.aanyajindal.pool_in.models.Item;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -47,7 +54,8 @@ public class ItemCategoryFragment extends Fragment {
         itCatList.add("Stationery");
         itCatList.add("Car Pooling");
         itCatList.add("Others");
-        ArrayAdapter<String> itCatAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.list_item_category, itCatList);
+
+        ItemCategoryFragment.ItCatAdapter itCatAdapter = new ItemCategoryFragment.ItCatAdapter(itCatList);
         lvItemCatg.setAdapter(itCatAdapter);
         lvItemCatg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,6 +68,52 @@ public class ItemCategoryFragment extends Fragment {
             }
         });
         return rootView;
+    }
+
+    class ItCatAdapter extends BaseAdapter {
+        class Holder {
+            TextView name;
+        }
+
+        ArrayList<String> mList;
+
+        public ItCatAdapter(ArrayList<String> mList) {
+            this.mList = mList;
+        }
+
+        @Override
+        public int getCount() {
+            return mList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater li = LayoutInflater.from(getActivity());
+            Holder holder = new Holder();
+            if (convertView == null) {
+                convertView = li.inflate(R.layout.list_item_category, null);
+
+                holder.name = (TextView) convertView.findViewById(R.id.tv_it_cat);
+                convertView.setTag(holder);
+            } else {
+                holder = (Holder) convertView.getTag();
+            }
+
+            holder.name.setText(mList.get(position).toString());
+
+            return convertView;
+        }
+
     }
 
 }

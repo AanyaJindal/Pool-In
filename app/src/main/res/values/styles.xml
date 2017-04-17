@@ -27,10 +27,10 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ListViewStyle" parent="android:style/Widget.ListView">
-        <item name="background">@color/lightGray</item>
+        <item name="background">@color/background</item>
         <item name="android:divider">@color/background</item>
         <item name="android:dividerHeight">@dimen/divider_height</item>
-        <item name="android:listSelector">@color/lighterGray</item>
+
         <item name="android:drawSelectorOnTop">false</item>
         <item name="android:cacheColorHint">#00000000</item>
     </style>
