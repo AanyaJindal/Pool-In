@@ -1,41 +1,82 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.aanyajindal.pool_in.DiscussionFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/message_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:hint="Comment"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+            fbutton:met_floatingLabel="highlight"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_addComment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_send_black_24dp"
+            android:scaleType="fitCenter" />
+
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:layout_above="@id/ll_box"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/discussion_header"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Discussion"
-            android:textColor="#000000"
-            android:textSize="28dp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/discussion_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Discussion"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#000000" />
+
+        <ListView
+            android:id="@+id/discussion_comment_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             />
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:background="#000000" />
 
-    <ListView
-        android:id="@+id/discussion_comment_listView"
-        android:layout_width="match_parent"
-        android:theme="@style/ListViewStyle2"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
 
-</LinearLayout>
+
+</RelativeLayout>

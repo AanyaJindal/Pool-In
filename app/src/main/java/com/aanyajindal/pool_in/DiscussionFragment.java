@@ -1,17 +1,22 @@
 package com.aanyajindal.pool_in;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +24,8 @@ import com.aanyajindal.pool_in.models.Comment;
 import com.aanyajindal.pool_in.models.Item;
 import com.aanyajindal.pool_in.models.Post;
 import com.aanyajindal.pool_in.models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -147,7 +154,8 @@ public class DiscussionFragment extends Fragment {
         TextView discussionAuthorView = (TextView) header.findViewById(R.id.discussion_author_value);
         TextView discussionDateView = (TextView) header.findViewById(R.id.discussion_date_value);
         TextView discussionBodyView = (TextView) header.findViewById(R.id.discussion_body_value);
-        Button addCommentButton = (Button) header.findViewById(R.id.btn_addComment);
+        final EditText messageBox = (EditText) rootView.findViewById(R.id.message_box);
+        ImageButton addCommentButton = (ImageButton) rootView.findViewById(R.id.btn_addComment);
 
         commentsList.addHeaderView(header, null, false);
 
@@ -179,26 +187,51 @@ public class DiscussionFragment extends Fragment {
         addCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater li = LayoutInflater.from(getActivity());
-                final View addCommentDialogView = li.inflate(R.layout.add_comment_dialog, null);
-                final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                final EditText etAddComment = (EditText) addCommentDialogView.findViewById(R.id.et_addComment);
-                alert.setView(addCommentDialogView);
-                alert.setTitle("Add Comment");
-                alert.setPositiveButton("Add Comment", new DialogInterface.OnClickListener() {
+//                LayoutInflater li = LayoutInflater.from(getActivity());
+//                final View addCommentDialogView = li.inflate(R.layout.add_comment_dialog, null);
+//                final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+//                final EditText etAddComment = (EditText) addCommentDialogView.findViewById(R.id.et_addComment);
+//                alert.setView(addCommentDialogView);
+//                alert.setTitle("Add Comment");
+//                alert.setPositiveButton("Add Comment", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        String body = etAddComment.getText().toString();
+//                        Date newDate = new Date();
+//                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//                        String date = sdf.format(newDate);
+//                        Comment comment = new Comment(fUser.getUid(), fUser.getDisplayName(), date, body);
+//                        commentRef.push().setValue(comment);
+//                    }
+//                });
+//                alert.setNegativeButton("CANCEL", null);
+//                alert.create();
+//                alert.show();
+
+                String body = messageBox.getText().toString();
+                Date newDate = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                String date = sdf.format(newDate);
+                Comment comment = new Comment(fUser.getUid(), fUser.getDisplayName(), date, body);
+                commentRef.push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String body = etAddComment.getText().toString();
-                        Date newDate = new Date();
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                        String date = sdf.format(newDate);
-                        Comment comment = new Comment(fUser.getUid(), fUser.getDisplayName(), date, body);
-                        commentRef.push().setValue(comment);
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        //TODO: improve this thing abhi khaas nahi hai
+                        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        //inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                        inputMethodManager.hideSoftInputFromWindow(
+                                getActivity().getCurrentFocus().getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
+                        messageBox.setText("");
+
+
                     }
                 });
-                alert.setNegativeButton("CANCEL", null);
-                alert.create();
-                alert.show();
+
+                //TODO: add kind of on complete listener after comment is pushed to empty the edit text use imeoptions to hide edit text
+                //http://stackoverflow.com/questions/19217582/implicit-submit-after-hitting-done-on-the-keyboard-at-the-last-edittext
+
             }
         });
 

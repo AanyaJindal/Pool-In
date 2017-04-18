@@ -29,7 +29,7 @@ tools:context="com.aanyajindal.pool_in.AddItem">
             android:padding="10dp"
             android:text="Add Post"
             android:textColor="#000000"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <View

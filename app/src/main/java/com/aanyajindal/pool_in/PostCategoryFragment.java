@@ -51,7 +51,6 @@ public class PostCategoryFragment extends Fragment {
                 "Complaints",
                 "Fest Participation",
                 "Campus Life",
-
                 "Others"));
         ItPostCatAdapter itPostCatAdapter = new ItPostCatAdapter(postCatList);
         lvPostCatg.setAdapter(itPostCatAdapter);
