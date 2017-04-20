@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +44,7 @@ import java.util.Date;
 
 public class DiscussionFragment extends Fragment {
 
+    private static final String TAG = "DiscussionFragment";
 
     DatabaseReference postsRef;
     FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -85,13 +88,14 @@ public class DiscussionFragment extends Fragment {
         postsRef = FirebaseDatabase.getInstance().getReference().child("posts");
         Bundle bundle = getArguments();
         final Post post = new Post(bundle.getString("title"), bundle.getString("date"), bundle.getString("body"), bundle.getString("author"), bundle.getString("authorname"), bundle.getString("tags"), bundle.getString("category"), bundle.getString("postid"));
+        commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
 
         String postid = post.getPostid();
         TextView headerTitle = (TextView) rootView.findViewById(R.id.discussion_header);
         headerTitle.setText(post.getTitle());
 
         final DatabaseReference commentRef = postsRef.child(postid).child("comments");
-
+        commentsList.setAdapter(new CommentAdapter(new ArrayList<Comment>()));
         commentRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -99,6 +103,7 @@ public class DiscussionFragment extends Fragment {
                 list.add(comment);
                 CommentAdapter comAdapter = new CommentAdapter(list);
                 commentsList.setAdapter(comAdapter);
+                Log.d(TAG, "onChildAdded: "+"I am here");
 
             }
 
@@ -148,7 +153,6 @@ public class DiscussionFragment extends Fragment {
 //        Button addCommentButton = (Button) rootView.findViewById(R.id.btn_addComment);
 
 
-        commentsList = (ListView) rootView.findViewById(R.id.discussion_comment_listView);
 
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.discussion_list, commentsList, false);
         TextView discussionAuthorView = (TextView) header.findViewById(R.id.discussion_author_value);
@@ -156,8 +160,8 @@ public class DiscussionFragment extends Fragment {
         TextView discussionBodyView = (TextView) header.findViewById(R.id.discussion_body_value);
         final EditText messageBox = (EditText) rootView.findViewById(R.id.message_box);
         ImageButton addCommentButton = (ImageButton) rootView.findViewById(R.id.btn_addComment);
-
         commentsList.addHeaderView(header, null, false);
+
 
         discussionAuthorView.setText(post.getAuthor());
 
@@ -258,6 +262,12 @@ public class DiscussionFragment extends Fragment {
                 return 0;
             else
                 return  1;
+        }
+
+
+        @Override
+        public boolean isEmpty() {
+            return false;
         }
 
         @Override
