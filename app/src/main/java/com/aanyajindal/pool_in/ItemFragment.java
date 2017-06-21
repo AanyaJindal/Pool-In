@@ -3,22 +3,32 @@ package com.aanyajindal.pool_in;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aanyajindal.pool_in.models.Item;
 import com.aanyajindal.pool_in.models.User;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,14 +37,17 @@ import java.util.Date;
 public class ItemFragment extends Fragment {
     User user;
 
+    File localFile = null;
+    ImageView ivItem;
 
     public ItemFragment() {
 
     }
 
-    public static ItemFragment newInstance(Item item) {
+    public static ItemFragment newInstance(String id, Item item) {
 
         Bundle args = new Bundle();
+        args.putString("id",id);
         args.putString("name", item.getName());
         args.putString("username", item.getUsername());
         args.putString("date", item.getDate());
@@ -56,6 +69,8 @@ public class ItemFragment extends Fragment {
         final Item obj = new Item(bundle.getString("name"), bundle.getString("user"), bundle.getString("username"), bundle.getString("desc")
                 , bundle.getString("mode"), bundle.getString("cat"), bundle.getString("tags"), bundle.getString("date"));
 
+        String itemID = bundle.getString("id");
+
         TextView itemName = (TextView) rootView.findViewById(R.id.item_name_value);
         TextView itemUser;
         itemUser = (TextView) rootView.findViewById(R.id.item_user_value);
@@ -65,6 +80,7 @@ public class ItemFragment extends Fragment {
         TextView itemCategory = (TextView) rootView.findViewById(R.id.item_category_value);
         TextView itemTags = (TextView) rootView.findViewById(R.id.item_tags_value);
         TextView itemDate = (TextView) rootView.findViewById(R.id.item_date_value);
+        ivItem = (ImageView) rootView.findViewById(R.id.iv_item);
 
 
 //        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(obj.getUser());
@@ -89,6 +105,29 @@ public class ItemFragment extends Fragment {
         itemMode.setText(obj.getMode());
         itemCategory.setText(obj.getCat());
         itemTags.setText(obj.getTags());
+
+
+        try {
+            localFile = File.createTempFile("images", "jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        StorageReference ref = FirebaseStorage.getInstance().getReference().child("items").child(itemID);
+        ref.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Glide.with(getContext()).load(localFile).into(ivItem);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle failed download
+                // ...
+            }
+        });
+
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
