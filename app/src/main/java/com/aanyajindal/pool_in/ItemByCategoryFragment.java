@@ -35,6 +35,7 @@ import java.util.Date;
  */
 public class ItemByCategoryFragment extends Fragment {
     ArrayList<Item> list;
+    ArrayList<String> ids;
 
     User user;
     private static final String TAG = "ItemByCategoryFragment";
@@ -62,7 +63,7 @@ public class ItemByCategoryFragment extends Fragment {
         String category = getArguments().getString("catKey");
 
         list = new ArrayList<>();
-
+        ids = new ArrayList<>();
         listView = (ListView) rootView.findViewById(R.id.lv_itemByCategory);
 
         DatabaseReference itemsRef = FirebaseDatabase.getInstance().getReference().child("items");
@@ -72,7 +73,9 @@ public class ItemByCategoryFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
                 System.out.println(dataSnapshot.getValue());
+                String itemID = dataSnapshot.getKey();
                 Item item = dataSnapshot.getValue(Item.class);
+                ids.add(itemID);
                 list.add(new Item(item.getName(), item.getUser(), item.getUsername(), item.getDesc(), item.getMode(), item.getCat(), item.getTags(), item.getDate()));
                 ItemAdapter itemAdapter = new ItemAdapter(list);
                 listView.setAdapter(itemAdapter);
@@ -105,7 +108,7 @@ public class ItemByCategoryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment frag = ItemFragment.newInstance(list.get(position));
+                Fragment frag = ItemFragment.newInstance(ids.get(position), list.get(position));
                 fragmentTransaction.replace(R.id.frag_container, frag);
                 fragmentTransaction.commit();
             }

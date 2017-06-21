@@ -2,16 +2,22 @@ package com.aanyajindal.pool_in;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -22,18 +28,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddItem extends AppCompatActivity {
 
+    ImageView imgviewItem;
     EditText etItemName, etItemCategory, etItemDesc, etItemMode, etItemTags;
-    Button btnAddItem;
+    Button btnAddItem,btnAddImage;
     RadioGroup rgCategory;
-
+    private static final String TAG = "AddItem";
+    Bitmap mImageBitmap;
+    String mCurrentPhotoPath;
     DatabaseReference mainDatabase, itemsList;
+    StorageReference storageRef;
     FirebaseUser user;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +63,10 @@ public class AddItem extends AppCompatActivity {
         etItemMode = (EditText) findViewById(R.id.et_itemMode);
         etItemTags = (EditText) findViewById(R.id.et_itemTags);
 
-        btnAddItem = (Button) findViewById(R.id.btn_addItem);
+        imgviewItem = (ImageView) findViewById(R.id.img_view_item);
 
+        btnAddItem = (Button) findViewById(R.id.btn_addItem);
+        btnAddImage = (Button) findViewById(R.id.btn_add_image);
 
         etItemCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +160,32 @@ public class AddItem extends AppCompatActivity {
             }
         });
 
+
+        btnAddImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                    // Create the File where the photo should go
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        // Error occurred while creating the File
+                        Log.i(TAG, "IOException");
+                    }
+                    // Continue only if the File was successfully created
+                    if (photoFile != null) {
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                        startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                    }
+                }
+            }
+        });
+
+
+
+
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +202,13 @@ public class AddItem extends AppCompatActivity {
                 itemsList = mainDatabase.child("items");
                 String itemid = itemsList.push().getKey();
                 itemsList.child(itemid).setValue(item);
+                storageRef = FirebaseStorage.getInstance().getReference().child("items").child(itemid);
+                storageRef.putFile(Uri.parse(mCurrentPhotoPath)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        Log.d(TAG, "onComplete: upload cocmplete");
+                    }
+                });
                 mainDatabase.child("users").child(user.getUid()).child("items").child(itemid).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -170,5 +221,35 @@ public class AddItem extends AppCompatActivity {
             }
         });
 
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            try {
+                Uri uri = Uri.parse(mCurrentPhotoPath);
+                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                imgviewItem.setImageBitmap(mImageBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
