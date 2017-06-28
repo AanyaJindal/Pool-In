@@ -136,8 +136,8 @@ public class WelcomeActivity extends AppCompatActivity
             frag = ItemCategoryFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_search) {
-            frag = SkillCategoryFragment.newInstance();
+        } else if (id == R.id.my) {
+            frag = MyFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_profile) {

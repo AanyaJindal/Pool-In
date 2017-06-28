@@ -106,43 +106,41 @@ const mailTransport = nodemailer.createTransport(
 
   console.log('Message is: ', message);
 
-  if (message && !message.sanitized) {
+  if (message) {
         // Retrieved the message values.
         console.log('Retrieved message content: ', message);
 
         // Run moderation checks on on the message and moderate if needed.
         var moderatedMessage = moderateMessage(message);
+        var body = moderatedMessage;
 
         // Update the Firebase DB with checked message.
         console.log('Message has been moderated. Saving to DB: ', moderatedMessage);
-        return event.data.adminRef.update({
-          text: moderatedMessage,
-          sanitized: true,
-          moderated: message.text !== moderatedMessage
-        });
+        return event.data.adminRef.set(
+          body
+        );
       }
     });
 
- exports.moderator = functions.database
+ exports.moderator1 = functions.database
  .ref('/posts/{postId}/body').onWrite(event => {
   var message = event.data.val();
 
   console.log('Message is: ', message);
 
-  if (message && !message.sanitized) {
+  if (message) {
         // Retrieved the message values.
         console.log('Retrieved message content: ', message);
 
         // Run moderation checks on on the message and moderate if needed.
         var moderatedMessage = moderateMessage(message);
+        var body = moderatedMessage;
 
         // Update the Firebase DB with checked message.
         console.log('Message has been moderated. Saving to DB: ', moderatedMessage);
-        return event.data.adminRef.update({
-          text: moderatedMessage,
-          sanitized: true,
-          moderated: message.text !== moderatedMessage
-        });
+        return event.data.adminRef.set(
+          body
+        );
       }
     });
 
@@ -187,3 +185,70 @@ function isShouting(message) {
 function stopShouting(message) {
   return capitalizeSentence(message.toLowerCase()).replace(/!+/g, '.');
 }
+
+
+
+
+
+
+
+
+//  Handling Images
+
+const mkdirp = require('mkdirp-promise');
+const gcs = require('@google-cloud/storage')();
+const exec = require('child-process-promise').exec;
+const LOCAL_TMP_FOLDER = '/tmp/';
+var im = require('imagemagick');
+const spawn = require('child-process-promise').spawn;
+
+// File extension for the created JPEG files.
+const JPEG_EXTENSION = '.jpg';
+
+/**
+ * When an image is uploaded in the Storage bucket it is converted to JPEG automatically using
+ * ImageMagick.
+ */
+ exports.resizeImage = functions.storage.object().onChange(event => {
+  const object = event.data;
+  const fileBucket = object.bucket;
+  const filePath = object.name;
+  const contentType = object.contentType; // File content type.
+const resourceState = object.resourceState; // The resourceState is 'exists' or 'not_exists' (for file/folder deletions).
+const metageneration = object.metageneration; // Number of times metadata has been generat
+const fileName = filePath.split('/').pop();
+console.log('jrodi   ', filePath);
+
+
+  // Exit if this is triggered on a file that is not an image.
+  if (!contentType.startsWith('image/')) {
+    console.log('This is not an image.');
+    return;
+  }
+
+  // Exit if this is a move or deletion event.
+  if (resourceState === 'not_exists') {
+    console.log('This is a deletion event.');
+    return;
+  }
+
+  // Download file from bucket.
+  const bucket = gcs.bucket(fileBucket);
+  const tempFilePath = `/tmp/${fileName}`;
+  return bucket.file(filePath).download({
+    destination: tempFilePath
+  }).then(() => {
+    console.log('Image downloaded locally to', tempFilePath);
+  // Generate a thumbnail using ImageMagick.
+  return spawn('convert', [tempFilePath, '-thumbnail', '200x200>', tempFilePath]).then(() => {
+    console.log('Thumbnail created at', tempFilePath);
+    // We add a 'thumb_' prefix to thumbnails file name. That's where we'll upload the thumbnail.
+    // Uploading the thumbnail.
+    return bucket.upload(tempFilePath, {
+      destination: filePath+JPEG_EXTENSION
+    });
+  });
+});
+});
+
+

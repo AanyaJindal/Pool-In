@@ -113,7 +113,7 @@ public class ItemFragment extends Fragment {
             e.printStackTrace();
         }
 
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child("items").child(itemID);
+        StorageReference ref = FirebaseStorage.getInstance().getReference().child(itemID+".jpg");
         ref.getFile(localFile)
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override

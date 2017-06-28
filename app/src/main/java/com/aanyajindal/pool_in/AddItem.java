@@ -164,6 +164,7 @@ public class AddItem extends AppCompatActivity {
         btnAddImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imgviewItem.setVisibility(View.VISIBLE);
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (cameraIntent.resolveActivity(getPackageManager()) != null) {
                     // Create the File where the photo should go
@@ -202,7 +203,7 @@ public class AddItem extends AppCompatActivity {
                 itemsList = mainDatabase.child("items");
                 String itemid = itemsList.push().getKey();
                 itemsList.child(itemid).setValue(item);
-                storageRef = FirebaseStorage.getInstance().getReference().child("items").child(itemid);
+                storageRef = FirebaseStorage.getInstance().getReference().child(itemid);
                 storageRef.putFile(Uri.parse(mCurrentPhotoPath)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
