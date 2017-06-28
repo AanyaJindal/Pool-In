@@ -5,6 +5,11 @@
     tools:context="com.aanyajindal.pool_in.MyDiscussionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:id="@+id/lv_itemCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
 
 
 </FrameLayout>
