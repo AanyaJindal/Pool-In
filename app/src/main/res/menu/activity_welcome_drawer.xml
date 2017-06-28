@@ -10,14 +10,16 @@
             android:id="@+id/nav_browse"
             android:icon="@mipmap/ic_browse"
             android:title="Browse Items" />
-        <item
-            android:id="@+id/nav_search"
-            android:icon="@mipmap/ic_search"
-            android:title="Search People with Skills" />
+
         <item
             android:id="@+id/nav_discussions"
             android:icon="@mipmap/ic_discuss"
             android:title="Discussions" />
+
+        <item
+            android:id="@+id/my"
+            android:icon="@mipmap/ic_mode"
+            android:title="My" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@mipmap/ic_profile"

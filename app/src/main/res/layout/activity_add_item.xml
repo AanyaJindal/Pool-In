@@ -97,28 +97,42 @@
                 fbutton:met_iconLeft="@mipmap/ic_mode" />
             <ImageView
                 android:id="@+id/img_view_item"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:layout_width="200dp"
                 android:layout_height="200dp" />
-            <Button
-                android:id="@+id/btn_add_image"
-                android:background="@color/colorSecondary"
-                android:text="Add Image"
-                android:textColor="#ffffff"
-                android:elevation="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/btn_addItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@color/colorSecondary"
-                android:elevation="2dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
                 android:layout_gravity="end"
-                android:padding="8dp"
-                android:text="ADD ITEM"
-                android:textColor="#ffffff" />
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_add_image"
+                    android:background="@color/colorSecondary"
+                    android:text="Add Image"
+                    android:layout_width="0dp"
+                    android:textColor="#ffffff"
+                    android:elevation="2dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btn_addItem"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+
+                    android:background="@color/colorSecondary"
+                    android:elevation="2dp"
+                    android:layout_margin="5dp"
+
+                    android:text="ADD ITEM"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
