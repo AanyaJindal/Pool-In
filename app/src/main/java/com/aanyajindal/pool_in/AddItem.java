@@ -20,9 +20,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.aanyajindal.pool_in.models.Item;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -207,14 +209,27 @@ public class AddItem extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         Log.d(TAG, "onComplete: upload cocmplete");
+                        Toast.makeText(AddItem.this, "Picture uploaded successfully!", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddItem.this, "Picture could not be uploaded", Toast.LENGTH_SHORT).show();
                     }
                 });
                 mainDatabase.child("users").child(user.getUid()).child("items").child(itemid).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+
+                        Toast.makeText(AddItem.this, "Item added successfully!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(AddItem.this, WelcomeActivity.class);
                         finish();
                         startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddItem.this, "Sorry! Item could not be added", Toast.LENGTH_SHORT).show();
                     }
                 });
 

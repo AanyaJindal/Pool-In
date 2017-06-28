@@ -21,12 +21,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aanyajindal.pool_in.models.Comment;
 import com.aanyajindal.pool_in.models.Item;
 import com.aanyajindal.pool_in.models.Post;
 import com.aanyajindal.pool_in.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -220,7 +222,7 @@ public class DiscussionFragment extends Fragment {
                 commentRef.push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
+                        Toast.makeText(getContext(), "Comment added! :)", Toast.LENGTH_SHORT).show();
                         //TODO: improve this thing abhi khaas nahi hai
                         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                         //inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
@@ -230,6 +232,11 @@ public class DiscussionFragment extends Fragment {
                         messageBox.setText("");
 
 
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Comment could not be added :(", Toast.LENGTH_SHORT).show();
                     }
                 });
 
