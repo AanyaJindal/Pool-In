@@ -33,9 +33,7 @@ public class StartActivity extends AppCompatActivity {
                             .createSignInIntentBuilder()
                             .setLogo(R.mipmap.ic_launcher)
                             .setIsSmartLockEnabled(false)
-                             .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                     new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                                     new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build()))
+                             .setProviders(Arrays.asList( new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                             .setTheme(R.style.GreenTheme)
                             .build(),
                     RC_SIGN_IN);

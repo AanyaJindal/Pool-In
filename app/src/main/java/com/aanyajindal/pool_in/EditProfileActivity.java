@@ -12,9 +12,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.aanyajindal.pool_in.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -71,9 +73,15 @@ public class EditProfileActivity extends AppCompatActivity {
                 userRef.setValue(mUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(EditProfileActivity.this, "Saved changes! :)", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(EditProfileActivity.this,ProfileActivity.class);
                         intent.putExtra("userid",user.getUid());
                         startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(EditProfileActivity.this, "Changes could not be saved. Please try again later!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
