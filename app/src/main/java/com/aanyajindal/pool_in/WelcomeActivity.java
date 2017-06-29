@@ -35,11 +35,11 @@ public class WelcomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView ivUserProfilePic;
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     User mUser;
     TextView tvUserDisplayName;
     private static final String TAG = "WelcomeActivity";
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,8 @@ public class WelcomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,8 +94,7 @@ public class WelcomeActivity extends AppCompatActivity
         tvUserDisplayName.setText("Hello, " + user.getDisplayName());
 
 
-        final DatabaseReference mainDatabase, usersList;
-        mainDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

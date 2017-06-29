@@ -70,7 +70,14 @@ public class EditProfileActivity extends AppCompatActivity {
                 mUser = new User(user.getDisplayName(),user.getEmail(),
                         etContact.getText().toString(),etYear.getText().toString(),
                         etBranch.getText().toString(),etLocation.getText().toString(),user.getPhotoUrl().toString());
-                userRef.setValue(mUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                userRef.child("branch").setValue(mUser.getBranch());
+                userRef.child("contact").setValue(mUser.getContact());
+                userRef.child("dplink").setValue(mUser.getDplink());
+                userRef.child("email").setValue(mUser.getEmail());
+                userRef.child("location").setValue(mUser.getLocation());
+                userRef.child("name").setValue(mUser.getName());
+                userRef.child("year").setValue(mUser.getYear()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(EditProfileActivity.this, "Saved changes! :)", Toast.LENGTH_SHORT).show();
@@ -84,6 +91,22 @@ public class EditProfileActivity extends AppCompatActivity {
                         Toast.makeText(EditProfileActivity.this, "Changes could not be saved. Please try again later!", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
+//                userRef.setValue(mUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        Toast.makeText(EditProfileActivity.this, "Saved changes! :)", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(EditProfileActivity.this,ProfileActivity.class);
+//                        intent.putExtra("userid",user.getUid());
+//                        startActivity(intent);
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(EditProfileActivity.this, "Changes could not be saved. Please try again later!", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         });
 
