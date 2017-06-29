@@ -6,8 +6,9 @@
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
-        android:id="@+id/lv_itemCategory"
+        android:id="@+id/lv_myDiscussions"
         android:layout_width="match_parent"
+        android:divider="@color/background"
         android:layout_height="wrap_content">
     </ListView>
 

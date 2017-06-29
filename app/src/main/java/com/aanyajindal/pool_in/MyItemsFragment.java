@@ -1,21 +1,28 @@
 package com.aanyajindal.pool_in;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.util.TypedValue;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aanyajindal.pool_in.models.Item;
-import com.aanyajindal.pool_in.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -31,6 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +48,8 @@ public class MyItemsFragment extends Fragment {
 
     ArrayList<Item> list;
     ArrayList<String> ids;
+    MyItemsFragment.ItemAdapter itemAdapter;
+
 
     FirebaseUser user;
     ListView listView;
@@ -57,7 +68,6 @@ public class MyItemsFragment extends Fragment {
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_my_items, container, false);
-
         list = new ArrayList<>();
         ids = new ArrayList<>();
         listView = (ListView) rootView.findViewById(R.id.lv_myItems);
@@ -80,7 +90,7 @@ public class MyItemsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Item item = dataSnapshot.getValue(Item.class);
                         list.add(item);
-                        MyItemsFragment.ItemAdapter itemAdapter = new MyItemsFragment.ItemAdapter(list);
+                        itemAdapter = new MyItemsFragment.ItemAdapter(list);
                         listView.setAdapter(itemAdapter);
                     }
 
@@ -127,10 +137,117 @@ public class MyItemsFragment extends Fragment {
             }
         });
 
+        // define Choice mode for multiple  delete
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(new  AbsListView.MultiChoiceModeListener() {
+
+            @Override
+            public boolean  onPrepareActionMode(ActionMode mode, Menu menu) {
+                // TODO  Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public void  onDestroyActionMode(ActionMode mode) {
+                // TODO  Auto-generated method stub
+
+            }
+
+            @Override
+            public boolean  onCreateActionMode(ActionMode mode, Menu menu) {
+                // TODO  Auto-generated method stub
+                mode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
+                return true;
+
+            }
+
+            @Override
+            public boolean  onActionItemClicked(final ActionMode mode,
+                                                MenuItem item) {
+                // TODO  Auto-generated method stub
+                switch  (item.getItemId()) {
+                    case R.id.selectAll:
+                        //
+                        final int checkedCount  = list.size();
+                        // If item  is already selected or checked then remove or
+                        // unchecked  and again select all
+                        itemAdapter.removeSelection();
+                        for (int i = 0; i <  checkedCount; i++) {
+                            listView.setItemChecked(i,   true);
+                             itemAdapter.toggleSelection(i);
+                        }
+                        // Set the  CAB title according to total checked items
+
+                        // Calls  toggleSelection method from ListViewAdapter Class
+
+                        // Count no.  of selected item and print it
+                        mode.setTitle(checkedCount  + "  Selected");
+                        return true;
+                    case R.id.delete:
+                        // Add  dialog for confirmation to delete selected item
+                        // record.
+//                        AlertDialog.Builder  builder = new AlertDialog.Builder(
+//                                MainActivity.this);
+//                        builder.setMessage("Do you  want to delete selected record(s)?");
+//
+//                        builder.setNegativeButton("No", new  OnClickListener() {
+//
+//                            @Override
+//                            public void  onClick(DialogInterface dialog, int which) {
+//                                // TODO  Auto-generated method stub
+//
+//                            }
+//                        });
+//                        builder.setPositiveButton("Yes", new  OnClickListener() {
+//
+//                            @Override
+//                            public void  onClick(DialogInterface dialog, int which) {
+//                                // TODO  Auto-generated method stub
+//                                SparseBooleanArray  selected = adapter
+//                                        .getSelectedIds();
+//                                for (int i =  (selected.size() - 1); i >= 0; i--) {
+//                                    if  (selected.valueAt(i)) {
+//                                        String  selecteditem = adapter
+//                                                .getItem(selected.keyAt(i));
+//                                        // Remove  selected items following the ids
+//                                        adapter.remove(selecteditem);
+//                                    }
+//                                }
+//
+//                                // Close CAB
+//                                mode.finish();
+//                                selected.clear();
+//
+//                            }
+//                        });
+//                        AlertDialog alert =  builder.create();
+//                        alert.setIcon(R.drawable.questionicon);// dialog  Icon
+//                        alert.setTitle("Confirmation"); // dialog  Title
+//                        alert.show();
+                        return true;
+                    default:
+                        return false;
+                }
+
+            }
+
+            @Override
+            public void  onItemCheckedStateChanged(ActionMode mode,
+                                                   int position, long id, boolean checked) {
+                // TODO  Auto-generated method stub
+                final int checkedCount  = listView.getCheckedItemCount();
+                // Set the  CAB title according to total checked items
+                mode.setTitle(checkedCount  + "  Selected");
+                // Calls  toggleSelection method from ListViewAdapter Class
+                itemAdapter.toggleSelection(position);
+            }
+        });
+
         return rootView;
     }
 
     class ItemAdapter extends BaseAdapter {
+
         class Holder {
             TextView name;
             TextView user;
@@ -139,9 +256,12 @@ public class MyItemsFragment extends Fragment {
         }
 
         ArrayList<Item> mList;
+        private  SparseBooleanArray mSelectedItemsIds;
 
         public ItemAdapter(ArrayList<Item> mList) {
+
             this.mList = mList;
+            mSelectedItemsIds = new  SparseBooleanArray();
         }
 
         @Override
@@ -208,6 +328,39 @@ public class MyItemsFragment extends Fragment {
 
             return convertView;
         }
+
+        public ArrayList<Item> getMyList(){
+            return mList;
+        }
+
+        public void  toggleSelection(int position) {
+            selectView(position, !mSelectedItemsIds.get(position));
+        }
+
+        // Remove selection after unchecked
+        public void  removeSelection() {
+            mSelectedItemsIds = new  SparseBooleanArray();
+            notifyDataSetChanged();
+        }
+
+        // Item checked on selection
+        public void selectView(int position, boolean value) {
+            if (value)
+                mSelectedItemsIds.put(position,  value);
+            else
+                mSelectedItemsIds.delete(position);
+            notifyDataSetChanged();
+        }
+
+        // Get number of selected item
+        public int  getSelectedCount() {
+            return mSelectedItemsIds.size();
+        }
+
+        public  SparseBooleanArray getSelectedIds() {
+            return mSelectedItemsIds;
+        }
+
 
     }
 
