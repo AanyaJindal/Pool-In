@@ -1,6 +1,7 @@
 package com.aanyajindal.pool_in;
 
 
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -51,7 +52,6 @@ public class MyItemsFragment extends Fragment {
     FirebaseUser user;
     ListView listView;
 
-
     public static final String TAG = "MyItemsFragment";
 
 
@@ -64,8 +64,6 @@ public class MyItemsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
 
         View rootView = inflater.inflate(R.layout.fragment_my_items, container, false);
         list = new ArrayList<>();
@@ -99,6 +97,7 @@ public class MyItemsFragment extends Fragment {
 
                     }
                 });
+
 
 
             }
@@ -192,8 +191,8 @@ public class MyItemsFragment extends Fragment {
                     case R.id.delete:
                         // Add  dialog for confirmation to delete selected item
                         // record.
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setMessage("Do you  want to delete selected item(s)?");
+                        AlertDialog.Builder  builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage("Do you surely want to delete the selected item(s)?");
 
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                             @Override
