@@ -14,17 +14,12 @@ public class StartActivity extends AppCompatActivity {
 
     public static final int RC_SIGN_IN = 101;
 
-    //TODO : check net wen startactivity launched
-    //TODO : DISABLE BACK ON EDIT PROFILE
 
     @SuppressWarnings("VisibleForTests")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
