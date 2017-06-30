@@ -47,7 +47,7 @@ public class MyFragment extends Fragment {
          */
         View x =  inflater.inflate(R.layout.fragment_my,null);
         tabLayout = (TabLayout) x.findViewById(R.id.tabs);
-        viewPager = (ViewPager) x.findViewById(R.id.viewpager);
+        viewPager = (CustomViewPager) x.findViewById(R.id.viewpager);
 
         /**
          *Set an Apater for the View Pager
@@ -93,6 +93,7 @@ class MyAdapter extends FragmentPagerAdapter {
         }
         return null;
     }
+
 
     @Override
     public int getCount() {
