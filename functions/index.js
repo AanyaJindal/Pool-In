@@ -1,6 +1,7 @@
 'use strict';
-
-const functions = require('firebase-functions');
+let functions = require('firebase-functions');
+let admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
 
 
 // // Create and Deploy Your First Cloud Functions
@@ -253,4 +254,65 @@ console.log('jrodi   ', filePath);
 });
 });
 
+
+
+
+
+
+
+//// Push Notifications
+
+  exports.sendPush = functions.database.ref('/posts/{postId}').onWrite(event => {
+  let projectStateChanged = false;
+  let projectCreated = false;
+  let projectData = event.data.val(); 
+
+  if (!event.data.previous.exists()) {
+    projectCreated = true;
+  }
+
+  if (!projectCreated && event.data.changed()) {
+  projectStateChanged = true;
+  }
+
+  let msg = 'A post was modified';
+
+  if (projectCreated) {
+    msg = `A new post was added to the platform by: ${projectData.author}`;
+  }
+
+  return loadUsers().then(users => {
+        let tokens = [];
+        for (let user of users) {
+            tokens.push(user);
+        }
+        let payload = {
+            notification: {
+                title: 'New Post Added',
+                body: msg,
+                sound: 'default',
+                badge: '1'
+            }     
+        };
+        return admin.messaging().sendToDevice(tokens, payload);
+    });
+
+});
+
+  function loadUsers() {
+  let dbRef = admin.database().ref('/users');
+  let defer = new Promise((resolve, reject) => {
+    dbRef.once('value', (snap) => {
+      let data = snap.val();
+      let users = [];
+      for (var property in data) {
+        users.push(data[property]);
+      }
+      resolve(users);
+    }, (err) => {
+      reject(err);
+    });
+  });
+  return defer;
+}
 
