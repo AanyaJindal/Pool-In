@@ -190,6 +190,7 @@ public class PostByCategoryFragment extends Fragment {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     Fragment frag = DiscussionFragment.newInstance(list.get(position));
                     fragmentTransaction.replace(R.id.frag_container, frag);
+                    fragmentTransaction.addToBackStack("post");
                     fragmentTransaction.commit();
                 }
             });

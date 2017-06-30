@@ -64,6 +64,7 @@ public class ItemCategoryFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment frag = ItemByCategoryFragment.newInstance(itCatList.get(position));
                 fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.addToBackStack("item-cat");
                 fragmentTransaction.commit();
             }
         });

@@ -137,6 +137,7 @@ public class MyItemsFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment frag = ItemFragment.newInstance(ids.get(position), list.get(position));
                 fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.addToBackStack("my-item");
                 fragmentTransaction.commit();
             }
         });

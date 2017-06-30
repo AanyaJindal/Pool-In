@@ -106,6 +106,9 @@ public class WelcomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager()
+//                .getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount()-1);
+        Log.d(TAG, "onBackPressed: "+getSupportFragmentManager());
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -120,11 +123,20 @@ public class WelcomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        Fragment frag1 = HomeFragment.newInstance();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.frag_container,frag1).commit();
+
+
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment frag = null;
 
         if (id == R.id.nav_settings) {
             frag = SettingsFragment.newInstance();
+            fragmentTransaction.addToBackStack("home");
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_home) {
@@ -134,10 +146,12 @@ public class WelcomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_browse) {
             frag = ItemCategoryFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
+            fragmentTransaction.addToBackStack("home");
             fragmentTransaction.commit();
         } else if (id == R.id.my) {
             frag = MyFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
+            fragmentTransaction.addToBackStack("home");
             fragmentTransaction.commit();
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, ProfileActivity.class);
@@ -147,6 +161,7 @@ public class WelcomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_discussions) {
             frag = PostCategoryFragment.newInstance();
             fragmentTransaction.replace(R.id.frag_container, frag);
+            fragmentTransaction.addToBackStack("home");
             fragmentTransaction.commit();
         }
 

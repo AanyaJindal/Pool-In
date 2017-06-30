@@ -62,6 +62,7 @@ public class PostCategoryFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment frag = PostByCategoryFragment.newInstance(postCatList.get(position));
                 fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.addToBackStack("post-cat");
                 fragmentTransaction.commit();
             }
         });
