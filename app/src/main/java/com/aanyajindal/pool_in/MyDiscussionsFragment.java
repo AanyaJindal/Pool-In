@@ -58,7 +58,7 @@ public class MyDiscussionsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_my_discussions, container, false);
@@ -137,12 +137,18 @@ public class MyDiscussionsFragment extends Fragment {
             @Override
             public void  onDestroyActionMode(ActionMode mode) {
                 // TODO  Auto-generated method stub
+                CustomViewPager view = (CustomViewPager) container.findViewById(R.id.viewpager);
+                view.disableScroll(false);
             }
 
             @Override
             public boolean  onCreateActionMode(ActionMode mode, Menu menu) {
                 // TODO  Auto-generated method stub
                 mode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
+
+                CustomViewPager view = (CustomViewPager) container.findViewById(R.id.viewpager);
+                view.disableScroll(true);
+
                 return true;
 
             }
