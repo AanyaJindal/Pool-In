@@ -1,14 +1,21 @@
 package com.aanyajindal.pool_in;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -38,6 +45,7 @@ public class MyDiscussionsFragment extends Fragment {
 
     ArrayList<Post> list;
     ArrayList<String> ids;
+    MyDiscussionsFragment.PostAdapter postAdapter;
 
     private static final String TAG = "MyDiscussionsFragment";
 
@@ -77,7 +85,7 @@ public class MyDiscussionsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Post post = dataSnapshot.getValue(Post.class);
                         list.add(post);
-                        MyDiscussionsFragment.PostAdapter postAdapter = new MyDiscussionsFragment.PostAdapter(list);
+                        postAdapter = new MyDiscussionsFragment.PostAdapter(list);
                         listView.setAdapter(postAdapter);
                     }
 
@@ -98,7 +106,11 @@ public class MyDiscussionsFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                Log.d(TAG, "onChildRemoved: "+dataSnapshot);
+                int i = ids.indexOf(dataSnapshot.getKey());
+                list.remove(i);
+                postAdapter = new MyDiscussionsFragment.PostAdapter(list);
+                listView.setAdapter(postAdapter);
             }
 
             @Override
@@ -112,7 +124,110 @@ public class MyDiscussionsFragment extends Fragment {
             }
         });
 
+        // define Choice mode for multiple  delete
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(new  AbsListView.MultiChoiceModeListener() {
+
+            @Override
+            public boolean  onPrepareActionMode(ActionMode mode, Menu menu) {
+                // TODO  Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public void  onDestroyActionMode(ActionMode mode) {
+                // TODO  Auto-generated method stub
+            }
+
+            @Override
+            public boolean  onCreateActionMode(ActionMode mode, Menu menu) {
+                // TODO  Auto-generated method stub
+                mode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
+                return true;
+
+            }
+
+            @Override
+            public boolean  onActionItemClicked(final ActionMode mode,
+                                                MenuItem item) {
+                // TODO  Auto-generated method stub
+                switch  (item.getItemId()) {
+                    case R.id.selectAll:
+                        //
+                        final int checkedCount  = list.size();
+                        // If item  is already selected or checked then remove or
+                        // unchecked  and again select all
+                        postAdapter.removeSelection();
+                        for (int i = 0; i <  checkedCount; i++) {
+                            listView.setItemChecked(i,   true);
+                            postAdapter.toggleSelection(i);
+                        }
+                        mode.setTitle(checkedCount  + "  Selected");
+                        return true;
+                    case R.id.delete:
+                        // Add  dialog for confirmation to delete selected item
+                        // record.
+                        AlertDialog.Builder  builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage("Do you surely want to delete the selected Post(s)?");
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.setPositiveButton("YES", new  DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void  onClick(DialogInterface dialog, int which) {
+                                // TODO  Auto-generated method stub
+                                SparseBooleanArray  selected = postAdapter.getSelectedIds();
+                                Log.d(TAG, "onClick: "+ selected);
+                                for (int i =  (selected.size() - 1); i >= 0; i--) {
+                                    if  (selected.valueAt(i)) {
+                                        Log.d(TAG, "onClick: "+ i + " hehe " + selected.valueAt(i));
+                                        String  selecteditemID = ids.get(selected.keyAt(i));
+                                        Log.d(TAG, "onClick: "+selecteditemID);
+                                        FirebaseDatabase.getInstance().getReference().child("posts")
+                                                .child(selecteditemID).removeValue();
+                                        FirebaseDatabase.getInstance().getReference().child("users")
+                                                .child(user.getUid()).child("posts")
+                                                .child(selecteditemID).removeValue();
+                                    }
+                                }
+
+                                // Close CAB
+                                mode.finish();
+                                selected.clear();
+
+                            }
+                        });
+                        AlertDialog alert =  builder.create();
+                        //alert.setIcon(R.drawable);// dialog  Icon
+                        alert.setTitle("Confirmation"); // dialog  Title
+                        alert.show();
+                        return true;
+                    default:
+                        return false;
+                }
+
+            }
+
+            @Override
+            public void  onItemCheckedStateChanged(ActionMode mode,
+                                                   int position, long id, boolean checked) {
+                // TODO  Auto-generated method stub
+                final int checkedCount  = listView.getCheckedItemCount();
+                // Set the  CAB title according to total checked items
+                mode.setTitle(checkedCount  + "  Selected");
+                // Calls  toggleSelection method from ListViewAdapter Class
+                postAdapter.toggleSelection(position);
+            }
+        });
+
         return rootView;
+
+
     }
 
 
@@ -126,9 +241,12 @@ public class MyDiscussionsFragment extends Fragment {
         }
 
         ArrayList<Post> mList;
+        private SparseBooleanArray mSelectedItemsIds;
+
 
         public PostAdapter(ArrayList<Post> mList) {
             this.mList = mList;
+            mSelectedItemsIds = new  SparseBooleanArray();
         }
 
         @Override
@@ -192,6 +310,7 @@ public class MyDiscussionsFragment extends Fragment {
 //
 //                }
 //            });
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -203,6 +322,34 @@ public class MyDiscussionsFragment extends Fragment {
                 }
             });
             return convertView;
+        }
+
+        public void  toggleSelection(int position) {
+            selectView(position, !mSelectedItemsIds.get(position));
+        }
+
+        // Remove selection after unchecked
+        public void  removeSelection() {
+            mSelectedItemsIds = new  SparseBooleanArray();
+            notifyDataSetChanged();
+        }
+
+        // Item checked on selection
+        public void selectView(int position, boolean value) {
+            if (value)
+                mSelectedItemsIds.put(position,  value);
+            else
+                mSelectedItemsIds.delete(position);
+            notifyDataSetChanged();
+        }
+
+        // Get number of selected item
+        public int  getSelectedCount() {
+            return mSelectedItemsIds.size();
+        }
+
+        public  SparseBooleanArray getSelectedIds() {
+            return mSelectedItemsIds;
         }
 
     }

@@ -183,7 +183,7 @@ public class MyItemsFragment extends Fragment {
                         // Add  dialog for confirmation to delete selected item
                         // record.
                         AlertDialog.Builder  builder = new AlertDialog.Builder(getContext());
-                        builder.setMessage("Do you  want to delete selected item(s)?");
+                        builder.setMessage("Do you surely want to delete the selected item(s)?");
 
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                             @Override
