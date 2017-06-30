@@ -67,9 +67,9 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mUser = new User(user.getDisplayName(),user.getEmail(),
-                        etContact.getText().toString(),etYear.getText().toString(),
-                        etBranch.getText().toString(),etLocation.getText().toString(),user.getPhotoUrl().toString());
+                mUser = new User(user.getDisplayName(), user.getEmail(),
+                        etContact.getText().toString(), etYear.getText().toString(),
+                        etBranch.getText().toString(), etLocation.getText().toString(), user.getPhotoUrl().toString());
 
                 userRef.child("branch").setValue(mUser.getBranch());
                 userRef.child("contact").setValue(mUser.getContact());
@@ -81,8 +81,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(EditProfileActivity.this, "Saved changes! :)", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(EditProfileActivity.this,ProfileActivity.class);
-                        intent.putExtra("userid",user.getUid());
+                        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                        intent.putExtra("userid", user.getUid());
                         startActivity(intent);
                     }
                 }).addOnFailureListener(new OnFailureListener() {

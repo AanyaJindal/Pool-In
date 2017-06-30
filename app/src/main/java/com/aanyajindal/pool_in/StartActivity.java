@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class StartActivity extends AppCompatActivity {
 
-    public static final int RC_SIGN_IN  = 101;
+    public static final int RC_SIGN_IN = 101;
 
     //TODO : check net wen startactivity launched
     //TODO : DISABLE BACK ON EDIT PROFILE
@@ -33,17 +33,18 @@ public class StartActivity extends AppCompatActivity {
             startActivityForResult(
                     // Get an instance of AuthUI based on the default app
 
-                     AuthUI.getInstance()
+                    AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setLogo(R.mipmap.ic_launcher)
                             .setIsSmartLockEnabled(false)
-                             .setProviders(Arrays.asList( new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                            .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
                             .setTheme(R.style.GreenTheme)
                             .build(),
                     RC_SIGN_IN);
         }
 
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {

@@ -10,7 +10,6 @@ public class Comment {
     String body;
 
 
-
     public Comment() {
     }
 

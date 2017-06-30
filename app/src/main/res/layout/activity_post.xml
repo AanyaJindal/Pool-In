@@ -1,110 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:fbutton="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingBottom="16dp"
-android:paddingLeft="16dp"
-android:paddingRight="16dp"
-android:paddingTop="16dp"
-tools:context="com.aanyajindal.pool_in.AddItem">
-
-<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.aanyajindal.pool_in.AddItem">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Add Post"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+
+                android:id="@+id/et_postTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="Title"
+                android:padding="5dp"
+                android:paddingTop="10dp"
+                android:textColor="#000000"
+                app:mtf_openKeyboardOnFocus="true"
+                fbutton:met_floatingLabel="highlight"
+                fbutton:met_iconLeft="@mipmap/ic_skill" />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_postBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Body"
+                android:padding="5dp"
+                android:textColor="#000000"
+                app:mtf_openKeyboardOnFocus="true"
+                fbutton:met_floatingLabel="highlight"
+                fbutton:met_iconLeft="@mipmap/ic_desc" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_postCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Category"
+                android:padding="5dp"
+                android:textColor="#000000"
+                app:mtf_openKeyboardOnFocus="true"
+                fbutton:met_floatingLabel="highlight"
+                fbutton:met_iconLeft="@mipmap/ic_mode" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_postTags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Post Tags"
+                android:padding="5dp"
+                android:textColor="#000000"
+                app:mtf_openKeyboardOnFocus="true"
+                fbutton:met_floatingLabel="highlight"
+                fbutton:met_iconLeft="@mipmap/ic_tag" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/item_header"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_addPost"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="Add Post"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000000" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Title"
-            android:focusable="true"
-            android:id="@+id/et_postTitle"
-            android:padding="5dp"
-            android:paddingTop="10dp"
-            android:textColor="#000000"
-            app:mtf_openKeyboardOnFocus="true"
-            fbutton:met_floatingLabel="highlight"
-            fbutton:met_iconLeft="@mipmap/ic_skill" />
-
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:hint="Body"
-            android:id="@+id/et_postBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textColor="#000000"
-            app:mtf_openKeyboardOnFocus="true"
-            fbutton:met_floatingLabel="highlight"
-            fbutton:met_iconLeft="@mipmap/ic_desc" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Category"
-            android:focusable="false"
-            android:id="@+id/et_postCategory"
-            android:padding="5dp"
-            android:textColor="#000000"
-            app:mtf_openKeyboardOnFocus="true"
-            fbutton:met_floatingLabel="highlight"
-            fbutton:met_iconLeft="@mipmap/ic_mode" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:hint="Post Tags"
-            android:id="@+id/et_postTags"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textColor="#000000"
-            app:mtf_openKeyboardOnFocus="true"
-            fbutton:met_floatingLabel="highlight"
-            fbutton:met_iconLeft="@mipmap/ic_tag" />
-
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorSecondary"
+            android:elevation="2dp"
+            android:padding="8dp"
+            android:text="ADD POST"
+            android:textColor="#ffffff" />
     </LinearLayout>
-</ScrollView>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true">
-    <Button
-        android:id="@+id/btn_addPost"
-        android:text="ADD POST"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorSecondary"
-        android:elevation="2dp"
-        android:layout_gravity="end"
-        android:padding="8dp"
-        android:textColor="#ffffff" />
-</LinearLayout>
 
 </RelativeLayout>

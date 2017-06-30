@@ -29,9 +29,9 @@ public class SettingsFragment extends Fragment {
     }
 
     public static SettingsFragment newInstance() {
-        
+
         Bundle args = new Bundle();
-        
+
         SettingsFragment fragment = new SettingsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -41,7 +41,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView  = inflater.inflate(R.layout.fragment_settings, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
         Button btnEditProfile = (Button) rootView.findViewById(R.id.btn_editProfile);
         Button btnChngPass = (Button) rootView.findViewById(R.id.btn_chPass);
         Button btnLogout = (Button) rootView.findViewById(R.id.btn_logout);

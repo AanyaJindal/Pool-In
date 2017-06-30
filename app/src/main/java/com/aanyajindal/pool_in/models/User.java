@@ -1,7 +1,6 @@
 package com.aanyajindal.pool_in.models;
 
-public class User
-{
+public class User {
     String name;
     String email;
     String contact;
@@ -10,7 +9,7 @@ public class User
     String location;
     String dplink;
 
-    public User(String name, String email, String contact, String year, String branch, String location,String dplink) {
+    public User(String name, String email, String contact, String year, String branch, String location, String dplink) {
         this.name = name;
         this.email = email;
         this.contact = contact;

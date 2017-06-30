@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto">
+    android:padding="12dp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/discussion_author_header"
@@ -77,49 +77,49 @@
     </LinearLayout>
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:orientation="horizontal" >-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:gravity="center_horizontal"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:orientation="horizontal" >-->
 
-        <!--<com.rengwuxian.materialedittext.MaterialEditText-->
-            <!--android:id="@+id/message_box"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:focusable="true"-->
-            <!--android:hint="Comment"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:inputType="textMultiLine|textCapSentences|textAutoCorrect"-->
-            <!--android:padding="5dp"-->
-            <!--android:textColor="#ffffff"-->
-            <!--fbutton:met_floatingLabel="highlight"-->
-           <!--/>-->
+    <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+    <!--android:id="@+id/message_box"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:focusable="true"-->
+    <!--android:hint="Comment"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:inputType="textMultiLine|textCapSentences|textAutoCorrect"-->
+    <!--android:padding="5dp"-->
+    <!--android:textColor="#ffffff"-->
+    <!--fbutton:met_floatingLabel="highlight"-->
+    <!--/>-->
 
     <!--<ImageButton-->
-        <!--android:id="@+id/btn_addComment"-->
-        <!--android:layout_width="40dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:background="@mipmap/ic_mail2"-->
-        <!--android:scaleType="fitCenter" />-->
+    <!--android:id="@+id/btn_addComment"-->
+    <!--android:layout_width="40dp"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:background="@mipmap/ic_mail2"-->
+    <!--android:scaleType="fitCenter" />-->
 
     <!--</LinearLayout>-->
 
 
     <!--<Button-->
-        <!--android:id="@+id/btn_addComment"-->
-        <!--android:text="ADD COMMENT"-->
-        <!--android:elevation="2dp"-->
-        <!--android:padding="8dp"-->
-        <!--android:textColor="#ffffff"-->
-        <!--android:textSize="20dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:background="@color/colorSecondary"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!--android:id="@+id/btn_addComment"-->
+    <!--android:text="ADD COMMENT"-->
+    <!--android:elevation="2dp"-->
+    <!--android:padding="8dp"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:textSize="20dp"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@color/colorSecondary"-->
+    <!--android:layout_height="wrap_content" />-->
 
 </RelativeLayout>

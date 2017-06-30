@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,8 +67,7 @@ public class MyItemsFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-
-        View rootView = inflater.inflate(R.layout.fragment_my_items, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_my_items, container, false);
         list = new ArrayList<>();
         ids = new ArrayList<>();
         listView = (ListView) rootView.findViewById(R.id.lv_myItems);
@@ -83,6 +83,7 @@ public class MyItemsFragment extends Fragment {
                 Log.d(TAG, "onChildAdded: " + dataSnapshot.getKey());
                 String itemID = dataSnapshot.getKey();
                 ids.add(itemID);
+                rootView.findViewById(R.id.tv_my_empty_items).setVisibility(View.GONE);
 
                 DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items").child(itemID);
                 itemRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -213,6 +214,10 @@ public class MyItemsFragment extends Fragment {
                                         Log.d(TAG, "onClick: " + i + " hehe " + selected.valueAt(i));
                                         String selecteditemID = ids.get(selected.keyAt(i));
                                         Log.d(TAG, "onClick: " + selecteditemID);
+                                        if (list.get(selected.keyAt(i)).getImage().equals("true")) {
+                                            FirebaseStorage.getInstance().getReference()
+                                                    .child("item" + selecteditemID + ".jpg").delete();
+                                        }
                                         FirebaseDatabase.getInstance().getReference().child("items")
                                                 .child(selecteditemID).removeValue();
                                         FirebaseDatabase.getInstance().getReference().child("users")

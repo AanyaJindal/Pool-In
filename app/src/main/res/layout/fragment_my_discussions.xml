@@ -8,9 +8,17 @@
     <ListView
         android:id="@+id/lv_myDiscussions"
         android:layout_width="match_parent"
-        android:divider="@color/background"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:divider="@color/background"></ListView>
+
+    <TextView
+        android:id="@+id/tv_my_empty_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="You have not added\n any post!"
+        android:textAlignment="center"
+        android:textSize="25sp" />
 
 
 </FrameLayout>

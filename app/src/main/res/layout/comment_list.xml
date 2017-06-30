@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/tv_list_author"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        android:textColor="#000000"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="14dp"
+        android:textStyle="bold" />
 
     <TextView
-        android:textSize="16dp"
-        android:textColor="#000000"
         android:id="@+id/tv_list_body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="16dp" />
 
     <TextView
-        android:textSize="10dp"
-        android:textColor="@color/colorPrimary"
-        android:gravity="end"
-        android:layout_gravity="end"
         android:id="@+id/tv_list_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10dp" />
 
 </LinearLayout>

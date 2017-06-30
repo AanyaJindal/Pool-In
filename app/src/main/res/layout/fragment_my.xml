@@ -1,23 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.aanyajindal.pool_in.MyFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        android:background="@color/background"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextColor="@color/lighterGray"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.design.widget.TabLayout>
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/lighterGray"></android.support.design.widget.TabLayout>
 
     <com.aanyajindal.pool_in.CustomViewPager
         android:id="@+id/viewpager"

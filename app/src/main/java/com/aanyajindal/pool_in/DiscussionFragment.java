@@ -105,7 +105,7 @@ public class DiscussionFragment extends Fragment {
                 list.add(comment);
                 CommentAdapter comAdapter = new CommentAdapter(list);
                 commentsList.setAdapter(comAdapter);
-                Log.d(TAG, "onChildAdded: "+"I am here");
+                Log.d(TAG, "onChildAdded: " + "I am here");
 
             }
 
@@ -146,7 +146,6 @@ public class DiscussionFragment extends Fragment {
 //        });
 
 
-
 //        TextView discussionTitleView = (TextView) rootView.findViewById(R.id.discussion_title_value);
 //        TextView discussionAuthorView = (TextView) rootView.findViewById(R.id.discussion_author_value);
 //        TextView discussionDateView = (TextView) rootView.findViewById(R.id.discussion_date_value);
@@ -155,8 +154,7 @@ public class DiscussionFragment extends Fragment {
 //        Button addCommentButton = (Button) rootView.findViewById(R.id.btn_addComment);
 
 
-
-        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.discussion_list, commentsList, false);
+        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.discussion_list, commentsList, false);
         TextView discussionAuthorView = (TextView) header.findViewById(R.id.discussion_author_value);
         TextView discussionDateView = (TextView) header.findViewById(R.id.discussion_date_value);
         TextView discussionBodyView = (TextView) header.findViewById(R.id.discussion_body_value);
@@ -170,8 +168,8 @@ public class DiscussionFragment extends Fragment {
         discussionAuthorView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),ProfileActivity.class);
-                intent.putExtra("userid",post.getAuthorId());
+                Intent intent = new Intent(getContext(), ProfileActivity.class);
+                intent.putExtra("userid", post.getAuthorId());
                 startActivity(intent);
             }
         });
@@ -265,10 +263,10 @@ public class DiscussionFragment extends Fragment {
 
         @Override
         public int getItemViewType(int position) {
-            if(position == 0)
+            if (position == 0)
                 return 0;
             else
-                return  1;
+                return 1;
         }
 
 
@@ -345,7 +343,6 @@ public class DiscussionFragment extends Fragment {
 //            });
             return convertView;
         }
-
 
 
     }

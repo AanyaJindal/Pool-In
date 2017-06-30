@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class PostActivity extends AppCompatActivity {
     EditText etPostTags;
     RadioGroup rgPostCategory;
     DatabaseReference postsDatabase;
+    private static final String TAG = "PostActivity";
     FirebaseUser user;
 
 
@@ -45,9 +47,9 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        etPostTitle = (EditText)findViewById(R.id.et_postTitle);
-        etPostBody = (EditText)findViewById(R.id.et_postBody);
-        etPostTags = (EditText)findViewById(R.id.et_postTags);
+        etPostTitle = (EditText) findViewById(R.id.et_postTitle);
+        etPostBody = (EditText) findViewById(R.id.et_postBody);
+        etPostTags = (EditText) findViewById(R.id.et_postTags);
         etPostCategory = (EditText) findViewById(R.id.et_postCategory);
         btn = (Button) findViewById(R.id.btn_addPost);
 
@@ -76,10 +78,9 @@ public class PostActivity extends AppCompatActivity {
                 rgPostCategory.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                        if(checkedId==R.id.rb_others1){
+                        if (checkedId == R.id.rb_others1) {
                             etRbothers1.setVisibility(View.VISIBLE);
-                        }
-                        else{
+                        } else {
                             etRbothers1.setVisibility(View.GONE);
                         }
                     }
@@ -92,25 +93,24 @@ public class PostActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String tMode = "";
-                        if(rbPlacement.isChecked()){
+                        if (rbPlacement.isChecked()) {
                             tMode = "Placement";
-                        }else if(rbProjects.isChecked()){
+                        } else if (rbProjects.isChecked()) {
                             tMode = "Projects";
-                        }else if(rbLost.isChecked()){
+                        } else if (rbLost.isChecked()) {
                             tMode = "Lost and Found";
-                        }else if(rbMentor.isChecked()){
+                        } else if (rbMentor.isChecked()) {
                             tMode = "Mentorship";
-                        }else if(rbBlood.isChecked()){
+                        } else if (rbBlood.isChecked()) {
                             tMode = "Blood Donation";
-                        }else if(rbComplaint.isChecked()){
+                        } else if (rbComplaint.isChecked()) {
                             tMode = "Complaints";
-                        }else if(rbFest.isChecked()) {
+                        } else if (rbFest.isChecked()) {
                             tMode = "Fest Participation";
-                        }else if(rbCampus.isChecked()) {
+                        } else if (rbCampus.isChecked()) {
                             tMode = "Campus Life";
-                        }
-                        else if(rbOthers1.isChecked()){
-                            tMode = "Others:"+etRbothers1.getText().toString();
+                        } else if (rbOthers1.isChecked()) {
+                            tMode = "Others:" + etRbothers1.getText().toString();
                         }
                         etPostCategory.setText(tMode);
                     }
@@ -124,20 +124,21 @@ public class PostActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "onClick: gello");
                 String postTitle = etPostTitle.getText().toString();
                 String postBody = etPostBody.getText().toString();
-                String postCategory =  etPostCategory.getText().toString();
+                String postCategory = etPostCategory.getText().toString();
                 String postTags = etPostTags.getText().toString();
 
                 postsDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
                 String key;
                 key = postsDatabase.push().getKey();
-                Post post = new Post(postTitle,date,postBody,user.getUid(),user.getDisplayName(),postTags,postCategory,key);
+                Post post = new Post(postTitle, date, postBody, user.getUid(), user.getDisplayName(), postTags, postCategory, key);
                 FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("posts").child(key).setValue(true);
                 postsDatabase.child(key).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(PostActivity.this,WelcomeActivity.class));
+                        startActivity(new Intent(PostActivity.this, WelcomeActivity.class));
                         Toast.makeText(PostActivity.this, "Post added successfully!", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

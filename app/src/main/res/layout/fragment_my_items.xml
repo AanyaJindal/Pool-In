@@ -1,9 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="16dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.aanyajindal.pool_in.MyItemsFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,8 +11,16 @@
     <ListView
         android:id="@+id/lv_myItems"
         android:layout_width="match_parent"
-        android:divider="@color/background"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:divider="@color/background" />
 
+    <TextView
+        android:id="@+id/tv_my_empty_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="You have not added\n any item!"
+        android:textAlignment="center"
+        android:textSize="25sp" />
 
 </FrameLayout>

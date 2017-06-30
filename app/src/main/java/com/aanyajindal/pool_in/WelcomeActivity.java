@@ -94,8 +94,6 @@ public class WelcomeActivity extends AppCompatActivity
         tvUserDisplayName.setText("Hello, " + user.getDisplayName());
 
 
-
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment fragment = null;

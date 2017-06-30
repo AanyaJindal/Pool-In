@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -45,7 +43,7 @@ public class MyFragment extends Fragment {
         /**
          *Inflate tab_layout and setup Views.
          */
-        View x =  inflater.inflate(R.layout.fragment_my,null);
+        View x = inflater.inflate(R.layout.fragment_my, null);
         tabLayout = (TabLayout) x.findViewById(R.id.tabs);
         viewPager = (CustomViewPager) x.findViewById(R.id.viewpager);
 
@@ -84,11 +82,12 @@ class MyAdapter extends FragmentPagerAdapter {
      */
 
     @Override
-    public Fragment getItem(int position)
-    {
-        switch (position){
-            case 0: return new MyItemsFragment();
-            case 1 : return new MyDiscussionsFragment();
+    public Fragment getItem(int position) {
+        switch (position) {
+            case 0:
+                return new MyItemsFragment();
+            case 1:
+                return new MyDiscussionsFragment();
 
         }
         return null;
@@ -109,10 +108,10 @@ class MyAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
 
-        switch (position){
-            case 0 :
+        switch (position) {
+            case 0:
                 return "My Items";
-            case 1 :
+            case 1:
                 return "My Discussions";
 
         }

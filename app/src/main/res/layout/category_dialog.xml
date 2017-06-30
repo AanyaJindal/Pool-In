@@ -1,64 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
 
     <RadioGroup
         android:id="@+id/rg_category"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <RadioButton
-            android:text="Books"
             android:id="@+id/rb_books"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Books" />
 
         <RadioButton
-            android:text="Notes"
             android:id="@+id/rb_notes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Notes" />
+
         <RadioButton
-            android:text="Online Resources"
             android:id="@+id/rb_res"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Online Resources" />
+
         <RadioButton
-            android:text="Stationery"
             android:id="@+id/rb_stationery"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Stationery" />
+
         <RadioButton
-            android:text="Car Pooling"
             android:id="@+id/rb_car"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Car Pooling" />
+
         <RadioButton
-            android:text="Others"
             android:id="@+id/rb_others"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Others" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:visibility="gone"
+            android:id="@+id/et_rbothers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:hint="Other Item Category"
-            fbutton:met_floatingLabel="highlight"
-            android:textSize="15sp"
-            android:id="@+id/et_rbothers"
-            fbutton:met_iconLeft="@mipmap/ic_skill"
+            android:padding="5dp"
             android:textColor="#000000"
+            android:textSize="15sp"
+            android:visibility="gone"
             app:mtf_openKeyboardOnFocus="true"
-            />
+            fbutton:met_floatingLabel="highlight"
+            fbutton:met_iconLeft="@mipmap/ic_skill" />
 
     </RadioGroup>
 

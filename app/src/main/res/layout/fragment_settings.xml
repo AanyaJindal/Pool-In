@@ -1,55 +1,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.aanyajindal.pool_in.SettingsFragment"
     android:padding="16dp"
-    android:gravity="center">
+    tools:context="com.aanyajindal.pool_in.SettingsFragment">
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btn_editProfile"
-        android:text="Rate us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Rate us"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
         fbutton:buttonColor="#757575"
+        fbutton:cornerRadius="5dp"
         fbutton:shadowColor="#616161"
         fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"
-        />
+        fbutton:shadowHeight="5dp" />
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btn_chPass"
-        android:text="Change Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Change Password"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
         fbutton:buttonColor="#616161"
+        fbutton:cornerRadius="5dp"
         fbutton:shadowColor="#424242"
         fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"/>
+        fbutton:shadowHeight="5dp" />
 
     <info.hoang8f.widget.FButton
         android:id="@+id/btn_logout"
-        android:text="Logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Logout"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
         fbutton:buttonColor="#424242"
+        fbutton:cornerRadius="5dp"
         fbutton:shadowColor="#212121"
         fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"/>
+        fbutton:shadowHeight="5dp" />
 
 </LinearLayout>

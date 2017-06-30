@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        id =  getIntent().getStringExtra("userid");
+        id = getIntent().getStringExtra("userid");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -78,8 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .centerCrop()
                         .into(ivProfilePic);
 
-                if(id.equals(user.getUid()))
-                {
+                if (id.equals(user.getUid())) {
                     rlContact.setVisibility(View.VISIBLE);
                     tvContact.setText(mUser.getContact());
                 }
@@ -96,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,EditProfileActivity.class));
+                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
             }
         });
     }

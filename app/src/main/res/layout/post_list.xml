@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="5dp"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="?android:attr/activatedBackgroundIndicator"
+    android:orientation="vertical"
 
-    android:layout_height="match_parent">
+    android:padding="5dp">
 
     <android.support.v7.widget.CardView
-        android:background="?android:attr/activatedBackgroundIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:background="?android:attr/activatedBackgroundIndicator">
 
-    <LinearLayout
-        android:background="?android:attr/activatedBackgroundIndicator"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/post_author"
-            android:text="Barack Obama"
-            android:textSize="14dp"
-            android:padding="2dp"
-            android:textColor="@color/colorPrimary"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="?android:attr/activatedBackgroundIndicator"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="#000000" />
+            <TextView
+                android:id="@+id/post_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="Barack Obama"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14dp" />
 
-        <TextView
-            android:id="@+id/post_title"
-            android:text="Post Title here"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:padding="2dp"
-            android:textColor="#000000"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#000000" />
 
-        <TextView
-            android:id="@+id/post_tags"
-            android:text="Tag1, Tag2"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="Post Title here"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/post_date"
-            android:layout_gravity="bottom|end"
-            android:text="hello"
-            android:textSize="10dp"
-            android:padding="2dp"
-            android:textColor="@color/colorPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/post_tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tag1, Tag2"
+                android:textColor="#000000"
+                android:textSize="16dp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/post_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:padding="2dp"
+                android:text="hello"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10dp" />
+
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 

@@ -58,7 +58,7 @@ public class PostByCategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_post_by_category, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_post_by_category, container, false);
 
         String category = getArguments().getString("postKey");
 
@@ -72,6 +72,9 @@ public class PostByCategoryFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
 //                System.out.println(dataSnapshot.getValue());
+
+                rootView.findViewById(R.id.tv_empty_posts).setVisibility(View.GONE);
+
                 Post post = dataSnapshot.getValue(Post.class);
 
                 list.add(post);
@@ -104,6 +107,7 @@ public class PostByCategoryFragment extends Fragment {
 
         return rootView;
     }
+
     class PostAdapter extends BaseAdapter {
         class Holder {
             TextView title;

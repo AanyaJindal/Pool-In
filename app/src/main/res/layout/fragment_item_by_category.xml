@@ -7,9 +7,18 @@
     <ListView
         android:id="@+id/lv_itemByCategory"
         android:layout_width="match_parent"
-        android:divider="@color/background"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:divider="@color/background">
 
     </ListView>
+
+    <TextView
+        android:id="@+id/tv_empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="Sorry!\n No items available\n for this category"
+        android:textAlignment="center"
+        android:textSize="25sp" />
 
 </FrameLayout>

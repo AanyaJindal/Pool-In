@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(getActivity().getApplicationContext(), AddItem.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), AddItem.class);
                 startActivity(intent);
             }
         });

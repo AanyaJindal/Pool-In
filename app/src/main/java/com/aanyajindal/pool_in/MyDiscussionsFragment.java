@@ -61,23 +61,25 @@ public class MyDiscussionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_my_discussions, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_my_discussions, container, false);
 
         list = new ArrayList<>();
         ids = new ArrayList<>();
         listView = (ListView) rootView.findViewById(R.id.lv_myDiscussions);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d(TAG, "onCreateView: "+user.getDisplayName());
+        Log.d(TAG, "onCreateView: " + user.getDisplayName());
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("posts");
 
         userRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
-                Log.d(TAG, "onChildAdded: "+ dataSnapshot.getKey());
+                Log.d(TAG, "onChildAdded: " + dataSnapshot.getKey());
                 String postID = dataSnapshot.getKey();
                 ids.add(postID);
+                rootView.findViewById(R.id.tv_my_empty_post).setVisibility(View.GONE);
+
 
                 DatabaseReference postRef = FirebaseDatabase.getInstance().getReference().child("posts").child(postID);
                 postRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -96,7 +98,6 @@ public class MyDiscussionsFragment extends Fragment {
                 });
 
 
-
             }
 
             @Override
@@ -106,7 +107,7 @@ public class MyDiscussionsFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onChildRemoved: "+dataSnapshot);
+                Log.d(TAG, "onChildRemoved: " + dataSnapshot);
                 int i = ids.indexOf(dataSnapshot.getKey());
                 list.remove(i);
                 postAdapter = new MyDiscussionsFragment.PostAdapter(list);
@@ -126,23 +127,23 @@ public class MyDiscussionsFragment extends Fragment {
 
         // define Choice mode for multiple  delete
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        listView.setMultiChoiceModeListener(new  AbsListView.MultiChoiceModeListener() {
+        listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
             @Override
-            public boolean  onPrepareActionMode(ActionMode mode, Menu menu) {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 // TODO  Auto-generated method stub
                 return false;
             }
 
             @Override
-            public void  onDestroyActionMode(ActionMode mode) {
+            public void onDestroyActionMode(ActionMode mode) {
                 // TODO  Auto-generated method stub
                 CustomViewPager view = (CustomViewPager) container.findViewById(R.id.viewpager);
                 view.disableScroll(false);
             }
 
             @Override
-            public boolean  onCreateActionMode(ActionMode mode, Menu menu) {
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 // TODO  Auto-generated method stub
                 mode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
 
@@ -154,26 +155,26 @@ public class MyDiscussionsFragment extends Fragment {
             }
 
             @Override
-            public boolean  onActionItemClicked(final ActionMode mode,
-                                                MenuItem item) {
+            public boolean onActionItemClicked(final ActionMode mode,
+                                               MenuItem item) {
                 // TODO  Auto-generated method stub
-                switch  (item.getItemId()) {
+                switch (item.getItemId()) {
                     case R.id.selectAll:
                         //
-                        final int checkedCount  = list.size();
+                        final int checkedCount = list.size();
                         // If item  is already selected or checked then remove or
                         // unchecked  and again select all
                         postAdapter.removeSelection();
-                        for (int i = 0; i <  checkedCount; i++) {
-                            listView.setItemChecked(i,   true);
+                        for (int i = 0; i < checkedCount; i++) {
+                            listView.setItemChecked(i, true);
                             postAdapter.toggleSelection(i);
                         }
-                        mode.setTitle(checkedCount  + "  Selected");
+                        mode.setTitle(checkedCount + "  Selected");
                         return true;
                     case R.id.delete:
                         // Add  dialog for confirmation to delete selected item
                         // record.
-                        AlertDialog.Builder  builder = new AlertDialog.Builder(getContext());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Do you surely want to delete the selected Post(s)?");
 
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -182,18 +183,18 @@ public class MyDiscussionsFragment extends Fragment {
 
                             }
                         });
-                        builder.setPositiveButton("YES", new  DialogInterface.OnClickListener() {
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                             @Override
-                            public void  onClick(DialogInterface dialog, int which) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 // TODO  Auto-generated method stub
-                                SparseBooleanArray  selected = postAdapter.getSelectedIds();
-                                Log.d(TAG, "onClick: "+ selected);
-                                for (int i =  (selected.size() - 1); i >= 0; i--) {
-                                    if  (selected.valueAt(i)) {
-                                        Log.d(TAG, "onClick: "+ i + " hehe " + selected.valueAt(i));
-                                        String  selecteditemID = ids.get(selected.keyAt(i));
-                                        Log.d(TAG, "onClick: "+selecteditemID);
+                                SparseBooleanArray selected = postAdapter.getSelectedIds();
+                                Log.d(TAG, "onClick: " + selected);
+                                for (int i = (selected.size() - 1); i >= 0; i--) {
+                                    if (selected.valueAt(i)) {
+                                        Log.d(TAG, "onClick: " + i + " hehe " + selected.valueAt(i));
+                                        String selecteditemID = ids.get(selected.keyAt(i));
+                                        Log.d(TAG, "onClick: " + selecteditemID);
                                         FirebaseDatabase.getInstance().getReference().child("posts")
                                                 .child(selecteditemID).removeValue();
                                         FirebaseDatabase.getInstance().getReference().child("users")
@@ -208,7 +209,7 @@ public class MyDiscussionsFragment extends Fragment {
 
                             }
                         });
-                        AlertDialog alert =  builder.create();
+                        AlertDialog alert = builder.create();
                         //alert.setIcon(R.drawable);// dialog  Icon
                         alert.setTitle("Confirmation"); // dialog  Title
                         alert.show();
@@ -220,12 +221,12 @@ public class MyDiscussionsFragment extends Fragment {
             }
 
             @Override
-            public void  onItemCheckedStateChanged(ActionMode mode,
-                                                   int position, long id, boolean checked) {
+            public void onItemCheckedStateChanged(ActionMode mode,
+                                                  int position, long id, boolean checked) {
                 // TODO  Auto-generated method stub
-                final int checkedCount  = listView.getCheckedItemCount();
+                final int checkedCount = listView.getCheckedItemCount();
                 // Set the  CAB title according to total checked items
-                mode.setTitle(checkedCount  + "  Selected");
+                mode.setTitle(checkedCount + "  Selected");
                 // Calls  toggleSelection method from ListViewAdapter Class
                 postAdapter.toggleSelection(position);
             }
@@ -235,7 +236,6 @@ public class MyDiscussionsFragment extends Fragment {
 
 
     }
-
 
 
     class PostAdapter extends BaseAdapter {
@@ -252,7 +252,7 @@ public class MyDiscussionsFragment extends Fragment {
 
         public PostAdapter(ArrayList<Post> mList) {
             this.mList = mList;
-            mSelectedItemsIds = new  SparseBooleanArray();
+            mSelectedItemsIds = new SparseBooleanArray();
         }
 
         @Override
@@ -330,31 +330,31 @@ public class MyDiscussionsFragment extends Fragment {
             return convertView;
         }
 
-        public void  toggleSelection(int position) {
+        public void toggleSelection(int position) {
             selectView(position, !mSelectedItemsIds.get(position));
         }
 
         // Remove selection after unchecked
-        public void  removeSelection() {
-            mSelectedItemsIds = new  SparseBooleanArray();
+        public void removeSelection() {
+            mSelectedItemsIds = new SparseBooleanArray();
             notifyDataSetChanged();
         }
 
         // Item checked on selection
         public void selectView(int position, boolean value) {
             if (value)
-                mSelectedItemsIds.put(position,  value);
+                mSelectedItemsIds.put(position, value);
             else
                 mSelectedItemsIds.delete(position);
             notifyDataSetChanged();
         }
 
         // Get number of selected item
-        public int  getSelectedCount() {
+        public int getSelectedCount() {
             return mSelectedItemsIds.size();
         }
 
-        public  SparseBooleanArray getSelectedIds() {
+        public SparseBooleanArray getSelectedIds() {
             return mSelectedItemsIds;
         }
 

@@ -41,9 +41,10 @@ import java.util.Date;
 
 public class AddItem extends AppCompatActivity {
 
+    boolean image = false;
     ImageView imgviewItem;
     EditText etItemName, etItemCategory, etItemDesc, etItemMode, etItemTags;
-    Button btnAddItem,btnAddImage;
+    Button btnAddItem, btnAddImage;
     RadioGroup rgCategory;
     private static final String TAG = "AddItem";
     Bitmap mImageBitmap;
@@ -88,10 +89,9 @@ public class AddItem extends AppCompatActivity {
                 rgCategory.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                        if(checkedId==R.id.rb_others){
+                        if (checkedId == R.id.rb_others) {
                             etRbothers.setVisibility(View.VISIBLE);
-                        }
-                        else{
+                        } else {
                             etRbothers.setVisibility(View.GONE);
                         }
                     }
@@ -187,8 +187,6 @@ public class AddItem extends AppCompatActivity {
         });
 
 
-
-
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,24 +198,27 @@ public class AddItem extends AppCompatActivity {
                 Date newDate = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                 String date = sdf.format(newDate);
-                Item item = new Item(itName, user.getUid(), user.getDisplayName(), itDesc, itMode, itCat, itTags, date);
+                Item item = new Item(itName, user.getUid(), user.getDisplayName(), itDesc, itMode, itCat, itTags, date, String.valueOf(image));
                 mainDatabase = FirebaseDatabase.getInstance().getReference();
                 itemsList = mainDatabase.child("items");
                 String itemid = itemsList.push().getKey();
                 itemsList.child(itemid).setValue(item);
-                storageRef = FirebaseStorage.getInstance().getReference().child("item"+itemid);
-                storageRef.putFile(Uri.parse(mCurrentPhotoPath)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        Log.d(TAG, "onComplete: upload cocmplete");
-                        Toast.makeText(AddItem.this, "Picture uploaded successfully!", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddItem.this, "Picture could not be uploaded", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+                if (image) {
+                    storageRef = FirebaseStorage.getInstance().getReference().child("item" + itemid);
+                    storageRef.putFile(Uri.parse(mCurrentPhotoPath)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            Log.d(TAG, "onComplete: upload cocmplete");
+                            Toast.makeText(AddItem.this, "Picture uploaded successfully!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddItem.this, "Picture could not be uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 mainDatabase.child("users").child(user.getUid()).child("items").child(itemid).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -263,6 +264,7 @@ public class AddItem extends AppCompatActivity {
                 Uri uri = Uri.parse(mCurrentPhotoPath);
                 mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                 imgviewItem.setImageBitmap(mImageBitmap);
+                image = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }

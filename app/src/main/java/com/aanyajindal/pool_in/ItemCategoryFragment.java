@@ -33,9 +33,9 @@ public class ItemCategoryFragment extends Fragment {
     }
 
     public static ItemCategoryFragment newInstance() {
-        
+
         Bundle args = new Bundle();
-        
+
         ItemCategoryFragment fragment = new ItemCategoryFragment();
         fragment.setArguments(args);
         return fragment;
@@ -45,7 +45,7 @@ public class ItemCategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView =  inflater.inflate(R.layout.fragment_item_category, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_item_category, container, false);
         ListView lvItemCatg = (ListView) rootView.findViewById(R.id.lv_itemCategory);
         final ArrayList<String> itCatList = new ArrayList<>();
         itCatList.add("Books");

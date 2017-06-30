@@ -59,7 +59,7 @@ public class ItemByCategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_item_by_category, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_item_by_category, container, false);
         String category = getArguments().getString("catKey");
 
         list = new ArrayList<>();
@@ -72,11 +72,13 @@ public class ItemByCategoryFragment extends Fragment {
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
+                rootView.findViewById(R.id.tv_empty_list).setVisibility(View.GONE);
                 System.out.println(dataSnapshot.getValue());
                 String itemID = dataSnapshot.getKey();
                 Item item = dataSnapshot.getValue(Item.class);
+                Log.d(TAG, "onChildAdded: here here");
                 ids.add(itemID);
-                list.add(new Item(item.getName(), item.getUser(), item.getUsername(), item.getDesc(), item.getMode(), item.getCat(), item.getTags(), item.getDate()));
+                list.add(item);
                 ItemAdapter itemAdapter = new ItemAdapter(list);
                 listView.setAdapter(itemAdapter);
             }

@@ -12,7 +12,6 @@ public class Post {
     String postid;
 
 
-
     public Post() {
     }
 

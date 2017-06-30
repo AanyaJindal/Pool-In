@@ -10,8 +10,9 @@ public class Item {
     String cat;
     String tags;
     String date;
+    String image;
 
-    public Item(String name, String user, String username, String desc, String mode, String cat, String tags, String date) {
+    public Item(String name, String user, String username, String desc, String mode, String cat, String tags, String date, String image) {
         this.name = name;
         this.user = user;
         this.username = username;
@@ -20,6 +21,7 @@ public class Item {
         this.cat = cat;
         this.tags = tags;
         this.date = date;
+        this.image = image;
     }
 
     public Item() {
@@ -87,5 +89,13 @@ public class Item {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -3,30 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.aanyajindal.pool_in.StartActivity"
-    android:orientation="vertical"
-    android:gravity="center">
+    tools:context="com.aanyajindal.pool_in.StartActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="GoodBye from Pool-In"
         android:textColor="#424242"
         android:textSize="28dp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:text="See you soon :-)"
         android:textColor="#424242"
         android:textSize="28dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="16dp"/>
+        android:textStyle="bold" />
 </LinearLayout>

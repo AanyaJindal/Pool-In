@@ -47,7 +47,7 @@ public class ItemFragment extends Fragment {
     public static ItemFragment newInstance(String id, Item item) {
 
         Bundle args = new Bundle();
-        args.putString("id",id);
+        args.putString("id", id);
         args.putString("name", item.getName());
         args.putString("username", item.getUsername());
         args.putString("date", item.getDate());
@@ -56,6 +56,7 @@ public class ItemFragment extends Fragment {
         args.putString("user", item.getUser());
         args.putString("mode", item.getMode());
         args.putString("cat", item.getCat());
+        args.putString("image", item.getImage());
         ItemFragment fragment = new ItemFragment();
         fragment.setArguments(args);
         return fragment;
@@ -67,7 +68,7 @@ public class ItemFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_item, container, false);
         Bundle bundle = getArguments();
         final Item obj = new Item(bundle.getString("name"), bundle.getString("user"), bundle.getString("username"), bundle.getString("desc")
-                , bundle.getString("mode"), bundle.getString("cat"), bundle.getString("tags"), bundle.getString("date"));
+                , bundle.getString("mode"), bundle.getString("cat"), bundle.getString("tags"), bundle.getString("date"), bundle.getString("image"));
 
         String itemID = bundle.getString("id");
 
@@ -106,28 +107,30 @@ public class ItemFragment extends Fragment {
         itemCategory.setText(obj.getCat());
         itemTags.setText(obj.getTags());
 
+        if (obj.getImage().equals("true")) {
 
-        try {
-            localFile = File.createTempFile("images", "jpg");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child("item"+itemID+".jpg");
-        ref.getFile(localFile)
-                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Glide.with(getContext()).load(localFile).into(ivItem);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle failed download
-                // ...
+            ivItem.setVisibility(View.VISIBLE);
+            try {
+                localFile = File.createTempFile("images", "jpg");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
 
+            StorageReference ref = FirebaseStorage.getInstance().getReference().child("item" + itemID + ".jpg");
+            ref.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Glide.with(getContext()).load(localFile).into(ivItem);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle failed download
+                    // ...
+                }
+            });
+        }
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat fmt2 = new SimpleDateFormat("EEE, MMM d, ''yy");
@@ -145,8 +148,8 @@ public class ItemFragment extends Fragment {
         itemUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),ProfileActivity.class);
-                intent.putExtra("userid",obj.getUser());
+                Intent intent = new Intent(getContext(), ProfileActivity.class);
+                intent.putExtra("userid", obj.getUser());
                 startActivity(intent);
             }
         });
