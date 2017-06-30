@@ -6,7 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">#4AC8F7</item>
     </style>
+
+
 
     <style name="GreenTheme" parent="FirebaseUI">
         <item name="colorPrimary">@color/colorSecondary</item>

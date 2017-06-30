@@ -246,6 +246,8 @@ console.log('jrodi   ', filePath);
     // Uploading the thumbnail.
     return bucket.upload(tempFilePath, {
       destination: filePath+JPEG_EXTENSION
+    }).then(() =>{
+      return bucket.file(filePath).delete();
     });
   });
 });
