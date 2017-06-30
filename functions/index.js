@@ -262,7 +262,9 @@ console.log('jrodi   ', filePath);
 
 //// Push Notifications
 
-  exports.sendPush = functions.database.ref('/posts/{postId}').onWrite(event => {
+  exports.sendPush = functions.database.ref('/posts/{postId}/comments/{commentId}').onWrite(event => {
+
+  console.log('Push notification event triggered');
   let projectStateChanged = false;
   let projectCreated = false;
   let projectData = event.data.val(); 
@@ -275,16 +277,16 @@ console.log('jrodi   ', filePath);
   projectStateChanged = true;
   }
 
-  let msg = 'A post was modified';
+  let msg = 'A comment was modified';
 
   if (projectCreated) {
-    msg = `A new post was added to the platform by: ${projectData.author}`;
+    msg = `A new comment was added to the platform by: ${projectData.author}`;
   }
 
-  return loadUsers().then(users => {
+  return loadUsers().then(posts => {
         let tokens = [];
-        for (let user of users) {
-            tokens.push(user);
+        for (let author of posts) {
+            tokens.push(posts.authorId);
         }
         let payload = {
             notification: {
@@ -300,7 +302,7 @@ console.log('jrodi   ', filePath);
 });
 
   function loadUsers() {
-  let dbRef = admin.database().ref('/users');
+  let dbRef = admin.database().ref('/posts');
   let defer = new Promise((resolve, reject) => {
     dbRef.once('value', (snap) => {
       let data = snap.val();
