@@ -51,4 +51,12 @@
         fbutton:shadowEnabled="true"
         fbutton:shadowHeight="5dp" />
 
+    <Switch
+        android:id="@+id/sw_contact_public"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:gravity="left"
+        android:text="Would you like to share your contact?"/>
+
 </LinearLayout>

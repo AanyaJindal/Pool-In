@@ -34,6 +34,8 @@ public class EditProfileActivity extends AppCompatActivity {
     User mUser;
     Button btnSaveChanges;
 
+    String flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +57,10 @@ public class EditProfileActivity extends AppCompatActivity {
                     etContact.setText(mUser.getContact());
                     etYear.setText(mUser.getYear());
                     etBranch.setText(mUser.getBranch());
+                    flag = mUser.getContactPublic();
                 }
+                else
+                    flag = "false";
             }
 
             @Override
@@ -69,7 +74,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mUser = new User(user.getDisplayName(), user.getEmail(),
                         etContact.getText().toString(), etYear.getText().toString(),
-                        etBranch.getText().toString(), etLocation.getText().toString(), user.getPhotoUrl().toString());
+                        etBranch.getText().toString(), etLocation.getText().toString(), user.getPhotoUrl().toString(), flag);
 
                 userRef.child("branch").setValue(mUser.getBranch());
                 userRef.child("contact").setValue(mUser.getContact());
@@ -77,6 +82,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 userRef.child("email").setValue(mUser.getEmail());
                 userRef.child("location").setValue(mUser.getLocation());
                 userRef.child("name").setValue(mUser.getName());
+                userRef.child("contactPublic").setValue(mUser.getContactPublic());
                 userRef.child("year").setValue(mUser.getYear()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

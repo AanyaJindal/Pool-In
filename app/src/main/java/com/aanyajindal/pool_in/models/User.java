@@ -8,8 +8,9 @@ public class User {
     String branch;
     String location;
     String dplink;
+    String contactPublic;
 
-    public User(String name, String email, String contact, String year, String branch, String location, String dplink) {
+    public User(String name, String email, String contact, String year, String branch, String location, String dplink, String contactPublic) {
         this.name = name;
         this.email = email;
         this.contact = contact;
@@ -17,6 +18,7 @@ public class User {
         this.branch = branch;
         this.location = location;
         this.dplink = dplink;
+        this.contactPublic = contactPublic;
     }
 
     public User() {
@@ -76,5 +78,13 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getContactPublic() {
+        return contactPublic;
+    }
+
+    public void setContactPublic(String contactPublic) {
+        this.contactPublic = contactPublic;
     }
 }

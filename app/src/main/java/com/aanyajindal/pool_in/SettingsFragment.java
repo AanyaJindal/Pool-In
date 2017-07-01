@@ -10,19 +10,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
+import com.aanyajindal.pool_in.models.User;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class SettingsFragment extends Fragment {
 
 
     FirebaseUser user;
+    User mUser;
+    String flag;
+    DatabaseReference userRef;
+    private static final String TAG = "SettingsFragment";
+    Switch swContactPublic;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -45,8 +58,40 @@ public class SettingsFragment extends Fragment {
         Button btnEditProfile = (Button) rootView.findViewById(R.id.btn_editProfile);
         Button btnChngPass = (Button) rootView.findViewById(R.id.btn_chPass);
         Button btnLogout = (Button) rootView.findViewById(R.id.btn_logout);
+        swContactPublic = (Switch) rootView.findViewById(R.id.sw_contact_public);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+        userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+              mUser = dataSnapshot.getValue(User.class);
+                flag = mUser.getContactPublic();
+                Log.d(TAG, "onDataChange: " + dataSnapshot);
+                Log.d(TAG, "onDataChange: " + flag);
+                if(flag.equals("false"))
+                    swContactPublic.setChecked(false);
+                else
+                    swContactPublic.setChecked(true);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        swContactPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    userRef.child("contactPublic").setValue("true");
+                else
+                    userRef.child("contactPublic").setValue("false");
+            }
+        });
 
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {

@@ -78,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .centerCrop()
                         .into(ivProfilePic);
 
-                if (id.equals(user.getUid())) {
+                if (id.equals(user.getUid()) || mUser.getContactPublic().equals("true")) {
                     rlContact.setVisibility(View.VISIBLE);
                     tvContact.setText(mUser.getContact());
                 }
