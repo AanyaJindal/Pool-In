@@ -52,6 +52,9 @@
                             android:padding="10dp"
                             android:layout_below="@id/iv_addItem"
                             android:layout_gravity="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="15dp"
                             android:text="ADD ITEM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -81,6 +84,9 @@
                         <TextView
                             android:padding="10dp"
                             android:text="ADD POST"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="15dp"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -117,6 +123,9 @@
                         <TextView
                             android:padding="10dp"
                             android:text="MY ITEMS"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="15dp"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -146,6 +155,9 @@
                         <TextView
                             android:padding="10dp"
                             android:text="MY DISCUSSIONS"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="15dp"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />

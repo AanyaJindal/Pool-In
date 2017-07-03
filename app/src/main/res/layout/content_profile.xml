@@ -31,7 +31,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_menu_gallery" />
+                android:src="@drawable/ic_contact_phone_black_24dp" />
 
             <TextView
                 android:id="@+id/tv_contact_item"
@@ -75,7 +75,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_mail_white_24dp" />
+                android:src="@drawable/ic_email_black_24dp" />
 
             <TextView
                 android:id="@+id/tv_email_item"
@@ -122,7 +122,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_mail_white_24dp" />
+                android:src="@drawable/ic_school_black_24dp" />
 
             <TextView
                 android:id="@+id/tv_year"
@@ -169,7 +169,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_mail_white_24dp" />
+                android:src="@drawable/ic_subject_black_24dp" />
 
             <TextView
                 android:id="@+id/tv_branch"
@@ -216,7 +216,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_mail_white_24dp" />
+                android:src="@drawable/ic_my_location_black_24dp" />
 
             <TextView
                 android:id="@+id/tv_location"
