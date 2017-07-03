@@ -149,7 +149,7 @@ public class WelcomeActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack("home");
             fragmentTransaction.commit();
         } else if (id == R.id.my) {
-            frag = MyFragment.newInstance();
+            frag = MyFragment.newInstance(0);
             fragmentTransaction.replace(R.id.frag_container, frag);
             fragmentTransaction.addToBackStack("home");
             fragmentTransaction.commit();
