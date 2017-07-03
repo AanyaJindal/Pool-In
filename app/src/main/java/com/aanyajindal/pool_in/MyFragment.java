@@ -26,9 +26,10 @@ public class MyFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static MyFragment newInstance() {
+    public static MyFragment newInstance(int pos) {
 
         Bundle args = new Bundle();
+        args.putInt("adapPos", pos);
 
         MyFragment fragment = new MyFragment();
         fragment.setArguments(args);
@@ -51,6 +52,8 @@ public class MyFragment extends Fragment {
          *Set an Apater for the View Pager
          */
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
+        int p = getArguments().getInt("adapPos");
+        viewPager.setCurrentItem(p);
 
 
         /**

@@ -18,8 +18,8 @@
 
         <item
             android:id="@+id/my"
-            android:icon="@mipmap/ic_mode"
-            android:title="My" />
+            android:icon="@drawable/ic_local_activity_black_24dp"
+            android:title="My Activity" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@mipmap/ic_profile"
