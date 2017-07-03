@@ -2,6 +2,7 @@ package com.aanyajindal.pool_in;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class ItemFragment extends Fragment {
 
     File localFile = null;
     ImageView ivItem;
+    Uri uri;
 
     public ItemFragment() {
 
@@ -84,6 +86,20 @@ public class ItemFragment extends Fragment {
         ivItem = (ImageView) rootView.findViewById(R.id.iv_item);
 
 
+
+        ivItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment frag = FullScreenImage.newInstance(uri);
+                fragmentTransaction.replace(R.id.frag_container, frag);
+                fragmentTransaction.addToBackStack("fullscr");
+                fragmentTransaction.commit();
+            }
+        });
+
 //        DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("users").child(obj.getUser());
 //        temp.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -110,26 +126,34 @@ public class ItemFragment extends Fragment {
         if (obj.getImage().equals("true")) {
 
             ivItem.setVisibility(View.VISIBLE);
-            try {
-                localFile = File.createTempFile("images", "jpg");
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(uri!=null)
+            {
+                Glide.with(getContext()).load(uri).into(ivItem);
             }
+            else {
 
-            StorageReference ref = FirebaseStorage.getInstance().getReference().child("item" + itemID + ".jpg");
-            ref.getFile(localFile)
-                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            Glide.with(getContext()).load(localFile).into(ivItem);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle failed download
-                    // ...
+                try {
+                    localFile = File.createTempFile(itemID, "jpg");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            });
+
+                StorageReference ref = FirebaseStorage.getInstance().getReference().child("item" + itemID + ".jpg");
+                uri = Uri.fromFile(localFile);
+                ref.getFile(localFile)
+                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Glide.with(getContext()).load(localFile).into(ivItem);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle failed download
+                        // ...
+                    }
+                });
+            }
         }
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");

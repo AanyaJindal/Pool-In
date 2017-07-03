@@ -3,6 +3,7 @@ package com.aanyajindal.pool_in;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -33,13 +34,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.vansuita.pickimage.bean.PickResult;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
+import com.vansuita.pickimage.listeners.IPickClick;
+import com.vansuita.pickimage.listeners.IPickResult;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddItem extends AppCompatActivity {
+public class AddItem extends AppCompatActivity implements IPickResult {
 
     boolean image = false;
     ImageView imgviewItem;
@@ -47,12 +53,10 @@ public class AddItem extends AppCompatActivity {
     Button btnAddItem, btnAddImage;
     RadioGroup rgCategory;
     private static final String TAG = "AddItem";
-    Bitmap mImageBitmap;
-    String mCurrentPhotoPath;
     DatabaseReference mainDatabase, itemsList;
     StorageReference storageRef;
     FirebaseUser user;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,22 +171,10 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imgviewItem.setVisibility(View.VISIBLE);
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-                    // Create the File where the photo should go
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
-                        Log.i(TAG, "IOException");
-                    }
-                    // Continue only if the File was successfully created
-                    if (photoFile != null) {
-                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                        startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
-                    }
-                }
+                PickSetup ps = new PickSetup()
+                        .setCancelTextColor(Color.parseColor("#7ca800"));
+                PickImageDialog.build(ps).show(AddItem.this);
+
             }
         });
 
@@ -206,7 +198,7 @@ public class AddItem extends AppCompatActivity {
 
                 if (image) {
                     storageRef = FirebaseStorage.getInstance().getReference().child("item" + itemid);
-                    storageRef.putFile(Uri.parse(mCurrentPhotoPath)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    storageRef.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             Log.d(TAG, "onComplete: upload cocmplete");
@@ -240,34 +232,15 @@ public class AddItem extends AppCompatActivity {
 
     }
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  // prefix
-                ".jpg",         // suffix
-                storageDir      // directory
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-        return image;
-    }
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            try {
-                Uri uri = Uri.parse(mCurrentPhotoPath);
-                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                imgviewItem.setImageBitmap(mImageBitmap);
-                image = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void onPickResult(PickResult pickResult) {
+        if(pickResult.getError()==null){
+            uri = pickResult.getUri();
+            imgviewItem.setImageURI(uri);
+            image = true;
+        }
+        else{
+            Toast.makeText(this, pickResult.getError().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }
