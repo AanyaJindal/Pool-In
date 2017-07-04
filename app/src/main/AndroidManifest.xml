@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aanyajindal.pool_in">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".StartPersistanceApp"
@@ -23,6 +23,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/picker_provider_paths" />
         </provider>
+
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name"
@@ -38,12 +39,11 @@
         <activity android:name=".PostActivity" />
         <activity
             android:name=".ProfileActivity"
-            android:parentActivityName=".WelcomeActivity"
             android:label="@string/title_activity_profile"
+            android:parentActivityName=".WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".EditProfileActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".FullScreenImageActivity"></activity>
     </application>
-
 
 </manifest>
