@@ -1,6 +1,7 @@
 package com.aanyajindal.pool_in;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -37,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tvContact;
     String id;
     ImageView ivProfilePic;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvYear = (TextView) findViewById(R.id.tv_year);
         tvBranch = (TextView) findViewById(R.id.tv_branch);
         tvContact = (TextView) findViewById(R.id.tv_contact_item);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         myRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -82,6 +85,9 @@ public class ProfileActivity extends AppCompatActivity {
                     rlContact.setVisibility(View.VISIBLE);
                     tvContact.setText(mUser.getContact());
                 }
+                if(id.equals((user.getUid()))){
+                    fab.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -90,8 +96,28 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        tvContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+tvContact.getText()));
+                startActivity(intent);
+            }
+        });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        tvEmailItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                intent.putExtra(Intent.EXTRA_EMAIL, tvEmailItem.getText());
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Via: Pool-in app:");
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
