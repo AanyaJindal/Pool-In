@@ -110,7 +110,8 @@ public class PostActivity extends AppCompatActivity {
                         } else if (rbCampus.isChecked()) {
                             tMode = "Campus Life";
                         } else if (rbOthers1.isChecked()) {
-                            tMode = "Others:" + etRbothers1.getText().toString();
+                            tMode = "Others";
+                            etPostTitle.setText(etRbothers1.getText().toString() + ": " +etPostTitle.getText());
                         }
                         etPostCategory.setText(tMode);
                     }
@@ -129,24 +130,32 @@ public class PostActivity extends AppCompatActivity {
                 String postBody = etPostBody.getText().toString();
                 String postCategory = etPostCategory.getText().toString();
                 String postTags = etPostTags.getText().toString();
+                if (postTitle.equals("")) {
+                    Toast.makeText(PostActivity.this, "Title cannot be left empty!", Toast.LENGTH_SHORT).show();
+                } else if (postBody.equals("")) {
+                    Toast.makeText(PostActivity.this, "Body cannot be left empty!", Toast.LENGTH_SHORT).show();
+                } else if (postCategory.equals("")) {
+                    Toast.makeText(PostActivity.this, "Category must be selected", Toast.LENGTH_SHORT).show();
+                } else {
 
-                postsDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
-                String key;
-                key = postsDatabase.push().getKey();
-                Post post = new Post(postTitle, date, postBody, user.getUid(), user.getDisplayName(), postTags, postCategory, key);
-                FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("posts").child(key).setValue(true);
-                postsDatabase.child(key).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(PostActivity.this, WelcomeActivity.class));
-                        Toast.makeText(PostActivity.this, "Post added successfully!", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(PostActivity.this, "Sorry! Post could not be added at this time", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    postsDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
+                    String key;
+                    key = postsDatabase.push().getKey();
+                    Post post = new Post(postTitle, date, postBody, user.getUid(), user.getDisplayName(), postTags, postCategory, key);
+                    FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("posts").child(key).setValue(true);
+                    postsDatabase.child(key).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            startActivity(new Intent(PostActivity.this, WelcomeActivity.class));
+                            Toast.makeText(PostActivity.this, "Post added successfully!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(PostActivity.this, "Sorry! Post could not be added at this time", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

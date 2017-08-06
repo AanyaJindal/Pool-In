@@ -58,8 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     etYear.setText(mUser.getYear());
                     etBranch.setText(mUser.getBranch());
                     flag = mUser.getContactPublic();
-                }
-                else
+                } else
                     flag = "false";
             }
 
@@ -76,27 +75,41 @@ public class EditProfileActivity extends AppCompatActivity {
                         etContact.getText().toString(), etYear.getText().toString(),
                         etBranch.getText().toString(), etLocation.getText().toString(), user.getPhotoUrl().toString(), flag);
 
-                userRef.child("branch").setValue(mUser.getBranch());
-                userRef.child("contact").setValue(mUser.getContact());
-                userRef.child("dplink").setValue(mUser.getDplink());
-                userRef.child("email").setValue(mUser.getEmail());
-                userRef.child("location").setValue(mUser.getLocation());
-                userRef.child("name").setValue(mUser.getName());
-                userRef.child("contactPublic").setValue(mUser.getContactPublic());
-                userRef.child("year").setValue(mUser.getYear()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(EditProfileActivity.this, "Saved changes! :)", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
-                        intent.putExtra("userid", user.getUid());
-                        startActivity(intent);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditProfileActivity.this, "Changes could not be saved. Please try again later!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if (mUser.getBranch().equals("") || mUser.getContact().equals("")
+                        || mUser.getYear().equals("") || mUser.getLocation().equals("")) {
+                    Toast.makeText(EditProfileActivity.this, "Fields cannot be left empty", Toast.LENGTH_SHORT).show();
+                }
+                else if(mUser.getContact().length()!=10&&mUser.getContact().length()!=12){
+                    Toast.makeText(EditProfileActivity.this, "Mobile number should be of ten digits!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    userRef.child("branch").setValue(mUser.getBranch());
+                    userRef.child("contact").setValue(mUser.getContact());
+                    userRef.child("dplink").setValue(mUser.getDplink());
+                    userRef.child("email").setValue(mUser.getEmail());
+                    userRef.child("location").setValue(mUser.getLocation());
+                    userRef.child("name").setValue(mUser.getName());
+                    userRef.child("contactPublic").setValue(mUser.getContactPublic());
+                    userRef.child("year").setValue(mUser.getYear()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(EditProfileActivity.this, "Saved changes! :)", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                            intent.putExtra("userid", user.getUid());
+                            startActivity(intent);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(EditProfileActivity.this, "Changes could not be saved. Please try again later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+    }
+}
+
 
 
 //                userRef.setValue(mUser).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -113,8 +126,8 @@ public class EditProfileActivity extends AppCompatActivity {
 //                        Toast.makeText(EditProfileActivity.this, "Changes could not be saved. Please try again later!", Toast.LENGTH_SHORT).show();
 //                    }
 //                });
-            }
-        });
+        //    }
+        //});
 
 //        etSkillSet.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -221,5 +234,3 @@ public class EditProfileActivity extends AppCompatActivity {
 //
 //            }
 //        });
-    }
-}

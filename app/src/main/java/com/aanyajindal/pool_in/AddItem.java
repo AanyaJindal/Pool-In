@@ -118,7 +118,8 @@ public class AddItem extends AppCompatActivity implements IPickResult {
                         } else if (rbStationery.isChecked()) {
                             tMode = "Stationery";
                         } else if (rbOthers.isChecked()) {
-                            tMode = "Others:" + etRbothers.getText().toString();
+                            tMode = "Others";
+                            etItemName.setText(etRbothers.getText().toString() + ": " + etItemName.getText());
                         }
                         etItemCategory.setText(tMode);
                     }
@@ -182,50 +183,62 @@ public class AddItem extends AppCompatActivity implements IPickResult {
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String itName = etItemName.getText().toString();
                 String itCat = etItemCategory.getText().toString();
                 String itMode = etItemMode.getText().toString();
                 String itDesc = etItemDesc.getText().toString();
                 String itTags = etItemTags.getText().toString();
-                Date newDate = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                String date = sdf.format(newDate);
-                Item item = new Item(itName, user.getUid(), user.getDisplayName(), itDesc, itMode, itCat, itTags, date, String.valueOf(image));
-                mainDatabase = FirebaseDatabase.getInstance().getReference();
-                itemsList = mainDatabase.child("items");
-                String itemid = itemsList.push().getKey();
-                itemsList.child(itemid).setValue(item);
 
-                if (image) {
-                    storageRef = FirebaseStorage.getInstance().getReference().child("item" + itemid);
-                    storageRef.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                if (itName.equals("")) {
+                    Toast.makeText(AddItem.this, "Name cannot pe empty", Toast.LENGTH_SHORT).show();
+                } else if (itCat.equals("")) {
+                    Toast.makeText(AddItem.this, "Category must be selected", Toast.LENGTH_SHORT).show();
+                } else if (itDesc.equals("")) {
+                    Toast.makeText(AddItem.this, "Description cannot be left empty", Toast.LENGTH_SHORT).show();
+                } else if (itMode.equals("")) {
+                    Toast.makeText(AddItem.this, "Mode must be selected", Toast.LENGTH_SHORT).show();
+                } else {
+                    Date newDate = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                    String date = sdf.format(newDate);
+                    Item item = new Item(itName, user.getUid(), user.getDisplayName(), itDesc, itMode, itCat, itTags, date, String.valueOf(image));
+                    mainDatabase = FirebaseDatabase.getInstance().getReference();
+                    itemsList = mainDatabase.child("items");
+                    String itemid = itemsList.push().getKey();
+                    itemsList.child(itemid).setValue(item);
+
+                    if (image) {
+                        storageRef = FirebaseStorage.getInstance().getReference().child("item" + itemid);
+                        storageRef.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                Log.d(TAG, "onComplete: upload cocmplete");
+                                Toast.makeText(AddItem.this, "Picture uploaded successfully!", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AddItem.this, "Picture could not be uploaded", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                    mainDatabase.child("users").child(user.getUid()).child("items").child(itemid).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            Log.d(TAG, "onComplete: upload cocmplete");
-                            Toast.makeText(AddItem.this, "Picture uploaded successfully!", Toast.LENGTH_SHORT).show();
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            Toast.makeText(AddItem.this, "Item added successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddItem.this, WelcomeActivity.class);
+                            finish();
+                            startActivity(intent);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddItem.this, "Picture could not be uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddItem.this, "Sorry! Item could not be added", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
-                mainDatabase.child("users").child(user.getUid()).child("items").child(itemid).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                        Toast.makeText(AddItem.this, "Item added successfully!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AddItem.this, WelcomeActivity.class);
-                        finish();
-                        startActivity(intent);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddItem.this, "Sorry! Item could not be added", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
             }
         });
@@ -234,12 +247,11 @@ public class AddItem extends AppCompatActivity implements IPickResult {
 
     @Override
     public void onPickResult(PickResult pickResult) {
-        if(pickResult.getError()==null){
+        if (pickResult.getError() == null) {
             uri = pickResult.getUri();
             imgviewItem.setImageURI(uri);
             image = true;
-        }
-        else{
+        } else {
             Toast.makeText(this, pickResult.getError().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
