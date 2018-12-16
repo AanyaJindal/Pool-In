@@ -1,5 +1,5 @@
 # Pool-In
-Winner of 2 hackathons
+This project helped us win 2 hackathons
 
 ## Overview
 This android application is one stop solution for a college student. 
